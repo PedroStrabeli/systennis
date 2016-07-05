@@ -4,16 +4,31 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var mysql = require('mysql');
+var connection  = require('express-myconnection');
 
 var routes = require('./routes/index');
+var index = require('./routes/index');
 var users = require('./routes/users');
 // var products = require('./routes/products');
 
 var app = express();
 
+app.use(
+   connection(mysql,{
+     host: 'localhost',
+     user: 'root',
+     password : '1moskva1',
+     port : 3306, //port mysql
+     database:'systennis_db'
+   },'request')
+);
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
+// connection with db
+
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -24,6 +39,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
+app.use('/index', index);
 app.use('/users', users);
 // app.use('/products',products)
 
