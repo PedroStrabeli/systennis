@@ -8,8 +8,10 @@ var mysql = require('mysql');
 var connection  = require('express-myconnection');
 
 var routes = require('./routes/index');
-var index = require('./routes/index');
 var users = require('./routes/users');
+var prod_detail = require('./routes/prod_detail');
+var cart = require('./routes/cart');
+
 // var products = require('./routes/products');
 
 var app = express();
@@ -23,12 +25,12 @@ app.use(
      database:'systennis_db'
    },'request')
 );
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 // connection with db
-
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -39,8 +41,10 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-app.use('/index', index);
+app.use('/index', routes);
 app.use('/users', users);
+app.use('/prod_detail', prod_detail);
+app.use('/cart', cart);
 // app.use('/products',products)
 
 // catch 404 and forward to error handler
