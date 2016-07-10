@@ -3,15 +3,26 @@ var queries = require('../constants/queries.js')
 var router = express.Router();
 /* GET home page. */
 router.get('/', function(req, res) {
+	console.log('got a GET request');
   	req.getConnection(function(err,connection){
         if(err) return res.status(400).json(err);
 
         connection.query(queries.queries.catalog ,[],function(err,result){
         	console.log(result);
-        	return res.status(200).json(result);
+   //  		res.status(200).render('index', 
+			// 	{ 
+			// 		title: 'Catalog Page',
+			// 		result: result
+			// 	}
+			// );    	
+        	//return res.status(200).json(result);
+        	res.render('index', { result: result });
         });
   	});
-  	
+
+// res.render('index',{title: 'Catalog Page'})
 });
+
+
 
 module.exports = router;

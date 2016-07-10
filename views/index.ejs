@@ -1,11 +1,44 @@
 <!DOCTYPE html>
-<html >
+<html ng-app="systennis">
 
-<head>
+	<head>
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
-    <meta charset="utf-8">
-    
-</head>
-  <p> Welcome (or not) to <%= title%> , <%= subtitle%>	 </p>
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+	    <meta charset="utf-8">
+	    <title>{{title}}</title>
+	</head>
+	<body>
+	<div class="container" ng-controller="catalog_ctrl">
+	  <h1> Welcome (or not) to {{title}}</h1>
+	  <table class="table">
+	  	<thead>
+	  		<tr>
+	  			<th>Nome</th>
+	  			<th>Descrição</th>
+	  			<th>Preço</th>
+	  			<th>Imagem</th>
+	  			<th>Tipo</th>
+	  			<th></th>
+	  		</tr>
+	  	</thead>
+	  	<tbody>
+	  		<tr ng-repeat="item in result">
+	  			<td>{{item.nome_prod}}</td>
+	  			<td>{{item.desc_prod}}</td>
+	  			<td>{{item.preco_prod}}</td>
+	  			<td>{{item.url_imagem}}</td>
+	  			<td>{{item.tipo_prod}}</td>
+	  		</tr>
+	  	</tbody>
+	  </table>
+	</div>
 
-  </html>
+		<!--<script source="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>-->
+		<script src="js/angular.min.js"></script>
+		<script src="js/ng-app.js"></script>		
+		<script src="js/index_controller.js"></script>
+	</body>
+</html>
