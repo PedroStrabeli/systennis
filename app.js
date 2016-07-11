@@ -9,6 +9,7 @@ var connection  = require('express-myconnection');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var catalog = require('./routes/catalog');
 var prod_detail = require('./routes/prod_detail');
 var cart = require('./routes/cart');
 
@@ -48,6 +49,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/index', routes);
 app.use('/users', users);
+app.use('/catalog', catalog);
 app.use('/prod_detail', prod_detail);
 app.use('/cart', cart);
 // app.use('/products',products)
