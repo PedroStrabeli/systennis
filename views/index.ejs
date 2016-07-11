@@ -26,11 +26,13 @@
 	  	</thead>
 	  	<tbody>
 	  		<tr ng-repeat="item in result">
-	  			<td>{{item.nome_prod}}</td>
+	  			
+	  			<td><a href="/prod_detail/{{item.id_prod}}">{{item.nome_prod}}</a></td>
 	  			<td>{{item.desc_prod}}</td>
 	  			<td>{{item.preco_prod}}</td>
-	  			<td>{{item.url_imagem}}</td>
+	  			<td><img src="images/{{item.url_imagem}}" width = "75"/></td>
 	  			<td>{{item.tipo_prod}}</td>
+	  			
 	  		</tr>
 	  	</tbody>
 	  </table>

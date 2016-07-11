@@ -13,12 +13,16 @@ router.get('/:id_prod', function(req, res) {
         connection.query(queries.queries.prod_detail+id_prod //id_prod
          ,[],function(err,result){
         	console.log(result);
-        	//return res.status(200).json(result);
+        	return res.status(200).json(result);
         });
 //ARRUMAR ISSO!!!
   	});
-  	//get the sizes.
-  	req.getConnection(function(err,connection){
+});
+
+
+router.get('/:id_prod/sizes', function(req, res) {
+  	//get the sizes.	
+	req.getConnection(function(err,connection){
   		//var nome_prod = req.params.nome_prod;
         if(err) return res.status(400).json(err);
 
@@ -29,5 +33,6 @@ router.get('/:id_prod', function(req, res) {
         });
   	});
 });
+
 
 module.exports = router;
