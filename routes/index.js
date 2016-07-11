@@ -3,7 +3,7 @@ var queries = require('../constants/queries.js')
 var router = express.Router();
 /* GET home page. */
 router.get('/', function(req, res) {  
-    console.log('The app has just been started');
+    console.log('The app has been started');
     res.status(200).render('index');    	
 });
 
