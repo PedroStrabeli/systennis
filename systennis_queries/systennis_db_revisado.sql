@@ -62,15 +62,15 @@ CREATE TABLE cliente_endereco (
 DROP TABLE IF EXISTS tb_produto;
 CREATE TABLE tb_produto (
 	id_prod  int primary key NOT NULL UNIQUE AUTO_INCREMENT
-	,nome_prod varchar(64) NOT NULL
+	,nome_prod varchar(100) NOT NULL
 	,desc_prod varchar(256)
-	,tipo_prod varchar(16)
-	,subtipo_prod varchar(16)
-	,cor_prod varchar(32) NOT NULL
-	,marca_prod varchar(16) NOT NULL
+	,tipo_prod varchar(50)
+	,subtipo_prod varchar(50)
+	,cor_prod varchar(50) NOT NULL
+	,marca_prod varchar(50) NOT NULL
 	,preco_prod decimal(10,2) NOT NULL
 	,estoque_prod int NOT NULL
-	,url_imagem varchar(64)
+	,url_imagem varchar(255)
 
 );
 

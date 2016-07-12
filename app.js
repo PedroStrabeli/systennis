@@ -12,6 +12,7 @@ var users = require('./routes/users');
 var catalog = require('./routes/catalog');
 var prod_detail = require('./routes/prod_detail');
 var cart = require('./routes/cart');
+var constants = require('./constants/constants.js')
 
 // var products = require('./routes/products');
 
@@ -20,11 +21,11 @@ var app = express();
 // connection with db
 app.use(
    connection(mysql,{
-     host: 'localhost',
-     user: 'root',
-     password : '1moskva1',
-     port : 3306, //port mysql
-     database:'systennis_db'
+     host: constants.db_param.host,
+     user: constants.db_param.user,
+     password : constants.db_param.password,
+     port : constants.db_param.port, //port mysql
+     database: constants.db_param.database
    },'request')
 );
 
