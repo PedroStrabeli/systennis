@@ -1,28 +1,49 @@
-
+<!DOCTYPE html>
+<html ng-app="systennis">
+	<head>
+		<link href="stylesheets/style.css" rel="stylesheet" type="text/css">
+	    <meta charset="utf-8">
+	    <title>{{title}}</title>
+	</head>
+	<body>
 	<div class="container" ng-controller="catalog_ctrl">
-	  <h1> Welcome (or not) to {{title}}</h1>
-	  <table class="table">
-	  	<thead>
-	  		<tr>
-	  			<th>Nome</th>
-	  			<th>Descrição</th>
-	  			<th>Preço</th>
-	  			<th>Imagem</th>
-	  			<th>Tipo</th>
-	  			<th></th>
-	  		</tr>
-	  	</thead>
-	  	<tbody>
-	  		<tr ng-repeat="item in result">
-	  			
-	  			<td><a href="/prod_detail/{{item.id_prod}}">{{item.nome_prod}}</a></td>
-	  			<td>{{item.desc_prod}}</td>
-	  			<td>{{item.preco_prod}}</td>
-	  			<td><img src="images/{{item.url_imagem}}" width = "75"/></td>
-	  			<td>{{item.tipo_prod}}</td>
-	  			
-	  		</tr>
-	  	</tbody>
-	  </table>
+			<header ng-include="'pages/template/navbar.html'"></header>
+	  	<br><br><br><br><br><br>
+	  	<ul class="product-list">
+	  		<li ng-repeat="item in result">
+	  			<span class="single-product" data-action="expand">
+		  			<a href="/prod_detail/{{item.id_prod}}">
+		  			<span class="product-img">
+		  				<span class="aligner">
+		  					<img src="{{item.url_imagem}}" class="lazy" title="{{item.nome_prod}}" width="190" height="190"/>
+		  				</span>
+		  				<span class="base-badge badge-high">
+		  				</span>
+		  				<span class="stamps-holder">
+		  				</span>
+		  			</span>
+		  			<div class="product-info-holder">
+		  				<div class="product-name" itemprop="name">{{item.nome_prod}}
+		  					<a href="/add_item/{{item.id_prod}}">
+			  					<span class="glyphicon glyphicon-plus" aria-hidden="true">
+			  				</a>
+			  					</span>
+			  			</div>
+<!-- 			  				<div class="cart-adder">
+			  					<a href="/add_item/{{item.id_prod}}">
+			  					<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+			  					</a>
+			  				</div> -->
+		  				<div class="price-holder" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+		  					<div class="price-info">
+		  						<strong class="price">R$ {{item.preco_prod.toFixed(2)}}</strong>
+		  					</div>
+		  				</div>
+		  			</div>
+		  			</a>
+		  		</span>
+	  		</li>
+	  	</ul>
 	</div>
-
+	</body>
+</html>
