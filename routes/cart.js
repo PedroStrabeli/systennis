@@ -2,7 +2,7 @@ var express = require('express');
 var queries = require('../constants/queries.js')
 var router = express.Router();
 /* GET home page. */
-var resultado = [];
+
 router.get('/:id_cliente', function(req, res) {
   	req.getConnection(function(err,connection){
   		var id_cliente=req.params.id_cliente;
@@ -17,7 +17,7 @@ router.get('/:id_cliente', function(req, res) {
 });
 
 
-router.get('/addprod', function(req, res) {
+router.get('/addprod=:id_prod', function(req, res) {
   	req.getConnection(function(err,connection){
   		var id_cliente=req.params.id_cliente;
   		var id_prod=req.params.id_prod;
