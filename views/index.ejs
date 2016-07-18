@@ -1,22 +1,42 @@
 <!DOCTYPE html>
-<html ng-app="systennis">
+<html  ng-app="systennis">
 	<head>
 		<!-- Latest compiled and minified CSS -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+		<link rel="stylesheet" href="Bootstrap/css/bootstrap.css" type="text/css">
+		<link rel="stylesheet" href="stylesheets/style.css" type="text/css">
 		<!-- Optional theme -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+		<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous"> -->
 	    <meta charset="utf-8">
 	    <title>{{title}}</title>
+
 	</head>
 	<body>
-	<div ui-view></div>
+
+	<div>
+	<header ng-include="'pages/template/navbar.html'"></header>	
+	<div ui-view></div>	
+	</div>
+
 		<!--<script source="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>-->
 		<script src="js/Angular/angular.js"></script>
-		<script src="js/ui-router/angular-ui-router.js"></script>
-		<script src="js/bootstrap/ui-bootstrap-tpls-0.12.0.min.js"></script>
 		<script src="js/Angular/angular-resource.min.js"></script>
+		<script src="js/ui-router/angular-ui-router.js"></script>
+		<!-- <script src="Bootstrap/ui-bootstrap-tpls-0.12.0.min.js"></script> -->
+		<!-- <script src="jquery/dist/jquery.js"></script> -->
+		<!-- <script
+			  src="https://code.jquery.com/jquery-2.2.4.js"
+			  integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
+			  crossorigin="anonymous"></script> -->
+		<script src="jquery/dist/jquery.js"></script>	 
+		<script src="jquery/dist/jquery.price_format.2.0.js"></script>
+		<script src="Bootstrap/js/bootstrap.js"></script>
+		<script src="Bootstrap/js/bootstrap.min.js"></script>
+		
+
+
 		<script src="js/config.js"></script>
 		<script src="js/controllers/catalog_ctrl.js"></script>
+		<script src="js/controllers/cadastro_prod_ctrl.js"></script>
 		<!--<script src="js/ng-app.js"></script>		-->
 		<!--<script src="js/index.controller.js"></script>-->
 	</body>

@@ -1,4 +1,3 @@
-
 angular.module('systennis')
 	.controller('catalog_ctrl',function($scope, $http){
 		$scope.title = 'Systennis'

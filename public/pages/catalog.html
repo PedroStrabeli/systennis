@@ -7,7 +7,6 @@
 	</head>
 	<body>
 	<div class="container" ng-controller="catalog_ctrl">
-			<header ng-include="'pages/template/navbar.html'"></header>
 	  	<br><br><br><br><br><br>
 	  	<ul class="product-list">
 	  		<li ng-repeat="item in result">
@@ -44,6 +43,32 @@
 		  		</span>
 	  		</li>
 	  	</ul>
+<!-- =======
+	  <h1> Welcome (or not) to {{title}}</h1>
+	  <table class="table">
+	  	<thead>
+	  		<tr>
+	  			<th>Nome</th>
+	  			<th>Descrição</th>
+	  			<th>Preço</th>
+	  			<th>Imagem</th>
+	  			<th>Tipo</th>
+	  			<th></th>
+	  		</tr>
+	  	</thead>
+	  	<tbody>
+	  		<tr ng-repeat="item in result">
+	  			
+	  			<td><a href="/prod_detail/{{item.id_prod}}">{{item.nome_prod}}</a></td>
+	  			<td>{{item.desc_prod}}</td>
+	  			<td>{{item.preco_prod}}</td>
+	  			<td><img src="{{item.url_imagem}}" width = "75"/></td>
+	  			<td>{{item.tipo_prod}}</td>
+	  			
+	  		</tr>
+	  	</tbody>
+	  </table>
+>>>>>>> Stashed changes -->
 	</div>
 	</body>
 </html>

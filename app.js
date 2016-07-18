@@ -14,6 +14,9 @@ var prod_detail = require('./routes/prod_detail');
 var cart = require('./routes/cart');
 var constants = require('./constants/constants.js')
 
+//CRUD produto
+var cadastro_prod = require('./routes/cadastro_prod');
+
 // var products = require('./routes/products');
 
 var app = express();
@@ -54,7 +57,9 @@ app.use('/users', users);
 app.use('/catalog', catalog);
 app.use('/prod_detail', prod_detail);
 app.use('/cart', cart);
-// app.use('/products',products)
+
+//CRUD produto
+app.use('/cadastro_prod', cadastro_prod);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
