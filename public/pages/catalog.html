@@ -12,7 +12,7 @@
 	  	<ul class="product-list">
 	  		<li ng-repeat="item in result">
 	  			<span class="single-product" data-action="expand">
-		  			<a href="/prod_detail/{{item.id_prod}}">
+		  			<a ui-sref="prod_detail" ng-click="sendDetail(item)">
 		  			<span class="product-img">
 		  				<span class="aligner">
 		  					<img src="{{item.url_imagem}}" class="lazy" title="{{item.nome_prod}}" width="190" height="190"/>
