@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html ng-app="systennis">
+	<head>
+		<link href="stylesheets/style.css" rel="stylesheet" type="text/css">
+	    <meta charset="utf-8">
+	    <title>{{title}}</title>
+	</head>
+	<body ng-controller="prod_detail_ctrl">
+	<div class="container">
+			<header ng-include="'pages/template/navbar.html'"></header>
+	  	<br><br><br><br><br><br>
+	  	<table class="table">
+	  	<thead>
+	  		<tr>
+	  			<th>Nome</th>
+	  			<th>Descrição</th>
+	  			<th>Preço</th>
+	  			<th>Imagem</th>
+	  			<th>Tipo</th>
+	  			<th></th>
+	  		</tr>
+	  	</thead>
+	  	<tbody>
+	  		<tr>
+	  			<td><a href="/prod_detail/{{detail.id_prod}}">{{detail.nome_prod}}</a></td>
+	  			<td>{{detail.desc_prod}}</td>
+	  			<td>{{detail.preco_prod}}</td>
+	  			<td><img src="{{detail.url_imagem}}" width = "75"/></td>
+	  			<td>{{detail.tipo_prod}}</td>
+	  			
+	  		</tr>
+	  	</tbody>
+	  </table>
+	</div>
+	</body>
+</html>

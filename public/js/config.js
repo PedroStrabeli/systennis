@@ -10,7 +10,20 @@ var config = ['$urlRouterProvider', '$stateProvider', '$locationProvider', funct
               url: "/",
               templateUrl: "pages/catalog.html",
               controller: 'catalog_ctrl',
-              data: { pageTitle: 'Pagina Principal' },
+              data: { pageTitle: 'Pagina Principal' }
+          })
+        .state('cart', {
+              url: "/carrinho",
+              templateUrl: "pages/cart.html",
+              controller: 'cart_ctrl',
+              data: { pageTitle: 'Carrinho' }
+          })
+        .state('prod_detail', {
+              url: "/detalheProduto",
+              templateUrl: "pages/prod_detail.html",
+              controller: 'prod_detail_ctrl',
+              data: { pageTitle: 'Detalhes' },
+              param:{ detail: null }
           })
         .state('cadastro_prod', {
               url: "/cadastro_prod",

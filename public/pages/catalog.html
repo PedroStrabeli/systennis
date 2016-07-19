@@ -1,10 +1,21 @@
+<div class="container">
 
-	<div class="container" ng-controller="catalog_ctrl">
+<!DOCTYPE html>
+<html ng-app="systennis">
+	<head>
+		<link href="stylesheets/style.css" rel="stylesheet" type="text/css">
+	    <meta charset="utf-8">
+	    <title>{{title}}</title>
+	</head>
+	<body>
+	<div class="container">
+			<header ng-include="'pages/template/navbar.html'"></header>
+
 	  	<br><br><br><br><br><br>
 	  	<ul class="product-list">
 	  		<li ng-repeat="item in result">
 	  			<span class="single-product" data-action="expand">
-		  			<a href="/prod_detail/{{item.id_prod}}">
+		  			<a ui-sref="prod_detail" ng-click="sendDetail(item)">
 		  			<span class="product-img">
 		  				<span class="aligner">
 		  					<img src="{{item.url_imagem}}" class="lazy" title="{{item.nome_prod}}" width="190" height="190"/>
@@ -14,11 +25,12 @@
 		  				<span class="stamps-holder">
 		  				</span>
 		  			</span>
+		  			</a>
 		  			<div class="product-info-holder">
 		  				<div class="product-name" itemprop="name">{{item.nome_prod}}
-		  					<a href="/add_item/{{item.id_prod}}">
-			  					<span class="glyphicon glyphicon-plus" aria-hidden="true">
-			  				</a>
+		  					<!--<a href="/add_item/{{item.id_prod}}">-->
+			  					<span class="glyphicon glyphicon-plus" aria-hidden="true" ng-click="addProduct(item)">
+			  				<!--</a>-->
 			  					</span>
 			  			</div>
 <!-- 			  				<div class="cart-adder">
@@ -32,9 +44,9 @@
 		  					</div>
 		  				</div>
 		  			</div>
-		  			</a>
+		  			
 		  		</span>
 	  		</li>
 	  	</ul>
 	</div>
-
+</body>
