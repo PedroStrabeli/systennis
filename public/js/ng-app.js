@@ -5,4 +5,4 @@
         // 'pascalprecht.translate',       // Angular Translate
         // 'ui.bootstrap',                 // Ui Bootstrap
     ])
-})
+})()

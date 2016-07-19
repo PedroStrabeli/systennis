@@ -12,14 +12,17 @@ var config = ['$urlRouterProvider', '$stateProvider', '$locationProvider', funct
               controller: 'catalog_ctrl',
               data: { pageTitle: 'Pagina Principal' },
           })
+
+
         // .state('outlook', {
         //     url: "/outlook",
         //     templateUrl: "page/outlook/outlook.html",
         //     data: { pageTitle: 'Outlook view', specialClass: 'fixed-sidebar' }
         // })
 }];
+    
 
-// var  =
+// var  = 
 
 
 angular
