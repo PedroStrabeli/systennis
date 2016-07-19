@@ -1,0 +1,26 @@
+<div>	
+	<h1> Welcome (or not) to {{title}}</h1>
+		  <table class="table">
+		  	<thead>
+		  		<tr>
+		  			<th>Nome</th>
+		  			<th>Descrição</th>
+		  			<th>Preço</th>
+		  			<th>Imagem</th>
+		  			<th>Tipo</th>
+		  			<th></th>
+		  		</tr>
+		  	</thead>
+		  	<tbody>
+		  		<tr ng-repeat="produto in produtos">
+		  			
+		  			<td><a href="{{produto.imagem}}">{{produto.nome}}</a></td>
+		  			<td>{{produto.desconto}}</td>
+		  			<td>{{produto.preco}}</td>
+		  			<td><img src="{{produto.imagem}}" width = "75"/></td>
+		  			<td>{{produto.tipo}}</td>
+		  			
+		  		</tr>
+		  	</tbody>
+		  </table>
+</div>

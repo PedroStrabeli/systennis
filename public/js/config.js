@@ -12,8 +12,18 @@ var config = ['$urlRouterProvider', '$stateProvider', '$locationProvider', funct
               controller: 'catalog_ctrl',
               data: { pageTitle: 'Pagina Principal' },
           })
-
-
+        .state('cadastro_prod', {
+              url: "/cadastro_prod",
+              templateUrl: "pages/cadastro_prod.html",
+              controller: 'cadastro_prod_ctrl',
+              data: { title: 'Cadastro de Produtos' },
+          })
+        .state('teste', {
+              url: "/teste",
+              templateUrl: "pages/teste.html",
+              // controller: 'cadastro_prod_ctrl',
+              data: { title: 'Teste' },
+          })
         // .state('outlook', {
         //     url: "/outlook",
         //     templateUrl: "page/outlook/outlook.html",
