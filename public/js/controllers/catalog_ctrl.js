@@ -11,6 +11,10 @@ angular.module('systennis')
         	productService.sendProduct(currObj);
     	};
 
+    	$scope.addProduct = function(currObj){
+        	cartService.addProduct(currObj);
+    	};
+
 		$scope.searchProduct = function(){
 			console.log($scope.search.opt);
 			$http.post('/catalog', $scope.search).success(function(response){

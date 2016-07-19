@@ -6,7 +6,7 @@
 	    <title>{{title}}</title>
 	</head>
 	<body>
-	<div class="container" ng-controller="cart_ctrl">
+	<div class="container">
 			<header ng-include="'pages/template/navbar.html'"></header>
 	  	<br><br><br><br><br><br>
 	  	<table class="table">
@@ -21,7 +21,7 @@
 	  		</tr>
 	  	</thead>
 	  	<tbody>
-	  		<tr ng-repeat="item in cart">
+	  		<tr ng-repeat="item in cart track by $index">
 	  			
 	  			<td><a href="/prod_detail/{{item.id_prod}}">{{item.nome_prod}}</a></td>
 	  			<td>{{item.desc_prod}}</td>

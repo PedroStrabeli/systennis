@@ -6,7 +6,7 @@
 	    <title>{{title}}</title>
 	</head>
 	<body>
-	<div class="container" ng-controller="catalog_ctrl">
+	<div class="container">
 			<header ng-include="'pages/template/navbar.html'"></header>
 	  	<br><br><br><br><br><br>
 	  	<ul class="product-list">
@@ -22,11 +22,12 @@
 		  				<span class="stamps-holder">
 		  				</span>
 		  			</span>
+		  			</a>
 		  			<div class="product-info-holder">
 		  				<div class="product-name" itemprop="name">{{item.nome_prod}}
-		  					<a href="/add_item/{{item.id_prod}}">
-			  					<span class="glyphicon glyphicon-plus" aria-hidden="true">
-			  				</a>
+		  					<!--<a href="/add_item/{{item.id_prod}}">-->
+			  					<span class="glyphicon glyphicon-plus" aria-hidden="true" ng-click="addProduct(item)">
+			  				<!--</a>-->
 			  					</span>
 			  			</div>
 <!-- 			  				<div class="cart-adder">
@@ -40,7 +41,7 @@
 		  					</div>
 		  				</div>
 		  			</div>
-		  			</a>
+		  			
 		  		</span>
 	  		</li>
 	  	</ul>

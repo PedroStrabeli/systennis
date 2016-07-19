@@ -14,20 +14,20 @@ router.get('/', function(req, res) {
 });
 
 /* POST home page. */
-router.post('/', function(req, res) {
-	console.log('got a POST request');
+// router.post('/', function(req, res) {
+// 	console.log('got a POST request');
 
-  	req.getConnection(function(err,connection){
-	    if(err) return res.status(400).json(err);
+//   	req.getConnection(function(err,connection){
+// 	    if(err) return res.status(400).json(err);
 
-	    var searchQuery = queries.queries.search + req.body.opt + "%' LIMIT 39"
+// 	    var searchQuery = queries.queries.search + req.body.opt + "%' LIMIT 39"
 
-	    connection.query(searchQuery ,[],function(err,result){
-	    	 if(err) return res.status(400).json(err);
-	    	 return res.status(200).json(result);
-	    });
-	});
-});
+// 	    connection.query(searchQuery ,[],function(err,result){
+// 	    	 if(err) return res.status(400).json(err);
+// 	    	 return res.status(200).json(result);
+// 	    });
+// 	});
+// });
 
 
 
