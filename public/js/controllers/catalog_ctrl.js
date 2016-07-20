@@ -3,7 +3,7 @@ angular.module('systennis')
 	.controller('catalog_ctrl',function($scope, $http, productService, cartService){
 		$scope.title = 'Systennis'
 
-
+		$scope.pagename='Catálogo';
 		$http.get('/catalog').success(function(response){			
 			$scope.result = response;
 		});

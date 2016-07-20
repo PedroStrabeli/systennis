@@ -1,4 +1,4 @@
-var queries={}
+	var queries={}
 
 //CATALOG
 queries.catalog='SELECT DISTINCT id_prod, nome_prod, desc_prod, tipo_prod, subtipo_prod, cor_prod, marca_prod, preco_prod, url_imagem FROM tb_produto';	

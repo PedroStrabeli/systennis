@@ -20,10 +20,10 @@ router.get('/:id_prod', function(req, res) {
 });
 
 
-router.get('/:id_prod/sizes', function(req, res) {
+router.get('/prod=:id_prod/getsizes', function(req, res) {
   	//get the sizes.	
 	req.getConnection(function(err,connection){
-  		//var nome_prod = req.params.nome_prod;
+  		var id_prod = req.params.id_prod;
         if(err) return res.status(400).json(err);
 
         connection.query(queries.queries.tamanho_prod+id_prod //id_prod

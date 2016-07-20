@@ -2,7 +2,7 @@
 angular.module('systennis')
 	.controller('cart_ctrl',function($scope, $http, cartService){
 		
-		
+		$scope.pagename='Carrinho';
 		var user={id_user:1};
 		if(user){
 			console.log('Usuario logado')
@@ -34,7 +34,7 @@ angular.module('systennis')
 					id_prod: item.id_prod,
 					id_cliente: user.id_user,
 					qte_prod: 1,
-					tamanho_prod: 40//item.tamanho_prod
+					tamanho_prod: item.tamanho_prod
 				};
 				
 				$http({method: 'POST', data: itemCart, url: '/cart/CheckProd'})

@@ -2346,7 +2346,11 @@ fieldset[disabled] .btn-template-primary.active {
   text-decoration: none;
   font-family: "Roboto", Helvetica, Arial, sans-serif;
 }
-#productMain .sizes a.active,
+#productMain .sizes a.isClicked
+{
+  background: #38a7bb;
+  color: #fff;
+}
 #productMain .sizes a:hover {
   background: #38a7bb;
   color: #fff;

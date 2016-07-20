@@ -31,11 +31,24 @@ var config = ['$urlRouterProvider', '$stateProvider', '$locationProvider', funct
               controller: 'cadastro_prod_ctrl',
               data: { title: 'Cadastro de Produtos' },
           })
-        .state('teste', {
-              url: "/teste",
-              templateUrl: "pages/teste.html",
-              // controller: 'cadastro_prod_ctrl',
-              data: { title: 'Teste' },
+        .state('new_index', {
+              url: "/new_index",
+              templateUrl: "pages/template/shop-category.html",
+              controller: 'catalog_ctrl',
+              data: { title: 'Systennis' },
+          })
+        .state('new_prod_detail', {
+              url: "/new_detalheProduto",
+              templateUrl: "pages/template/shop-detail.html",
+              controller: 'prod_detail_ctrl',
+              data: { pageTitle: 'Detalhes' },
+              param:{ detail: null }
+          })
+        .state('new_cart', {
+              url: "/carrinho",
+              templateUrl: "pages/template/shop-basket.html",
+              controller: 'cart_ctrl',
+              data: { pageTitle: 'Carrinho' }
           })
         // .state('outlook', {
         //     url: "/outlook",
