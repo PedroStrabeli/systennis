@@ -29,19 +29,19 @@ _________________________________________________________ -->
                         <!--<p class="text-muted lead">In our Ladies department we offer wide selection of the best products we have found and carefully selected worldwide. Pellentesque habitant morbi tristique senectus et netuss.</p>-->
                         <div class="row products">
 
-                            <div class="col-md-4 col-sm-6" ng-repeat="item in result">
+                            <div class="col-md-4 col-sm-6" ng-repeat="item in result"><!--| offset: currentPage*itemsPerPage | limitTo: itemsPerPage-->
                                 <div class="product">
                                     <div class="image">
-                                        <a ui-sref="new_prod_detail" ng-click="sendDetail(item)">
+                                        <a ui-sref="prod_detail" ng-click="sendDetail(item)">
                                             <img src="{{item.url_imagem}}" alt="" class="img-responsive image1">
                                         </a>
                                     </div>
                                     <!-- /.image -->
                                     <div class="text">
-                                        <h3><a ui-sref="new_prod_detail" ng-click="sendDetail(item)">{{item.nome_prod}}</a></h3>
+                                        <h3><a ui-sref="prod_detail" ng-click="sendDetail(item)">{{item.nome_prod}}</a></h3>
                                         <p class="price">R$ {{item.preco_prod.toFixed(2)}}</p>
                                         <!--<p class="buttons">
-                                            <a ui-sref="new_prod_detail" ng-click="sendDetail(item)" class="btn btn-default">View detail</a>
+                                            <a ui-sref="prod_detail" ng-click="sendDetail(item)" class="btn btn-default">View detail</a>
                                             <a href="shop-basket.html" class="btn btn-template-main"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                         </p>-->
                                     </div>
@@ -62,6 +62,9 @@ _________________________________________________________ -->
                                     <!-- /.ribbon -->
                                 </div>
                                 <!-- /.product -->
+                                   <!-- <button ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">Previous</button>
+                                    {{currentPage+1}}/{{numberOfPages()}}
+                                    <button ng-disabled="currentPage >= result.length/pageSize - 1" ng-click="currentPage=currentPage+1">Next</button>-->
                             </div>
                             <!-- /.col-md-4 -->
                         
@@ -69,11 +72,11 @@ _________________________________________________________ -->
 
                         <div class="row">
 
-                            <div class="col-md-12 banner">
+                            <!--<div class="col-md-12 banner">
                                 <a href="#">
                                     <img src="img/banner2.jpg" alt="" class="img-responsive">
                                 </a>
-                            </div>
+                            </div>-->
 
                         </div>
 

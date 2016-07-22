@@ -2,7 +2,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-xs-5 contact">
-                            <p class="hidden-sm hidden-xs">Contact us on +420 777 555 333 or hello@universal.com.</p>
+                            <p class="hidden-sm hidden-xs">Colocar aqqui a barra de busca</p>
                             <p class="hidden-md hidden-lg"><a href="#" data-animate-hover="pulse"><i class="fa fa-phone"></i></a>  <a href="#" data-animate-hover="pulse"><i class="fa fa-envelope"></i></a>
                             </p>
                         </div>
@@ -16,7 +16,7 @@
 
                             <div class="login">
                                 <a href="" data-toggle="modal" data-target="#login-modal"><i class="fa fa-sign-in"></i> <span class="hidden-xs text-uppercase">Sign in</span></a>
-                                <a href="customer-register.html"><i class="fa fa-user"></i> <span class="hidden-xs text-uppercase">Sign up</span></a>
+                                <a ui-sref="cadastro_cliente"><i class="fa fa-user"></i> <span class="hidden-xs text-uppercase">Sign up</span></a>
                             </div>
 
                         </div>
@@ -36,9 +36,9 @@
                     <div class="container">
                         <div class="navbar-header" >
 
-                            <a class="navbar-brand home" href="index.html">
+                            <a class="navbar-brand home" ui-sref="new_index">
                                 <img src="https://dl.dropboxusercontent.com/s/j1l92u5t07kjsil/systennis_logo_alt_bo.png" alt="Systennis logo" class="hidden-xs hidden-sm" width="150">
-                                <img src="https://dl.dropboxusercontent.com/s/j1l92u5t07kjsil/systennis_logo_alt_bo.png" alt="Systennis logo" class="visible-xs visible-sm"><span class="sr-only">Universal - go to homepage</span>
+                                <img src="https://dl.dropboxusercontent.com/s/j1l92u5t07kjsil/systennis_logo_alt_bo.png" alt="Systennis logo" class="visible-xs visible-sm"><span class="sr-only">Systennis</span>
                             </a>
                             <div class="navbar-buttons">
                                 <button type="button" class="navbar-toggle btn-template-main" data-toggle="collapse" data-target="#navigation">
@@ -52,80 +52,43 @@
                         <div class="navbar-collapse collapse" id="navigation">
 
                             <ul class="nav navbar-nav navbar-right">
-                                <li class="dropdown active">
-                                    <a href="javascript: void(0)" class="dropdown-toggle" data-toggle="dropdown">Home <b class="caret"></b></a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="index.html">Option 1: Default Page</a>
-                                        </li>
-                                        <li><a href="index2.html">Option 2: Application</a>
-                                        </li>
-                                        <li><a href="index3.html">Option 3: Startup</a>
-                                        </li>
-                                        <li><a href="index4.html">Option 4: Agency</a>
-                                        </li>
-                                        <li><a href="index5.html">Option 5: Portfolio</a>
-                                        </li>
-                                    </ul>
+                                <li class="dropdown">
+                                    <a ui-sref="catalog" class="dropdown-toggle">Home <b class="caret"></b></a>
                                 </li>
-                                <li class="dropdown use-yamm yamm-fw">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Features<b class="caret"></b></a>
+                                <li class="dropdown"><!-- use-yamm yamm-fw-->
+                                    <a href="javascript: void(0)" class="dropdown-toggle" data-toggle="dropdown">Perfil<b class="caret"></b></a>
                                     <ul class="dropdown-menu">
                                         <li>
                                             <div class="yamm-content">
                                                 <div class="row">
-                                                    <div class="col-sm-6">
-                                                        <img src="img/template-easy-customize.png" class="img-responsive hidden-xs" alt="">
-                                                    </div>
                                                     <div class="col-sm-3">
                                                         <h5>Shortcodes</h5>
                                                         <ul>
-                                                            <li><a href="template-accordions.html">Accordions</a>
+                                                            <li><a ui-sref="perfil">Perfil</a>
                                                             </li>
-                                                            <li><a href="template-alerts.html">Alerts</a>
+                                                            <li><a ui-sref="orders">Pedidos</a>
                                                             </li>
-                                                            <li><a href="template-buttons.html">Buttons</a>
+                                                            <li><a ui-sref="wishlist">Wishlist</a>
                                                             </li>
-                                                            <li><a href="template-content-boxes.html">Content boxes</a>
-                                                            </li>
-                                                            <li><a href="template-blocks.html">Horizontal blocks</a>
-                                                            </li>
-                                                            <li><a href="template-pagination.html">Pagination</a>
-                                                            </li>
-                                                            <li><a href="template-tabs.html">Tabs</a>
-                                                            </li>
-                                                            <li><a href="template-typography.html">Typography</a>
-                                                            </li>
+                                                            
                                                         </ul>
                                                     </div>
-                                                    <div class="col-sm-3">
-                                                        <h5>Header variations</h5>
-                                                        <ul>
-                                                            <li><a href="template-header-default.html">Default sticky header</a>
-                                                            </li>
-                                                            <li><a href="template-header-nosticky.html">No sticky header</a>
-                                                            </li>
-                                                            <li><a href="template-header-light.html">Light header</a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
+                                                    
                                                 </div>
                                             </div>
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="dropdown use-yamm yamm-fw">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Portfolio <b class="caret"></b></a>
+                                <li class="dropdown">
+                                    <a ui-sref="cart" class="dropdown-toggle">Compras <b class="caret"></b></a>
                                     <ul class="dropdown-menu">
                                         <li>
                                             <div class="yamm-content">
                                                 <div class="row">
-                                                    <div class="col-sm-6">
-                                                        <img src="img/template-homepage.png" class="img-responsive hidden-xs" alt="">
-                                                    </div>
                                                     <div class="col-sm-3">
                                                         <h5>Portfolio</h5>
                                                         <ul>
-                                                            <li><a href="portfolio-2.html">2 columns</a>
+                                                            <li><a ui-sref="new_cart">Carrinho</a>
                                                             </li>
                                                             <li><a href="portfolio-no-space-2.html">2 columns with negative space</a>
                                                             </li>
@@ -143,31 +106,14 @@
                                                             </li>
                                                         </ul>
                                                     </div>
-                                                    <div class="col-sm-3">
-                                                        <h5>About</h5>
-                                                        <ul>
-                                                            <li><a href="about.html">About us</a>
-                                                            </li>
-                                                            <li><a href="team.html">Our team</a>
-                                                            </li>
-                                                            <li><a href="team-member.html">Team member</a>
-                                                            </li>
-                                                            <li><a href="services.html">Services</a>
-                                                            </li>
-                                                        </ul>
-                                                        <h5>Marketing</h5>
-                                                        <ul>
-                                                            <li><a href="packages.html">Packages</a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
+                                                    
                                                 </div>
                                             </div>
                                         </li>
                                     </ul>
                                 </li>
                                 <!-- ========== FULL WIDTH MEGAMENU ================== -->
-                                <li class="dropdown use-yamm yamm-fw">
+                               <!-- <li class="dropdown use-yamm yamm-fw">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">All Pages <b class="caret"></b></a>
                                     <ul class="dropdown-menu">
                                         <li>
@@ -300,14 +246,14 @@
                                                         </ul>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div>-->
                                             <!-- /.yamm-content -->
-                                        </li>
+                                        <!--</li>
                                     </ul>
-                                </li>
+                                </li>-->
                                 <!-- ========== FULL WIDTH MEGAMENU END ================== -->
 
-                                <li class="dropdown">
+                                <!--<li class="dropdown">
                                     <a href="javascript: void(0)" class="dropdown-toggle" data-toggle="dropdown">Contact <b class="caret"></b></a>
                                     <ul class="dropdown-menu">
                                         <li><a href="contact.html">Contact option 1</a>
@@ -319,7 +265,7 @@
 
                                     </ul>
                                 </li>
-                            </ul>
+                            </ul>-->
 
                         </div>
                         <!--/.nav-collapse -->
