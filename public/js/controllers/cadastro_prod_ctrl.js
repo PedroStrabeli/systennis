@@ -14,7 +14,7 @@ angular.module('systennis')
 			"Fitness e Musculação"
 		];
 
-		$http.get('/cadastro_prod').success(function(response){		
+		$http.get('/crud_prod').success(function(response){		
 		 	$scope.produtos = response;
 			
 		});
@@ -22,10 +22,9 @@ angular.module('systennis')
 		$scope.produtos = [];
 
 		$scope.adicionarProduto = function (produto) {
-			produto.preco = produto.preco.replace(/[R$.]+/g,"");
-			produto.preco = parseFloat(produto.preco.replace(/[,]+/g,"."));
-			// $scope.produtos.push(angular.copy(produto));
-			$http.post('/cadastro_prod', produto);
+			produto.preco = parseFloat(produto.preco.replace(/[,]+/g,".")).toFixed(2);
+			produto.preco = parseFloat(produto.preco);
+			$http.post('/crud_prod/create', produto);
 			delete $scope.produto
 		};
 
@@ -33,13 +32,5 @@ angular.module('systennis')
 			console.log(produto);
 			$http.post('/cadastro_prod', produto);
 		};
-
-		// JQUERY - Price Format
-
-		$('#price').priceFormat({
-    		prefix: 'R$ ',
-    		centsSeparator: ',',
-    		thousandsSeparator: '.'
-		});
-		
+	
 	});

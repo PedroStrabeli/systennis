@@ -1,5 +1,4 @@
-<br><br><br><br><br><br>
-<div class="container" ng-controller="cadastro_prod_ctrl">
+<div class="container-fluid" ng-controller="cadastro_prod_ctrl">
 	<div>
 		<h3>{{title}}</h3>
 		<br><br>
@@ -30,13 +29,15 @@
 		    	<label>Marca</label>
 		    	<input type="textarea" class="form-control cadastro" placeholder="Digite a marca do produto." ng-model="produto.marca">
 		  	</div>
-		  	<div>
-		    	<label>Preço</label>
-		  		<input type="text" class="form-control cadastro" step="0.01" id="price" placeholder="ex: R$100,00" ng-model="produto.preco">
-		  	</div>		  	
+		  		<label>Preço</label>
+			  	<div class="form-group input-group">
+
+	                <span class="input-group-addon">R$</span>
+	                <input type="text" class="form-control" style="width: 157px"ng-model="produto.preco">
+	            </div>		  	
 		  	<div>
 			  	<label>Estoque</label>
-			  	<input type="number" class="form-control cadastro" style="width: 10%"  min="0" max="10000" placeholder=0 ng-model="produto.estoque">
+			  	<input type="number" class="form-control cadastro" style="width: 200px"  min="0" max="10000" placeholder=0 ng-model="produto.estoque">
 		  	</div>
 		  	<div>
 		  		<label>URL da imagem</label>
@@ -45,35 +46,17 @@
 
 		  	<button type="submit" class="btn btn-primary btn-block" ng-click="adicionarProduto(produto)" ng-disabled="!produto.nome || !produto.descricao || !produto.tipo 
 			|| !produto.subtipo || !produto.cor || !produto.marca|| !produto.preco || !produto.estoque || !produto.imagem">Adicionar produto</button>
-	    
+	    	{{produto}}
 		</form>
 	  
 	</div>
-
-	<div>
-		<h3>Lista de Produtos</h3>
-			  <table class="table">
-			  	<thead>
-			  		<tr>
-			  			<th>Nome</th>
-			  			<th>Descrição</th>
-			  			<th>Preço</th>
-			  			<th>Imagem</th>
-			  			<th>Tipo</th>
-			  			<th></th>
-			  		</tr>
-			  	</thead>
-			  	<tbody>
-			  		<tr ng-repeat="produto in produtos">
-			  			
-			  			<td>{{produto.nome_prod}}</a></td>
-			  			<td>{{produto.desc_prod}}</td>
-			  			<td>{{produto.preco_prod}}</td>
-			  			<td><img src="{{produto.url_imagem}}" width = "75"/></td>
-			  			<td>{{produto.tipo_prod}}</td>
-			  			
-			  		</tr>
-			  	</tbody>
-			  </table>
-	</div>
 </div>
+
+
+
+
+
+
+
+
+

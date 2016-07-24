@@ -18,11 +18,11 @@ var config = ['$urlRouterProvider', '$stateProvider', '$locationProvider', funct
               controller: 'cadastro_prod_ctrl',
               data: { title: 'Cadastro de Produtos' },
           })
-        .state('teste', {
-              url: "/teste",
-              templateUrl: "pages/teste.html",
+        .state('consulta_prod', {
+              url: "/consulta_prod",
+              templateUrl: "pages/template/startbootstrap-sb-admin-1.0.4/index.html",
               // controller: 'cadastro_prod_ctrl',
-              data: { title: 'Teste' },
+              data: { title: 'Consulta de Produtos' },
           })
         // .state('outlook', {
         //     url: "/outlook",
