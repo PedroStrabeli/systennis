@@ -3,7 +3,7 @@ angular.module('systennis')
 		$scope.title = "Consulta de Produtos";
 
 		// Paginação
-		$scope.maxSize = 5;
+		$scope.maxSize = 7;
 		$scope.currentPage = 1;	  
 
 		$http.get('/crud_prod').success(function(response){		
