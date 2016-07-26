@@ -27,7 +27,7 @@ WHERE id_prod = 1;  #inserir id_prod selecionado;
 
 select * from tb_produto;
 #cart: pega os produtos do carrinho para o cliente.
-SELECT id_prod, nome_prod, desc_prod,cor_prod, tamanho_prod, preco_prod, url_imagem, qte_produto FROM item_carrinho
+SELECT id_prod, nome_prod, desc_prod,cor_prod, tamanho_prod, preco_prod, url_imagem, qte_prod FROM item_carrinho
 LEFT JOIN tb_produto using(id_prod)
 LEFT JOIN tb_cliente using(id_cliente)
 WHERE id_cliente = 1 #id do objeto de autenticação

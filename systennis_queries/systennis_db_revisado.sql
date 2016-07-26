@@ -87,7 +87,7 @@ CREATE TABLE item_carrinho (
 	id_cliente int NOT NULL
 	,id_prod int NOT NULL
     ,tamanho_prod int NOT NULL
-	,qte_produto int NOT NULL
+	,qte_prod int NOT NULL
 );
 
 #---------------------------------------------------------------
@@ -205,7 +205,7 @@ CREATE TABLE item_pedido (
 	id_pedido int primary key NOT NULL UNIQUE AUTO_INCREMENT
 	,id_prod int NOT NULL
     ,tamanho_prod int NOT NULL
-	,id_entrega int NOT NULL 
+	,id_entrega int
 	,qte_prod int NOT NULL
 );
 

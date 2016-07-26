@@ -1,8 +1,9 @@
 
 angular.module('systennis')
-	.controller('cart_ctrl',function($scope, $http, cartService){
+	.controller('cart_ctrl',function($scope, $state, $http, cartService){
 		
 		$scope.pagename='Carrinho';
+
 		var user={id_user:1};
 		if(user){
 			console.log('Usuario logado')
@@ -13,7 +14,7 @@ angular.module('systennis')
 				console.log('checker')
 			}
 			else {
-				$http.get('/cart/1').then(function(response){
+				$http.get('/cart/'+user.id_user).then(function(response){
 					
 					$scope.cart = response.data;
 					console.log(response.data);
@@ -23,8 +24,30 @@ angular.module('systennis')
 		else{
 			$scope.cart = cartService.getProducts();
 		}
+
+
+		$scope.reloadState = function() {
+		   $state.go($state.current, {}, {reload: true});
+		}
 		
 		//FAZER IR PARA O COOKIE
+		var removeCart=function(id_prod){
+			console.log ('apagando')
+			if(user){
+				$http({method: 'POST', 
+						data: {id_cliente: id_cliente, id_prod: id_prod},
+						url: '/cart/removeCart'})
+						.then(function(response){
+							alert("Removido com sucesso.");
+							$route.reload();
+						}).catch(function(err){
+							alert("Ocorreu um erro! \n"+err);
+						});
+					}
+			else {
+				//Tirar do array.
+			}
+		}
 
 		function Checker(){
 			var lista=cartService.getProducts();
@@ -45,7 +68,7 @@ angular.module('systennis')
 							$http({method: 'POST', data: itemCart, url: '/cart/addCartProduct'})
 								.then(function(){
 									console.log("Produto adicionado ao carrinho: " + item.id_prod);
-									$http.get('/cart/1').then(function(response){
+									$http.get('/cart/'+id_user).then(function(response){
 										$scope.cart = response.data;
 									});
 								});	

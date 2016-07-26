@@ -32,16 +32,16 @@ _________________________________________________________ -->
                             <div class="col-md-4 col-sm-6" ng-repeat="item in result"><!--| offset: currentPage*itemsPerPage | limitTo: itemsPerPage-->
                                 <div class="product">
                                     <div class="image">
-                                        <a ui-sref="prod_detail" ng-click="sendDetail(item)">
+                                        <a ui-sref="prod_detail({id_prod: item.id_prod})" ng-click="sendDetail(item)">
                                             <img src="{{item.url_imagem}}" alt="" class="img-responsive image1">
                                         </a>
                                     </div>
                                     <!-- /.image -->
                                     <div class="text">
-                                        <h3><a ui-sref="prod_detail" ng-click="sendDetail(item)">{{item.nome_prod}}</a></h3>
+                                        <h3><a ui-sref="prod_detail({id_prod: item.id_prod})" ng-click="sendDetail(item)">{{item.nome_prod}}</a></h3>
                                         <p class="price">R$ {{item.preco_prod.toFixed(2)}}</p>
                                         <!--<p class="buttons">
-                                            <a ui-sref="prod_detail" ng-click="sendDetail(item)" class="btn btn-default">View detail</a>
+                                            <a ui-sref="prod_detail({id_prod: item.id_prod})" ng-click="sendDetail(item)" class="btn btn-default">View detail</a>
                                             <a href="shop-basket.html" class="btn btn-template-main"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                         </p>-->
                                     </div>

@@ -10,7 +10,7 @@ var config = ['$urlRouterProvider', '$stateProvider', '$locationProvider', funct
               url: "/",
               templateUrl: "pages/template/shop-category.html",
               controller: 'catalog_ctrl',
-              data: { pageTitle: 'Pagina Principal' }
+              data: { pageTitle: 'Pagina Principal'}
           })
         .state('cart', {
               url: "/carrinho",
@@ -43,11 +43,11 @@ var config = ['$urlRouterProvider', '$stateProvider', '$locationProvider', funct
               data: { pageTitle: 'Reveja seu Pedido' }
           })
         .state('prod_detail', {
-              url: "/detalheProduto",
+              url: "/detalheProduto/prod=:id_prod",
               templateUrl: "pages/template/shop-detail.html",
               controller: 'prod_detail_ctrl',
-              data: { pageTitle: 'Detalhes' },
-              param:{ detail: null }
+              data: { pageTitle: 'Detalhes' }
+              // param:{ id_prod }
           })
         .state('cadastro_prod', {
               url: "/cadastro_prod",

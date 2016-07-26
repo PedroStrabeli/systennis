@@ -7,7 +7,7 @@ router.get('/', function(req, res) {
   	req.getConnection(function(err,connection){
         if(err) return res.status(400).json(err);
 
-        connection.query(queries.queries.catalog+' LIMIT 39' ,[],function(err,result){
+        connection.query(queries.queries.catalog()+' LIMIT 39' ,[],function(err,result){
         	 return res.status(200).json(result);
         });
   	});

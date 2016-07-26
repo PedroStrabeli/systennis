@@ -3,14 +3,14 @@ var queries = require('../constants/queries.js')
 var router = express.Router();
 
 /* GET home page. */
-router.get('/:id_prod', function(req, res) {
+router.get('/prod=:id_prod', function(req, res) {
   	//get produtc details
   	var id_prod = req.params.id_prod;
   	req.getConnection(function(err,connection){
   		
         if(err) return res.status(400).json(err);
 
-        connection.query(queries.queries.prod_detail+id_prod //id_prod
+        connection.query(queries.queries.prod_detail(id_prod) //id_prod
          ,[],function(err,result){
         	console.log(result);
         	return res.status(200).json(result);
@@ -25,8 +25,8 @@ router.get('/prod=:id_prod/getsizes', function(req, res) {
 	req.getConnection(function(err,connection){
   		var id_prod = req.params.id_prod;
         if(err) return res.status(400).json(err);
-
-        connection.query(queries.queries.tamanho_prod+id_prod //id_prod
+        console.log('vou pegar')
+        connection.query(queries.queries.tamanho_prod(id_prod) //id_prod
          ,[],function(err,result){
         	console.log(result);
         	return res.status(200).json(result);
