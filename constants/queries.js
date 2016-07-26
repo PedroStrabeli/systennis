@@ -14,9 +14,9 @@ queries.tamanho_prod= function (id_prod){return  'SELECT tamanho_prod FROM taman
 //CART
 queries.add_cart= function (params){return 'INSERT INTO item_carrinho (id_cliente, id_prod, tamanho_prod, qte_prod) VALUES ('+params+')'};
 
-queries.check_cart=  function (id_cliente, id_prod){return 'SELECT count(*) as count FROM item_carrinho WHERE id_cliente = '+id_cliente+' AND id_prod = '+id_prod};
+queries.check_cart=  function (id_cliente, id_prod, tamanho_prod){return 'SELECT count(*) as count FROM item_carrinho WHERE id_cliente = '+id_cliente+' AND id_prod = '+id_prod+' AND tamanho_prod = '+tamanho_prod};
 
-queries.get_cart= function (id_cliente){return   'SELECT id_prod, nome_prod, desc_prod,cor_prod, preco_prod, url_imagem, qte_prod FROM item_carrinho LEFT JOIN tb_produto using(id_prod) LEFT JOIN tb_cliente using(id_cliente) WHERE id_cliente = '+id_cliente;};
+queries.get_cart= function (id_cliente){return   'SELECT id_prod, nome_prod, desc_prod,cor_prod, tamanho_prod, preco_prod, url_imagem, qte_prod FROM item_carrinho LEFT JOIN tb_produto using(id_prod) LEFT JOIN tb_cliente using(id_cliente) WHERE id_cliente = '+id_cliente;};
 
 queries.remove_cart=function(id_cliente,id_prod){return 'DELETE FROM item_carrinho WHERE id_cliente = '+id_cliente+' AND id_prod = '+id_prod;}
 //CHECKOUT

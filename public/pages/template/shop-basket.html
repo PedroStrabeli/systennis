@@ -22,7 +22,7 @@ _________________________________________________________ -->
 
                 <div class="row">
                     <div class="col-md-12">
-                        <p class="text-muted lead">You currently have 3 item(s) in your cart.</p>
+                        <p class="text-muted lead">You currently have {{cart.length}} item(s) in your cart.</p>
                     </div>
 
 
@@ -36,10 +36,11 @@ _________________________________________________________ -->
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th colspan="2">Product</th>
-                                                <th>Quantity</th>
-                                                <th>Unit price</th>
-                                                <th>Discount</th>
+                                                <th colspan="2">Produto</th>
+                                                <th>Tamanho</th>
+                                                <th>Quantidade</th>
+                                                <th>Preço Unitário</th>
+                                                <th>Desconto</th>
                                                 <th colspan="2">Total</th>
                                             </tr>
                                         </thead>
@@ -51,6 +52,8 @@ _________________________________________________________ -->
                                                     </a>
                                                 </td>
                                                 <td><a href="/prod_detail/{{item.id_prod}}">{{item.nome_prod}}</a>
+                                                </td>
+                                                <td>{{item.tamanho_prod}}
                                                 </td>
                                                 <td>
                                                     <input type="number" value="{{item.qte_prod}}" class="form-control">
@@ -78,7 +81,7 @@ _________________________________________________________ -->
                                         <a href="shop-category.html" class="btn btn-default"><i class="fa fa-chevron-left"></i> Continue shopping</a>
                                     </div>
                                     <div class="pull-right">
-                                        <button class="btn btn-default"><i class="fa fa-refresh"></i> Update cart</button>
+                                        <button ng-click="reloadState()" class="btn btn-default"><i class="fa fa-refresh"></i> Update cart</button>
                                         <a ui-sref="checkout1"><button class="btn btn-template-main">Proceed to checkout <i class="fa fa-chevron-right"></i>
                                         </button></a>
                                     </div>

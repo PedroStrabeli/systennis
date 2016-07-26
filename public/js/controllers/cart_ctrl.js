@@ -4,6 +4,13 @@ angular.module('systennis')
 		
 		$scope.pagename='Carrinho';
 
+		var getCart=function(id_user){
+			$http.get('/cart/'+id_user).then(function(response){
+				$scope.cart = response.data;
+				console.log (response.data)
+			});
+		}
+
 		var user={id_user:1};
 		if(user){
 			console.log('Usuario logado')
@@ -14,11 +21,7 @@ angular.module('systennis')
 				console.log('checker')
 			}
 			else {
-				$http.get('/cart/'+user.id_user).then(function(response){
-					
-					$scope.cart = response.data;
-					console.log(response.data);
-				});//.then(function(){
+				getCart(user.id_user);
 			}
 		}
 		else{
@@ -68,11 +71,11 @@ angular.module('systennis')
 							$http({method: 'POST', data: itemCart, url: '/cart/addCartProduct'})
 								.then(function(){
 									console.log("Produto adicionado ao carrinho: " + item.id_prod);
-									$http.get('/cart/'+id_user).then(function(response){
-										$scope.cart = response.data;
-									});
+									getCart(user.id_user);
 								});	
 							
+						} else{
+							getCart(user.id_user);
 						}
 						
 					});	

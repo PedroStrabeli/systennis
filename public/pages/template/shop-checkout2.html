@@ -24,7 +24,7 @@ _________________________________________________________ -->
                     <div class="col-md-9 clearfix" id="checkout">
 
                         <div class="box">
-                            <form method="post" action="shop-checkout3.html">
+                            
                                 <ul class="nav nav-pills nav-justified">
                                     <li><a href="shop-checkout1.html"><i class="fa fa-map-marker"></i><br>Address</a>
                                     </li>
@@ -36,52 +36,41 @@ _________________________________________________________ -->
                                     </li>
                                 </ul>
 
+                                <form>
                                 <div class="content">
+
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <div class="box shipping-method">
 
-                                                <h4>USPS Next Day</h4>
+                                                <h4>Entrega Total</h4>
 
-                                                <p>Get it right on next day - fastest option possible.</p>
+                                                <p>Receba todos seus produtos em uma só entrega, quando juntarmos todos os seus produtos.</p>
 
                                                 <div class="box-footer text-center">
 
-                                                    <input type="radio" name="delivery" value="delivery1">
+                                                    <input type="radio" name="delivery" ng-model="entrega" ng-value="false">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="box shipping-method">
 
-                                                <h4>USPS Next Day</h4>
+                                                <h4>Entregas Parciais</h4>
 
-                                                <p>Get it right on next day - fastest option possible.</p>
+                                                <p>Receba seus produtos o mais rápido possivel, podendo recebê-los em mais de uma entrega</p>
 
                                                 <div class="box-footer text-center">
 
-                                                    <input type="radio" name="delivery" value="delivery2">
+                                                    <input type="radio" name="delivery" ng-model="entrega" ng-value="true">
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-6">
-                                            <div class="box shipping-method">
-
-                                                <h4>USPS Next Day</h4>
-
-                                                <p>Get it right on next day - fastest option possible.</p>
-
-                                                <div class="box-footer text-center">
-
-                                                    <input type="radio" name="delivery" value="delivery3">
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
                                     <!-- /.row -->
 
-                                </div>
+                                </div></form>
                                 <!-- /.content -->
 
                                 <div class="box-footer">
@@ -89,11 +78,11 @@ _________________________________________________________ -->
                                         <a ui-sref="checkout1" class="btn btn-default"><i class="fa fa-chevron-left"></i>Back to Addresses</a>
                                     </div>
                                     <div class="pull-right">
-                                        <a ui-sref="checkout3"><button class="btn btn-template-main">Continue to Payment Method<i class="fa fa-chevron-right"></i>
+                                        <a ng-click="validateEntr()"><button class="btn btn-template-main">Continue to Payment Method<i class="fa fa-chevron-right"></i>
                                         </button></a>
                                     </div>
                                 </div>
-                            </form>
+                            
                         </div>
                         <!-- /.box -->
 

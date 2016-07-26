@@ -42,7 +42,7 @@ CREATE TABLE tb_cliente (
 	,email_cliente varchar (64) NOT NULL
 	,hash_senha varchar (512) NOT NULL
 	,cpf_cliente varchar (16) NOT NULL
-	,rg_cliente varchar (16) NOT NULL
+	,rg_cliente varchar (16)
 	,member_since date
 	,tel_fixo varchar(16) 
 	,tel_cel varchar(16) 
