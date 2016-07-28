@@ -14,11 +14,10 @@ angular.module('systennis')
 			"Fitness e Musculação"
 		];
 
-		$http.get('/cadastro_prod').success(function(response){		
+		$http.get('/cadastro_prod').success(function(response){
 		 	$scope.produtos = response;
-			
 		});
-		
+
 		$scope.produtos = [];
 
 		$scope.adicionarProduto = function (produto) {
@@ -41,5 +40,4 @@ angular.module('systennis')
     		centsSeparator: ',',
     		thousandsSeparator: '.'
 		});
-		
 	});

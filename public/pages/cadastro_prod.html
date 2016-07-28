@@ -33,7 +33,7 @@
 		  	<div>
 		    	<label>Preço</label>
 		  		<input type="text" class="form-control cadastro" step="0.01" id="price" placeholder="ex: R$100,00" ng-model="produto.preco">
-		  	</div>		  	
+		  	</div>
 		  	<div>
 			  	<label>Estoque</label>
 			  	<input type="number" class="form-control cadastro" style="width: 10%"  min="0" max="10000" placeholder=0 ng-model="produto.estoque">
@@ -43,11 +43,9 @@
 		  		<input type="url" class="form-control cadastro" placeholder="Digite a URL da imagem." ng-model="produto.imagem">
 		  	</div>
 
-		  	<button type="submit" class="btn btn-primary btn-block" ng-click="adicionarProduto(produto)" ng-disabled="!produto.nome || !produto.descricao || !produto.tipo 
+		  	<button type="submit" class="btn btn-primary btn-block" ng-click="adicionarProduto(produto)" ng-disabled="!produto.nome || !produto.descricao || !produto.tipo
 			|| !produto.subtipo || !produto.cor || !produto.marca|| !produto.preco || !produto.estoque || !produto.imagem">Adicionar produto</button>
-	    
 		</form>
-	  
 	</div>
 
 	<div>
@@ -65,13 +63,11 @@
 			  	</thead>
 			  	<tbody>
 			  		<tr ng-repeat="produto in produtos">
-			  			
 			  			<td>{{produto.nome_prod}}</a></td>
 			  			<td>{{produto.desc_prod}}</td>
 			  			<td>{{produto.preco_prod}}</td>
 			  			<td><img src="{{produto.url_imagem}}" width = "75"/></td>
 			  			<td>{{produto.tipo_prod}}</td>
-			  			
 			  		</tr>
 			  	</tbody>
 			  </table>

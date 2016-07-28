@@ -6,13 +6,20 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mysql = require('mysql');
 var connection  = require('express-myconnection');
+var passport = require('passport');
+var expressJWT = require('express-jwt');
+var jwt = require('jsonwebtoken');
+
+var flash = require('connect-flash');
+var expressValidator = require('express-validator');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var catalog = require('./routes/catalog');
 var prod_detail = require('./routes/prod_detail');
 var cart = require('./routes/cart');
-var constants = require('./constants/constants.js')
+var constants = require('./constants/constants.js');
+var queries = require('./constants/queries.js');
 
 //CRUD produto
 var cadastro_prod = require('./routes/cadastro_prod');
@@ -45,11 +52,67 @@ app.set('view engine', 'ejs');
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
+
+app.use(expressValidator({
+  errorFormatter: function(param, msg, value) {
+      var namespace = param.split('.')
+      , root    = namespace.shift()
+      , formParam = root;
+
+    while(namespace.length) {
+      formParam += '[' + namespace.shift() + ']';
+    }
+    return {
+      param : formParam,
+      msg   : msg,
+      value : value
+    }
+  }
+}));
+
+app.use(expressValidator({
+  customValidators: {
+    isEmailORCpfAvailable: function(email_or_cpf) {
+      return new Promise(function(resolve, reject) {
+
+      var con = mysql.createConnection(
+      {
+        host: constants.db_param.host,
+        user: constants.db_param.user,
+        password : constants.db_param.password,
+        port : constants.db_param.port, //port mysql
+        database: constants.db_param.database
+      });
+
+      con.query(queries.queries.is_registration_available(email_or_cpf),[],
+        function(err, result){
+          if(err) throw err;
+
+          console.log(result[0].has_registration);
+
+          if(eval(result[0].has_registration))
+          {
+            reject(true);
+          }
+          else
+          {
+            resolve(true);
+          }
+
+        });
+      });
+      }
+  }
+}));
+
+// app.use(expressJWT({ secret: 'secret123' }).unless({ path: }))
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'page')));
-
 
 app.use('/', routes);
 app.use('/index', routes);
@@ -69,6 +132,13 @@ app.use(function(req, res, next) {
 });
 
 // error handlers
+
+app.use(function(err, res, next) {
+  res.locals.success_msg = req.flash('success_msg');
+  res.locals.error_msg = req.flash('error_msg');
+  res.locals.error = req.flash('error');
+  next();
+})
 
 // development error handler
 // will print stacktrace
