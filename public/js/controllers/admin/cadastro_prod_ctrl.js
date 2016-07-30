@@ -1,5 +1,5 @@
 angular.module('systennis')
-	.controller('cadastro_prod_ctrl',function($scope, $http){
+	.controller('cadastro_prod_ctrl',function($scope, $http, $state){
 		$scope.title = "Cadastro de Produtos";
 
 		//SELECT TIPO
@@ -27,12 +27,12 @@ angular.module('systennis')
 		$scope.adicionarProduto = function (produto, tamanhos) {
 			produto.tamanhos = tamanhos;
 			console.log(produto);
-			produto.preco = parseFloat(produto.preco.replace(/[,]+/g,".")).toFixed(2);
-			produto.preco = parseFloat(produto.preco);
+			produto.preco_prod = parseFloat(produto.preco_prod.toString().replace(/[,]+/g,".")).toFixed(2);
+			produto.preco_prod = parseFloat(produto.preco_prod);
 			$http.post('/crud_prod/create', produto).then(function(response){
 				for (i = 0; i < tamanhos.length; i++){
 					var input = {
-						tamanho : tamanhos[i].tamanho,
+						tamanho_prod : tamanhos[i].tamanho_prod,
 						id_prod : response.data.id
 					};
 					$http.post('/crud_prod/create_tamanho', input);
@@ -40,6 +40,7 @@ angular.module('systennis')
 			}, function(error){});
 			delete $scope.tamanhos;
 			delete $scope.produto;
+			$state.go('consulta_prod');
 		};
 
 		//CADASTRO DE TAMANHOS
@@ -49,7 +50,7 @@ angular.module('systennis')
 			var teste =1;
 			if ($scope.tamanhos.length > 0){
 				for (i = 0; i < $scope.tamanhos.length; i++){
-					if ($scope.tamanhos[i].tamanho == tamanho.tamanho){
+					if ($scope.tamanhos[i].tamanho_prod == tamanho.tamanho_prod){
 						teste = 0;
 					}
 				}
@@ -58,13 +59,16 @@ angular.module('systennis')
 				$scope.tamanhos.push(angular.copy(tamanho));
 			}
 			$scope.tamanhos.sort(function compare(a, b) {
-			    if (a.tamanho < b.tamanho) return -1;
-			    if (a.tamanho > b.tamanho) return 1;
+			    if (a.tamanho_prod < b.tamanho_prod) return -1;
+			    if (a.tamanho_prod > b.tamanho_prod) return 1;
 			    return 0;
 			})
 			delete tamanho;
 		};
 
+		$scope.teste = function () {
+			console.log('teste');
+		}
 		$scope.apagarTamanho = function (tamanho) {
 			var temp;
 			for (i = 0; i < $scope.tamanhos.length; i++){
@@ -76,8 +80,8 @@ angular.module('systennis')
 				}
 			}
 			$scope.tamanhos.sort(function compare(a, b) {
-			    if (a.tamanho < b.tamanho) return -1;
-			    if (a.tamanho > b.tamanho) return 1;
+			    if (a.tamanho_prod < b.tamanho_prod) return -1;
+			    if (a.tamanho_prod > b.tamanho_prod) return 1;
 			    return 0;
 			})
 		};

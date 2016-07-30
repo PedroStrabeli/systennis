@@ -3,7 +3,7 @@ angular.module('systennis')
 		$scope.title = "Consulta de Produtos";
 
 		// Paginação
-		$scope.maxSize = 7;
+		$scope.maxSize = 10;
 		$scope.currentPage = 1;	  
 
 		$http.get('/crud_prod').success(function(response){		
@@ -27,6 +27,10 @@ angular.module('systennis')
 			console.log($scope.produtoSelecionado);
 		}
 
+		$scope.editarProduto = function (id) {
+			sessionStorage.editId = id;
+		}
+
 
 		$scope.ordenar = function(keyname){
 	        $scope.sortKey = keyname;
@@ -35,10 +39,12 @@ angular.module('systennis')
 		  
 	})
 
-	//Filtro para paginação 
+	// Filtro para paginação 
 	.filter('startFrom', function(){
        return function(data, start){
         return data.slice(start);
       }
-    });
+    })
+	
+
 

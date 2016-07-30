@@ -41,9 +41,9 @@
 
         
 
-        <header ng-include="'pages/template/admin-navbar.html'"></header>
+        <header ng-include="'pages/admin/admin-navbar.html'"></header>
 
-        <div id="page-wrapper">
+        <div id="page-wrapper" style="height : 100%">
             <div ui-view></div>
         </div>
 
@@ -77,8 +77,10 @@
     <!-- Config -->
     <script src="js/config-admin.js"></script>
 
-    <script src="js/controllers/cadastro_prod_ctrl.js"></script>
-    <script src="js/controllers/consulta_prod_ctrl.js"></script>
+    <script src="js/controllers/admin/cadastro_prod_ctrl.js"></script>
+    <script src="js/controllers/admin/consulta_prod_ctrl.js"></script>
+    <script src="js/controllers/admin/edicao_prod_ctrl.js"></script>
+    <script src="js/controllers/admin/visualizar_prod_ctrl.js"></script>
 
 
 
