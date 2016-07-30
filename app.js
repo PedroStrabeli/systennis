@@ -8,6 +8,7 @@ var mysql = require('mysql');
 var connection  = require('express-myconnection');
 
 var routes = require('./routes/index');
+var routes_admin = require('./routes/index-admin');
 var users = require('./routes/users');
 var catalog = require('./routes/catalog');
 var prod_detail = require('./routes/prod_detail');
@@ -15,7 +16,7 @@ var cart = require('./routes/cart');
 var constants = require('./constants/constants.js')
 
 //CRUD produto
-var cadastro_prod = require('./routes/cadastro_prod');
+var crud_prod = require('./routes/crud_prod');
 
 // var products = require('./routes/products');
 
@@ -53,13 +54,14 @@ app.use(express.static(path.join(__dirname, 'page')));
 
 app.use('/', routes);
 app.use('/index', routes);
+app.use('/admin', routes_admin);
 app.use('/users', users);
 app.use('/catalog', catalog);
 app.use('/prod_detail', prod_detail);
 app.use('/cart', cart);
 
 //CRUD produto
-app.use('/cadastro_prod', cadastro_prod);
+app.use('/crud_prod', crud_prod);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

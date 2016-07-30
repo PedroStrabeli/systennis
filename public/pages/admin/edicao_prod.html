@@ -1,0 +1,78 @@
+<div class="container-fluid">
+	<div>
+		<h3>{{title}}</h3>
+		<br><br>
+	  	<form>
+		  	<div>
+		    	<label>Nome do Produto</label>
+		    	<input type="text" class="form-control cadastro" value="{{produto.nome_prod}}" ng-model="produto.nome_prod">
+		  	</div>
+		  	<div>
+		  		<label>Tipo de Produto</label>
+			  	<select class="select cadastro" style="margin-right: 30px; width: 125px"  ng-model="produto.tipo_prod" ng-options="tipo_produto for tipo_produto in tipo_produto" placeholder="">
+					<option value="">{{produto.tipo_prod}}</option>
+				</select>
+				<label>Subtipo de Produto</label>
+			  	<select class="select cadastro" style="width: 125px"  ng-model="produto.subtipo_prod" ng-options="subtipo_produto for subtipo_produto in subtipo_produto" placeholder="">
+					<option value="">{{produto.subtipo_prod}}</option>
+				</select>
+			</div>
+		  	<div>
+		  		<label>Descrição</label>
+		    	<textarea class="form-control cadastro" placeholder="Digite a descrição do produto." rows="4" cols="100" ng-model="produto.desc_prod">{{produto.dec_prod}}</textarea>
+		  	</div>
+		  	<div>
+		    	<label>Cor</label>
+		    	<input type="textarea" class="form-control cadastro" placeholder="Digite a cor do produto." value="{{produto.cor_prod}}" ng-model="produto.cor_prod"> 
+		  	</div>
+		  	<div>
+		    	<label>Marca</label>
+		    	<input type="textarea" class="form-control cadastro" placeholder="Digite a marca do produto." value="{{produto.marca_prod}}" ng-model="produto.marca_prod">
+		  	</div> 
+		  	<div>
+		  		<label>Preço</label>
+			  	<div class="form-group input-group">
+	                <span class="input-group-addon">R$</span>
+	                <input type="text" class="form-control" style="width: 157px"value="{{produto.preco_prod}}" ng-model="produto.preco_prod">
+	            </div> 
+	        </div>
+	        <div style="position : relative">
+	        	<label>Tamanhos</label>
+	        	<div>
+		        	<input type="number" class="form-control cadastro" style="width: 70px; display: inline;" ng-model="tamanho.tamanho_prod"/>
+		        	<button class="btn btn-default" style="background-color: #eee; color: #555; border: 1px solid #ccc; border-radius: 4px" ng-click="adicionarTamanho(tamanho)" ng-disabled="!tamanho.tamanho_prod"> >> </button>
+		        	<table style="display: inline; position: relative; top: 7px">
+		        		<tr>
+		        			<!-- <th>Tamanhos</th> -->
+		        			<td ng-repeat="valor in tamanhos" class="tamanho-elemento">
+		        			{{valor.tamanho_prod}} &nbsp
+		        			<button type="button" class="close" aria-label="Fechar" ng-click="apagarTamanho(valor)"><span aria-hidden="true">&times;</span></button>
+		        			</td>
+		        		</tr>
+		        	</table>
+	        	</div>
+	        </div>		  	
+		  	<div>
+			  	<label>Estoque</label>
+			  	<input type="number" class="form-control cadastro" style="width: 200px"  min="0" max="10000" placeholder=0 value="{{produto.estoque_prod}}" ng-model="produto.estoque_prod">
+		  	</div> 
+		  	<div>
+		  		<label>URL da imagem</label>
+		  		<input type="url" class="form-control cadastro" placeholder="Digite a URL da imagem." value="{{produto.url_imagem}}" ng-model="produto.url_imagem">
+		  	</div> 
+
+		  	<button type="submit" class="btn btn-warning btn-block" ng-click="editarProduto(produto, tamanhos, tamanhosToDelete)" ng-disabled="" ng-disabled="!produto.nome_prod || !produto.desc_prod || !produto.tipo_prod 
+			|| !produto.subtipo_prod || !produto.cor_prod || !produto.marca_prod || !produto.preco_prod || !produto.estoque_prod || !produto.url_imagem">Editar Produto</button>
+		</form>
+	  
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
