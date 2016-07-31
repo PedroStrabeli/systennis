@@ -1,24 +1,32 @@
 
 angular.module('systennis')
-	.controller('cart_ctrl',function($scope, $state, $http, cartService){
+	.controller('cart_ctrl',function($scope, $state, $http, cartService, checkoutService){
 		
 		$scope.pagename='Carrinho';
 
 		var getCart=function(id_user){
 			$http.get('/cart/'+id_user).then(function(response){
-				$scope.cart = response.data;
-				console.log (response.data)
+				checkoutService.checkout.cart=response.data;
+				checkoutService.checkout.cart.total=calculaTotal(response.data);
+				//console.log (checkoutService.checkout.cart)
+				$scope.cart = checkoutService.checkout.cart;
 			});
 		}
-
-		var user={id_user:1};
+		var calculaTotal=function(item){
+			var total=0;
+			
+			for (i=0, len= item.length; i < len; i++){
+				total+=item[i].preco_prod*item[i].qte_prod;
+			}
+			return total.toFixed(2);
+		}
+		var user={id_user:1, email_cliente:'pedrostrabeli@gmail.com'};
 		if(user){
 			console.log('Usuario logado')
 			//checa se existe algo no carrinho local.
 			if (cartService.getProducts()[0]!= null){
 				//console.log(cartService.getProducts()!==[])
 				Checker();
-				console.log('checker')
 			}
 			else {
 				getCart(user.id_user);
@@ -30,7 +38,8 @@ angular.module('systennis')
 
 
 		$scope.reloadState = function() {
-		   $state.go($state.current, {}, {reload: true});
+		   // $state.go($state.current, {}, {reload: true});
+		   $state.transitionTo('cart', $stateParams, { reload: true, inherit: false, notify: true });
 		}
 		
 		//FAZER IR PARA O COOKIE
@@ -81,4 +90,5 @@ angular.module('systennis')
 					});	
 			}
 		};
+		checkoutService.checkout.user=user;
 	});

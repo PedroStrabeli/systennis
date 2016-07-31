@@ -23,22 +23,21 @@ _________________________________________________________ -->
                     <div class="col-md-9 clearfix" id="checkout">
 
                         <div class="box">
-                            <form method="post" action="shop-checkout2.html">
-
                                 <ul class="nav nav-pills nav-justified">
-                                    <li class="active"><a href="#"><i class="fa fa-map-marker"></i><br>Address</a>
+                                    <li class="active"><a><i class="fa fa-map-marker"></i><br>Endereço</a>
                                     </li>
-                                    <li class="disabled"><a href="#"><i class="fa fa-truck"></i><br>Delivery Method</a>
+                                    <li class="disabled"><a><i class="fa fa-truck"></i><br>Método de Entrega</a>
                                     </li>
-                                    <li class="disabled"><a href="#"><i class="fa fa-money"></i><br>Payment Method</a>
+                                    <li class="disabled"><a><i class="fa fa-eye"></i><br>Revise seu Pedido</a>
                                     </li>
-                                    <li class="disabled"><a href="#"><i class="fa fa-eye"></i><br>Order Review</a>
+                                    <li class="disabled"><a><i class="fa fa-money"></i><br>Pagamento</a>
                                     </li>
                                 </ul>
 
                                 <div class="row content">
                                 <!--<form >-->
-                                    <div class="col-md-4 col-sm-6" ng-repeat="address in addresses" ng-click="chooseAddr(address)">
+                                    <form>
+                                    <div class="col-md-4 col-sm-6" ng-repeat="address in addresses" ><!--ng-click="chooseAddr(address)"-->
                                     <div class="box shipping-method">
                                         
                                         <h4>{{address.rua_end+', '+address.numero_end}}</h4>
@@ -49,7 +48,7 @@ _________________________________________________________ -->
                                             <li>{{address.cep_end}}</li>
                                         </ul>
                                         <div class="box-footer text-center">
-                                            <input type="radio" name="address" ng-value="{{address}}" ng-model="address">
+                                            <input type="radio" name="address" ng-click="chooseAddr(address)"><!--ng-value="{{address}}" ng-model="address"-->
                                         </div>
                                         </div>
                                     </div>
@@ -63,14 +62,13 @@ _________________________________________________________ -->
 
                                 <div class="box-footer">
                                     <div class="pull-left">
-                                        <a ui-sref="cart" class="btn btn-default"><i class="fa fa-chevron-left"></i>Back to basket</a>
+                                        <a ui-sref="cart" class="btn btn-default"><i class="fa fa-chevron-left"></i>Voltar ao Carrinho</a>
                                     </div>
                                     <div class="pull-right">
-                                        <a ng-click="validateAddr()"><button class="btn btn-template-main">Continue to Delivery Method<i class="fa fa-chevron-right"></i>
+                                        <a ng-click="validateAddr()"><button class="btn btn-template-main">Continuar para Método de Entrega<i class="fa fa-chevron-right"></i>
                                         </button></a>
                                     </div>
                                 </div>
-                            </form>
                         </div>
                         <!-- /.box -->
 
@@ -80,40 +78,9 @@ _________________________________________________________ -->
 
                     <div class="col-md-3">
 
-                        <div class="box" id="order-summary">
-                            <div class="box-header">
-                                <h3>Order summary</h3>
-                            </div>
-                            <p class="text-muted">Shipping and additional costs are calculated based on the values you have entered.</p>
-
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <tbody>
-                                        <tr>
-                                            <td>Order subtotal</td>
-                                            <th>$446.00</th>
-                                        </tr>
-                                        <tr>
-                                            <td>Shipping and handling</td>
-                                            <th>$10.00</th>
-                                        </tr>
-                                        <tr>
-                                            <td>Tax</td>
-                                            <th>$0.00</th>
-                                        </tr>
-                                        <tr class="total">
-                                            <td>Total</td>
-                                            <th>$456.00</th>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-
-                        </div>
-
-                    </div>
+                        <div ng-include="'pages/template/common/summary-checkout.html'"></div>
                     <!-- /.col-md-3 -->
-
+                    </div>
                 </div>
                 <!-- /.row -->
 

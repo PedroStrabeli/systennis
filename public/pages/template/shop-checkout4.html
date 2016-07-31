@@ -24,63 +24,54 @@ _________________________________________________________ -->
                         <div class="box">
                             <form method="post" action="shop-checkout4.html">
                                 <ul class="nav nav-pills nav-justified">
-                                    <li><a href="shop-checkout1.html"><i class="fa fa-map-marker"></i><br>Address</a>
+                                    <li><a ui-sref="checkout1"><i class="fa fa-map-marker"></i><br>Endereço</a>
                                     </li>
-                                    <li><a href="shop-checkout2.html"><i class="fa fa-truck"></i><br>Delivery Method</a>
+                                    <li><a ui-sref="checkout2"><i class="fa fa-truck"></i><br>Método de Entrega</a>
                                     </li>
-                                    <li><a href="shop-checkout3.html"><i class="fa fa-money"></i><br>Payment Method</a>
+                                    <li class="active"><a><i class="fa fa-eye"></i><br>Revise seu Pedido</a>
                                     </li>
-                                    <li class="active"><a href="#"><i class="fa fa-eye"></i><br>Order Review</a>
+                                    <li class="disabled"><a><i class="fa fa-money"></i><br>Pagamento</a>
                                     </li>
                                 </ul>
 
                                 <div class="content">
                                     <div class="table-responsive">
                                         <table class="table">
-                                            <thead>
-                                                <tr>
-                                                    <th colspan="2">Product</th>
-                                                    <th>Quantity</th>
-                                                    <th>Unit price</th>
-                                                    <th>Discount</th>
-                                                    <th>Total</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <a href="#">
-                                                            <img src="img/detailsquare.jpg" alt="White Blouse Armani">
-                                                        </a>
-                                                    </td>
-                                                    <td><a href="#">White Blouse Armani</a>
-                                                    </td>
-                                                    <td>2</td>
-                                                    <td>$123.00</td>
-                                                    <td>$0.00</td>
-                                                    <td>$246.00</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <a href="#">
-                                                            <img src="img/basketsquare.jpg" alt="Black Blouse Armani">
-                                                        </a>
-                                                    </td>
-                                                    <td><a href="#">Black Blouse Armani</a>
-                                                    </td>
-                                                    <td>1</td>
-                                                    <td>$200.00</td>
-                                                    <td>$0.00</td>
-                                                    <td>$200.00</td>
-                                                </tr>
-                                            </tbody>
-                                            <tfoot>
-                                                <tr>
-                                                    <th colspan="5">Total</th>
-                                                    <th>$446.00</th>
-                                                </tr>
-                                            </tfoot>
-                                        </table>
+                                        <thead>
+                                            <tr>
+                                                <th colspan="2">Produto</th>
+                                                <th>Tamanho</th>
+                                                <th>Quantidade</th>
+                                                <th>Preço Unitário</th>
+                                                <!--<th>Desconto</th>-->
+                                                <th colspan="2">Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="item in order">
+                                                <td>
+                                                    <a href="/prod_detail/{{item.id_prod}}">
+                                                        <img src="{{item.url_imagem}}" alt="{{item.nome_prod}}">
+                                                    </a>
+                                                </td>
+                                                <td><a href="/prod_detail/{{item.id_prod}}">{{item.nome_prod}}</a>
+                                                </td>
+                                                <td>{{item.tamanho_prod}}
+                                                </td>
+                                                <td>{{item.qte_prod}}</td>
+                                                <td>{{item.preco_prod.toFixed(2)}}</td>
+                                                <!--<td>$0.00</td>-->
+                                                <td>{{(item.preco_prod*item.qte_prod).toFixed(2)}}</td>
+                                                
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th colspan="5">Total</th>
+                                                <th colspan="2">{{order.total}}</th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
 
                                     </div>
                                     <!-- /.table-responsive -->
@@ -89,10 +80,10 @@ _________________________________________________________ -->
 
                                 <div class="box-footer">
                                     <div class="pull-left">
-                                        <a ui-sref="checkout3" class="btn btn-default"><i class="fa fa-chevron-left"></i>Back to Payment method</a>
+                                        <a ui-sref="checkout2" class="btn btn-default"><i class="fa fa-chevron-left"></i>Voltar para Método de Entrega</a>
                                     </div>
                                     <div class="pull-right">
-                                        <a ui-sref="orders"><button type="submit" class="btn btn-template-main">Place an order<i class="fa fa-chevron-right"></i>
+                                        <a ui-sref="checkout3"><button type="submit" class="btn btn-template-main">Continuar para o Pagamento<i class="fa fa-chevron-right"></i>
                                         </button></a>
                                     </div>
                                 </div>
@@ -106,36 +97,8 @@ _________________________________________________________ -->
 
                     <div class="col-md-3">
 
-                        <div class="box" id="order-summary">
-                            <div class="box-header">
-                                <h3>Order summary</h3>
-                            </div>
-                            <p class="text-muted">Shipping and additional costs are calculated based on the values you have entered.</p>
+                        <div ng-include="'pages/template/common/summary-checkout.html'"></div>
 
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <tbody>
-                                        <tr>
-                                            <td>Order subtotal</td>
-                                            <th>$446.00</th>
-                                        </tr>
-                                        <tr>
-                                            <td>Shipping and handling</td>
-                                            <th>$10.00</th>
-                                        </tr>
-                                        <tr>
-                                            <td>Tax</td>
-                                            <th>$0.00</th>
-                                        </tr>
-                                        <tr class="total">
-                                            <td>Total</td>
-                                            <th>$456.00</th>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-
-                        </div>
 
                     </div>
                     <!-- /.col-md-3 -->
@@ -164,16 +127,7 @@ _________________________________________________________ -->
    <!-- *** GET IT ***
 _________________________________________________________ -->
 
-        <div id="get-it">
-            <div class="container">
-                <div class="col-md-8 col-sm-12">
-                    <!--<h3>Do you want cool website like this one?</h3>
-                </div>
-                <div class="col-md-4 col-sm-12">
-                    <a href="#" class="btn btn-template-transparent-primary">Buy this template now</a>-->
-                </div>
-            </div>
-        </div>
+        
 
 
         <!-- *** GET IT END *** -->

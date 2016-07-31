@@ -26,13 +26,13 @@ _________________________________________________________ -->
                         <div class="box">
                             
                                 <ul class="nav nav-pills nav-justified">
-                                    <li><a href="shop-checkout1.html"><i class="fa fa-map-marker"></i><br>Address</a>
+                                    <li><a ui-sref="checkout1"><i class="fa fa-map-marker"></i><br>Endereço</a>
                                     </li>
-                                    <li class="active"><a href="#"><i class="fa fa-truck"></i><br>Delivery Method</a>
+                                    <li class="active"><a><i class="fa fa-truck"></i><br>Método de Entrega</a>
                                     </li>
-                                    <li class="disabled"><a href="#"><i class="fa fa-money"></i><br>Payment Method</a>
+                                    <li class="disabled"><a><i class="fa fa-eye"></i><br>Revise seu Pedido</a>
                                     </li>
-                                    <li class="disabled"><a href="#"><i class="fa fa-eye"></i><br>Order Review</a>
+                                    <li class="disabled"><a><i class="fa fa-money"></i><br>Pagamento</a>
                                     </li>
                                 </ul>
 
@@ -75,10 +75,10 @@ _________________________________________________________ -->
 
                                 <div class="box-footer">
                                     <div class="pull-left">
-                                        <a ui-sref="checkout1" class="btn btn-default"><i class="fa fa-chevron-left"></i>Back to Addresses</a>
+                                        <a ui-sref="checkout1" class="btn btn-default"><i class="fa fa-chevron-left"></i>Voltar para Endereços</a>
                                     </div>
                                     <div class="pull-right">
-                                        <a ng-click="validateEntr()"><button class="btn btn-template-main">Continue to Payment Method<i class="fa fa-chevron-right"></i>
+                                        <a ng-click="validateEntr()"><button class="btn btn-template-main">Revise seu pedido<i class="fa fa-chevron-right"></i>
                                         </button></a>
                                     </div>
                                 </div>
@@ -92,36 +92,7 @@ _________________________________________________________ -->
 
                     <div class="col-md-3">
 
-                        <div class="box" id="order-summary">
-                            <div class="box-header">
-                                <h3>Order summary</h3>
-                            </div>
-                            <p class="text-muted">Shipping and additional costs are calculated based on the values you have entered.</p>
-
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <tbody>
-                                        <tr>
-                                            <td>Order subtotal</td>
-                                            <th>$446.00</th>
-                                        </tr>
-                                        <tr>
-                                            <td>Shipping and handling</td>
-                                            <th>$10.00</th>
-                                        </tr>
-                                        <tr>
-                                            <td>Tax</td>
-                                            <th>$0.00</th>
-                                        </tr>
-                                        <tr class="total">
-                                            <td>Total</td>
-                                            <th>$456.00</th>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-
-                        </div>
+                        <div ng-include="'pages/template/common/summary-checkout.html'"></div>
 
                     </div>
                     <!-- /.col-md-3 -->

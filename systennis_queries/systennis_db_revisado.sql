@@ -150,10 +150,11 @@ CREATE TABLE alerta_destino (
 DROP TABLE IF EXISTS tb_pagamento;
 CREATE TABLE tb_pagamento (
 	id_pagamento int primary key NOT NULL UNIQUE AUTO_INCREMENT
-	,numero_cartao char(19) NOT NULL
-	,numero_boleto char (44) NOT NULL
+	,numero_cartao char(19) 
+	,numero_boleto char (44)
 	,horario_pagamento datetime NOT NULL
 	,valor_pedido decimal(10,2) NOT NULL
+	,status_pagamento varchar(15) not null 	
 );
 
 #--#11 - 
@@ -175,8 +176,7 @@ CREATE TABLE tb_pedido (
 	,status_pedido varchar(32) NOT NULL
 	,entr_parcial bool NOT NULL
 	,id_endereco int NOT NULL
-	,id_cortesia int NOT NULL
-	,id_func int NOT NULL
+	,id_cortesia int NULL
 	,id_pagamento int NOT NULL
 );
 
@@ -242,7 +242,6 @@ ALTER TABLE tb_pedido
 ADD FOREIGN KEY (id_cliente) REFERENCES tb_cliente(id_cliente)
 ,ADD FOREIGN KEY (id_endereco) REFERENCES tb_endereco(id_endereco)
 ,ADD FOREIGN KEY (id_cortesia) REFERENCES tb_cortesia(id_cortesia)
-,ADD FOREIGN KEY (id_func) REFERENCES tb_funcionario(id_func)
 ,ADD FOREIGN KEY (id_pagamento) REFERENCES tb_pagamento(id_pagamento);
 
 

@@ -23,7 +23,11 @@ queries.remove_cart=function(id_cliente,id_prod){return 'DELETE FROM item_carrin
 
 queries.get_address= function (id_cliente){return   'select * from cliente_endereco left join tb_endereco using(id_endereco) WHERE id_cliente = '+id_cliente};
 
-queries.payment = function (id_cliente){return   'select * from cliente_endereco left join tb_endereco using(id_endereco) WHERE id_cliente = '+id_cliente};
+queries.payment = function (params){return   "INSERT INTO tb_pagamento (numero_cartao, numero_boleto, horario_pagamento, valor_pedido, status_pagamento) values ('"+params.cartao+"','"+params.boleto+"','"+params.data+"',"+params.valor+",'Pendente');"};
+
+queries.getpayid=function (){return" SELECT max(id_pagamento) from tb_pagamento;"}
+
+queries.update_payment = function (id_pagamento){return   "UPDATE tb_pagamento SET status_pagamento = 'Recebido' where id_pagamento="+id_pagamento+";"};
 
 queries.finish_order = function (params){return   'INSERT INTO tb_pedido (id_cliente, data_pedido, status_pedido, entrega_parcial, id endereco, id_cortesia, id_func, id_pagamento) VALUES ('+params+');'};
 

@@ -13,6 +13,7 @@ var catalog = require('./routes/catalog');
 var prod_detail = require('./routes/prod_detail');
 var cart = require('./routes/cart');
 var checkout = require('./routes/checkout');
+var mail = require('./routes/mail');
 var constants = require('./constants/constants.js')
 
 //CRUD produto
@@ -59,6 +60,7 @@ app.use('/catalog', catalog);
 app.use('/prod_detail', prod_detail);
 app.use('/cart', cart);
 app.use('/checkout', checkout);
+app.use('/mail', mail);
 
 //CRUD produto
 app.use('/cadastro_prod', cadastro_prod);

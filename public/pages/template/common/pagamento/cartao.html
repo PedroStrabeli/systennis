@@ -1,0 +1,87 @@
+<div class="container">
+    <div class="row-fluid">
+      <form class="form-horizontal">
+        <fieldset>
+          <div>
+            <legend>Pagamento com cartão de crédito</legend>
+          </div>
+     
+          <!-- Name -->
+          <div>
+            <label>Nome do portador</label>
+            <div>
+              <input placeholder="Nome do portador" class="input-xlarge" name="nome" ng-model="pag.nome_portador">
+            </div>
+          </div>
+     
+          <!-- Card Number -->
+          <div >
+            <label>Número do cartão</label>
+            <div>
+              <input ng-model="pag.numero_cartao">
+                  <!--<p ng-show="userForm.username.$error.maxlength">Números demais.</p>-->
+            </div>
+          </div>
+     
+          <!-- Expiry-->
+          <div >
+            <label class="control-label" name="password">Data de Validade</label>
+            <div class="controls">
+              <select class="span3" name="mes" ng-model="pag.mes_val">
+                <option></option>
+                <option ng-value="01">Jan (01)</option>
+                <option ng-value="02">Fev (02)</option>
+                <option ng-value="03">Mar (03)</option>
+                <option ng-value="04">Abr (04)</option>
+                <option ng-value="05">Mai (05)</option>
+                <option ng-value="06">Jun (06)</option>
+                <option ng-value="07">Jul (07)</option>
+                <option ng-value="08">Ago (08)</option>
+                <option ng-value="09">Set (09)</option>
+                <option ng-value="10">Out (10)</option>1
+                <option ng-value="11">Nov (11)</option>
+                <option ng-value="12">Dez (12)</option>
+              </select>
+              <select class="span2" name="ano" ng-model="pag.ano_val">
+                <option ng-value="16">2016</option>
+                <option ng-value="17">2017</option>
+                <option ng-value="18">2018</option>
+                <option ng-value="19">2019</option>
+                <option ng-value="20">2020</option>
+                <option ng-value="21">2021</option>
+                <option ng-value="22">2022</option>
+                <option ng-value="23">2023</option>
+              </select>
+            </div>
+          </div>
+     
+          <!-- CVV -->
+          <div class="control-group">
+            <label class="control-label"  name="password_confirm">Código de segurança</label>
+            <div class="controls">
+              <input type="password"  placeholder="CVV" class="span2" name="cvv"  ng-model="pag.cvv">
+            </div>
+          </div>
+
+     
+          <!-- Save card -->
+          <!--<div class="control-group">
+            <div class="controls">
+              <label class="checkbox" for="save_card">
+                <input type="checkbox" id="save_card" value="option1">
+                Save card on file?
+              </label>
+            </div>
+          </div>-->
+     
+          <!-- Submit -->
+          <!--<div class="control-group">
+            <div class="controls">
+              <button class="btn btn-success">Pay Now</button>
+            </div>
+          </div>-->
+     
+        </fieldset>
+      </form>
+    </div>
+</div>

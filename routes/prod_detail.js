@@ -12,7 +12,7 @@ router.get('/prod=:id_prod', function(req, res) {
 
         connection.query(queries.queries.prod_detail(id_prod) //id_prod
          ,[],function(err,result){
-        	console.log(result);
+        	// console.log(result);
         	return res.status(200).json(result);
         });
 //ARRUMAR ISSO!!!
@@ -25,10 +25,9 @@ router.get('/prod=:id_prod/getsizes', function(req, res) {
 	req.getConnection(function(err,connection){
   		var id_prod = req.params.id_prod;
         if(err) return res.status(400).json(err);
-        console.log('vou pegar')
         connection.query(queries.queries.tamanho_prod(id_prod) //id_prod
          ,[],function(err,result){
-        	console.log(result);
+        	// console.log(result);
         	return res.status(200).json(result);
         });
   	});

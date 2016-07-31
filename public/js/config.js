@@ -92,6 +92,13 @@ var config = ['$urlRouterProvider', '$stateProvider', '$locationProvider', funct
               data: { title: 'Lista de Desejos' },
           })
 
+        .state('test', {
+              url: "/test",
+              templateUrl: "pages/teste.html",
+              controller: 'test',
+              data: { title: 'testes' },
+          })
+
 }];
     
 
