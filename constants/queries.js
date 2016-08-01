@@ -2,8 +2,8 @@
 
 
 //CATALOG
-//queries.catalog= function (){return 'SELECT DISTINCT id_prod, nome_prod, desc_prod,marca_prod, preco_prod, url_imagem FROM tb_produto';}
-queries.catalog= function (){return 'SELECT DISTINCT * FROM tb_produto';}
+// queries.catalog = function (){return 'SELECT DISTINCT id_prod, nome_prod, desc_prod,marca_prod, preco_prod, url_imagem FROM tb_produto';}
+queries.catalog = function (){return 'SELECT DISTINCT * FROM tb_produto';}
 
 
 //PROD_DETAIL
@@ -11,7 +11,9 @@ queries.prod_detail= function (id_prod){return  'SELECT DISTINCT id_prod, nome_p
 
 queries.tamanho_prod= function (id_prod){return  'SELECT tamanho_prod FROM tamanho_produto WHERE id_prod = '+ id_prod;}
 
-queries.prod_colors_available = 'SELECT DISTINCT cor_prod, id_prod FROM tb_produto WHERE nome_prod IN (SELECT nome_prod FROM tb_produto WHERE id_prod =';
+queries.prod_colors_available = function (id_prod){return 'SELECT DISTINCT cor_prod, id_prod FROM tb_produto WHERE nome_prod IN (SELECT nome_prod FROM tb_produto WHERE id_prod = ' + id_prod + "')ghg"}
+
+// queries.prod_colors_available = 'SELECT DISTINCT cor_prod, id_prod FROM tb_produto WHERE nome_prod IN (SELECT nome_prod FROM tb_produto WHERE id_prod =';
 
 queries.prod_sizes_available = 'SELECT DISTINCT tamanho_prod FROM tamanho_produto WHERE id_prod ='
 
@@ -121,12 +123,12 @@ queries.fetch_func_by_email = function(func_email) {return "SELECT id_func, nome
 queries.fetch_func_by_id = function(id_func) {return "SELECT id_func, nome_func, sobrenome_func, email_func, hash_senha, cpf_func, tel_func FROM tb_funcionario WHERE id_func = '" + id_func + "' LIMIT 1"};
 
 
-queries.get_cart= 'SELECT id_prod, nome_prod, desc_prod,cor_prod, preco_prod, url_imagem, qte_produto FROM item_carrinho LEFT JOIN tb_produto using(id_prod) LEFT JOIN tb_cliente using(id_cliente) WHERE id_cliente =';
+// queries.get_cart= 'SELECT id_prod, nome_prod, desc_prod,cor_prod, preco_prod, url_imagem, qte_produto FROM item_carrinho LEFT JOIN tb_produto using(id_prod) LEFT JOIN tb_cliente using(id_cliente) WHERE id_cliente =';
 
 queries.get_order_id = function (id_cliente){return   'select id_pedido from tb_pedido where id_cliente = '+id_cliente+' order by data_pedido desc'};
 
 queries.insert_order_items= function (id_pedido, params){
-	var query='INSERT INTO item_pedido (id_pedido, id_prod, tamanho_prod, qte_prod VALUES '; 
+	var query='INSERT INTO item_pedido (id_pedido, id_prod, tamanho_prod, qte_prod VALUES ';
 
 	for (item in params){
 		query+='('+ id_pedido +', '+item.id_prod +', '+item.tamanho_prod +', '+item.qte_prod+'),';

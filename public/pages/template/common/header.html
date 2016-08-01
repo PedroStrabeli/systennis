@@ -1,8 +1,9 @@
-            <div id="top">
-                <div class="container">
+<!DOCTYPE html>
+<html ng-app="systennis">
+            <div id="top" ng-controller="login_ctrl">
+                <div class="container" ng-init="session_check()">
                     <div class="row">
                         <div class="col-xs-5 contact">
-                            <p class="hidden-sm hidden-xs">Colocar aqqui a barra de busca</p>
                             <p class="hidden-md hidden-lg"><a href="#" data-animate-hover="pulse"><i class="fa fa-phone"></i></a>  <a href="#" data-animate-hover="pulse"><i class="fa fa-envelope"></i></a>
                             </p>
                         </div>
@@ -15,8 +16,11 @@
                             </div>
 
                             <div class="login">
-                                <a href="" data-toggle="modal" data-target="#login-modal"><i class="fa fa-sign-in"></i> <span class="hidden-xs text-uppercase">Sign in</span></a>
-                                <a ui-sref="cadastro_cliente"><i class="fa fa-user"></i> <span class="hidden-xs text-uppercase">Sign up</span></a>
+                                <a href="/#/users/login" ng-if="!isAuthenticated"><i class="fa fa-sign-in"></i> <span class="hidden-xs text-uppercase">Login</span></a>
+                                <a href="/#/users/register" ng-if="!isAuthenticated"><i class="fa fa-user"></i> <span class="hidden-xs text-uppercase">Cadastre-se</span></a>
+                                <a><span class="hidden-xs text-uppercase" ng-if="isAuthenticated">{{user.email_cliente}}</span></a>
+                                <a><i class="fa fa-lock" ng-if="isAuthenticatedAsAdmin"></i><span class="hidden-xs text-uppercase" ng-if="isAuthenticatedAsAdmin">{{func.email_func}}</span></a>
+                                <a href='/#/users/login' ng-if="isAuthenticated" ng-click="logout()"><i class="fa fa-sign-out"></i> <span class="hidden-xs text-uppercase">Logout</span></a>
                             </div>
 
                         </div>
@@ -70,10 +74,8 @@
                                                             </li>
                                                             <li><a ui-sref="wishlist">Wishlist</a>
                                                             </li>
-                                                            
                                                         </ul>
                                                     </div>
-                                                    
                                                 </div>
                                             </div>
                                         </li>
@@ -106,7 +108,6 @@
                                                             </li>
                                                         </ul>
                                                     </div>
-                                                    
                                                 </div>
                                             </div>
                                         </li>
@@ -297,3 +298,9 @@
             </div>
 
             <!-- *** NAVBAR END *** -->
+</ul>
+</div>
+</div>
+</div>
+</div>
+</html>
