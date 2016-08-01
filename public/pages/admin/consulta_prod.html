@@ -8,71 +8,87 @@
 
 
 <div class="container-fluid">
-		<h3>{{title}}</h3>
-			<div class="col-sm-6">
-				
-				<div class="input-group h2">
-					<input type="text" ng-model="procurar" class="form-control" placeholder="Procurar...">
-					<span class="input-group-btn">
-						<button class="btn btn-default" type="submit">
-							<span class="glyphicon glyphicon-search"></span>
-						</button>
-					</span>
-				</div>
-				
-			</div>
+	<div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                {{title}}
+            </h1>
+            <ol class="breadcrumb">
+                <li>
+                    <i class="fa fa-dashboard"></i>  <a href="index.html">Dashboard</a>
+                </li>
+                <li class="active">
+                    <i class="fa fa-search"></i> {{title}}
+                </li>
+            </ol>
+        </div>
+    </div>
 
-
-			<div class="table-responsive col-md-10" style="width : 100%">
-		  	<table class="table" cellspacing="0" cellpadding="0">
-		  		<thead>
-		  			<tr>
-		  				<th>ID<i class="fa fa-fw fa-caret-down" ng-click="ordenar('id_prod')"></i></th>
-		  				<th style="width : 40%">Nome<i class="fa fa-fw fa-caret-down" ng-click="ordenar('nome_prod')"></i></th>
-		  				<th>Preço<i class="fa fa-fw fa-caret-down" ng-click="ordenar('preco_prod')"></th>
-		  				<th>Imagem</th>
-		  				<th>Tipo<i class="fa fa-fw fa-caret-down" ng-click="ordenar('tipo_prod')"></th>
-		  				<th></th>
-		  			</tr>
-		  		</thead>
-		  		<tbody>
-		  			<tr ng-repeat="produto in produtos | filter:procurar | orderBy:sortKey:reverse | startFrom: (currentPage - 1) * maxSize | limitTo: maxSize" >
-		  				<td>{{produto.id_prod}}</a></td>
-		  				<td>{{produto.nome_prod}}</a></td>
-			  			<td style="width= 200px">R$ {{produto.preco_prod}}</td>
-			  			<td><img src="{{produto.url_imagem}}" width = "75"/></td>
-			  			<td>{{produto.tipo_prod}}</td>
-			  			<td class="actions">
-			  				<a class="btn btn-default btn-sm" ng-click="editarProduto(produto.id_prod)" ui-sref="visualizar_prod">Visualizar</a>
-							<a class="btn btn-warning btn-sm" ng-click="editarProduto(produto.id_prod)" ui-sref="edicao_prod">Editar</a>
-							<a class="fa fa-trash" style="font-size : 25px; color: gray; margin-left: 10px" href="#" data-toggle="modal" data-target="#delete-modal" ng-click="selecionarProduto(produto.id_prod)"></a>
-			  			</td>
-			  			
-		  			</tr>
-		  		</tbody>
-		  	</table>
-
-		  	<ul uib-pagination total-items="produtos.length" ng-model="currentPage" max-size="maxSize" class="pagination" boundary-links="true" force-ellipses="true"></ul>
-
-		  	</div>
-
-		  	<div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel">
-			  	<div class="modal-dialog" role="document">
-			    	<div class="modal-content">
-			      		<div class="modal-header">
-			        		<button type="button" class="close" data-dismiss="modal" aria-label="Fechar"><span aria-hidden="true">&times;</span></button>
-			        		<h4 class="modal-title" id="modalLabel">Excluir Item</h4>
-			      		</div>
-				      	<div class="modal-body">
-				        	Deseja realmente excluir este item? {{produto.id_prod}}
-				      	</div>
-				      	<div class="modal-footer">
-				        	<button type="button" class="btn btn-danger" ng-click="deletarProduto(produtoSelecionado)" data-dismiss="modal">Sim</button>
-							<button type="button" class="btn btn-default" data-dismiss="modal">N&atilde;o</button>
-				      	</div>
-			    	</div>
-			  	</div>
-			</div>
+	<div class="col-md-6">
+		
+		<div class="input-group h2">
+			<input type="text" ng-model="procurar" class="form-control" placeholder="Procurar...">
+			<span class="input-group-btn">
+				<button class="btn btn-default" type="submit" style="background-color: #eee; color: #555; border: 1px solid #ccc">
+					<i class="fa fa-fw fa-search"></i>
+				</button>
+			</span>
+		</div>
+		
 	</div>
+
+
+	<div class="table-responsive col-md-10" style="width : 100%">
+		<table class="table" cellspacing="0" cellpadding="0">
+			<thead>
+				<tr>
+					<th>ID<i class="fa fa-fw fa-caret-down" ng-click="ordenar('id_prod')"></i></th>
+					<th style="width : 40%">Nome<i class="fa fa-fw fa-caret-down" ng-click="ordenar('nome_prod')"></i></th>
+					<th>Preço<i class="fa fa-fw fa-caret-down" ng-click="ordenar('preco_prod')"></th>
+					<th>Imagem</th>
+					<th>Tipo<i class="fa fa-fw fa-caret-down" ng-click="ordenar('tipo_prod')"></th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="produto in produtos | filter:procurar | orderBy:sortKey:reverse | startFrom: (currentPage - 1) * maxSize | limitTo: maxSize" >
+					<td>{{produto.id_prod}}</a></td>
+					<td>{{produto.nome_prod}}</a></td>
+	  			<td style="width= 200px">R$ {{produto.preco_prod}}</td>
+	  			<td><img src="{{produto.url_imagem}}" width = "75"/></td>
+	  			<td>{{produto.tipo_prod}}</td>
+	  			<td class="actions">
+	  				<a class="btn btn-default btn-sm" ng-click="editarProduto(produto.id_prod)" ui-sref="visualizar_prod">Visualizar</a>
+					<a class="btn btn-warning btn-sm" ng-click="editarProduto(produto.id_prod)" ui-sref="edicao_prod">Editar</a>
+					<a class="fa fa-trash" style="font-size : 25px; color: gray; margin-left: 10px" href="#" data-toggle="modal" data-target="#delete-modal" ng-click="selecionarProduto(produto.id_prod)"></a>
+	  			</td>
+	  			
+				</tr>
+			</tbody>
+		</table>
+
+		<ul uib-pagination total-items="produtos.length" ng-model="currentPage" max-size="maxSize" class="pagination" boundary-links="true" force-ellipses="true"></ul>
+
+		</div>
+
+		<div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel">
+		  	<div class="modal-dialog" role="document">
+		    	<div class="modal-content">
+		      		<div class="modal-header">
+		        		<button type="button" class="close" data-dismiss="modal" aria-label="Fechar"><span aria-hidden="true">&times;</span></button>
+		        		<h4 class="modal-title" id="modalLabel">Excluir Item</h4>
+		      		</div>
+			      	<div class="modal-body">
+			        	Deseja realmente excluir este item? {{produto.id_prod}}
+			      	</div>
+			      	<div class="modal-footer">
+			        	<button type="button" class="btn btn-danger" ng-click="deletarProduto(produtoSelecionado)" data-dismiss="modal">Sim</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">N&atilde;o</button>
+			      	</div>
+		    	</div>
+		  	</div>
+		</div>
+	</div>
+</div>	
 
 	<script data-require="angular-ui-bootstrap@0.3.0" data-semver="0.3.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.3.0.min.js"></script>

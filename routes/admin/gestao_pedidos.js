@@ -1,5 +1,5 @@
 var express = require('express');
-var queries = require('../constants/queries.js')
+var queries = require('../../constants/queries.js')
 var router = express.Router();
 
 /* Envia lista de produtos. */
@@ -8,10 +8,32 @@ router.get('/', function(req, res) {
   	req.getConnection(function(err,connection){
         if(err) return res.status(400).json(err);
 
-        connection.query(queries.queries.catalog ,[],function(err,result){
+        connection.query("SELECT * FROM systennis_db.tb_pedido WHERE status_pedido='Aprovado';" ,[],function(err,result){
         	 return res.status(200).json(result);
         });
   	});
+});
+
+/* Aloca pedidos para o gerente */
+router.post('/selecionar_pedidos', function(req, res) {
+    console.log(req.body);
+    var input = JSON.parse(JSON.stringify(req.body));
+     var pedido = {
+        status_pedido   : input.status_pedido,
+        id_supervisor   : input.id_supervisor
+    };
+    var id_pedido = input.id_pedido;
+    req.getConnection(function(err,connection){
+        if(err) return res.status(400).json(err);
+        connection.query("UPDATE tb_pedido set ? WHERE id_pedido=? ",[pedido, id_pedido], function(err, result)
+        {
+
+            if (err)
+                console.log("Error inserting : %s ",err );
+
+        });
+    });
+    console.log("Sucesso!");
 });
 
 /* Envia dados do produto recuperado */

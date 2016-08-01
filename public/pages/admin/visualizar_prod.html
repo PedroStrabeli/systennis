@@ -1,6 +1,23 @@
-<h3>{{title}}</h3>
 <div class="container-fluid">
-	<br/>
+	<div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                {{title}}
+            </h1>
+            <ol class="breadcrumb">
+                <li>
+                    <i class="fa fa-dashboard"></i>  <a href="index.html">Dashboard</a>
+                </li>
+                <li class="active">
+                    <i class="fa fa-search"></i> <a ui-sref="consulta_prod">Consulta de Produtos</a>
+                </li>
+                <li class="active">
+                    <i class="fa fa-edit"></i> {{title}}
+                </li>
+            </ol>
+        </div>
+    </div>
+
  	<div class="col-lg-6">
 		<label>Nome:</label>
 		<h5>{{produto.nome_prod}}</h5>
@@ -38,9 +55,17 @@
 			<h5>{{produto.estoque_prod}}</h5>
 		</div>	
 	</div>
+
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+
 	<div class="col-lg-6">
 		<img src="{{produto.url_imagem}}" width= "400px">
-	</div>	
+	</div>
+
 	<a class="btn btn-default" ui-sref="consulta_prod"> < Voltar</a>
+
 </div>
 

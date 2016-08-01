@@ -1,7 +1,21 @@
 <div class="container-fluid" ng-controller="cadastro_prod_ctrl">
-	<div>
-		<h3>{{title}}</h3>
-		<br><br>
+	<div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                {{title}}
+            </h1>
+            <ol class="breadcrumb">
+                <li>
+                    <i class="fa fa-dashboard"></i>  <a href="index.html">Dashboard</a>
+                </li>
+                <li class="active">
+                    <i class="fa fa-edit"></i> {{title}}
+                </li>
+            </ol>
+        </div>
+    </div>
+
+	<div class="row col-md-12">
 	  	<form>
 		  	<div>
 		    	<label>Nome do Produto</label>

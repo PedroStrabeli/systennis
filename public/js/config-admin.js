@@ -4,6 +4,7 @@ var config = ['$urlRouterProvider', '$stateProvider', '$locationProvider', funct
     $urlRouterProvider.otherwise('/consulta_prod');
 
     $stateProvider
+        //CRUD PRODUTOS
         .state('cadastro_prod', {
               url: "/cadastro_prod",
               templateUrl: "pages/admin/cadastro_prod.html",
@@ -27,6 +28,13 @@ var config = ['$urlRouterProvider', '$stateProvider', '$locationProvider', funct
               templateUrl: "pages/admin/visualizar_prod.html",
               controller: 'visualizar_prod_ctrl',
               data: { title: 'Visualização de Produtos' },
+          })
+        //GESTÃO DE ENTREGAS
+        .state('gestao_pedidos', {
+              url: "/gestao_pedidos",
+              templateUrl: "pages/admin/gestao_pedidos.html",
+              controller: 'gestao_pedidos_ctrl',
+              data: { title: 'Gestão de Pedidos' },
           })
 }];
     

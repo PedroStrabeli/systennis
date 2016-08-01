@@ -114,14 +114,14 @@
             <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
-                    <li class="active">
+                    <li>
                         <a href="index.html"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                     </li>
                     <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Produto <i class="fa fa-fw fa-caret-down"></i></a>
-                        <ul id="demo" class="collapse">
+                        <a href="javascript:;" data-toggle="collapse" data-target="#produtos"><i class="fa fa-fw fa-shopping-bag"></i> Produto <i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="produtos" class="collapse">
                             <li>
-                                <a ui-sref="consulta_prod"><i class="fa fa-fw fa-table"></i> Consulta</a>
+                                <a ui-sref="consulta_prod"><i class="fa fa-fw fa-search"></i> Consulta</a>
                             </li>
                             <li>
                                 <a ui-sref="cadastro_prod"><i class="fa fa-fw fa-edit"></i>  Cadastro</a>
@@ -129,6 +129,21 @@
                         </ul>
                     </li>
                     <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#gentregas"><i class="fa fa-fw fa-share-alt"></i> Gestão de Entregas <i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="gentregas" class="collapse">
+                            <li>
+                                <a href="#"><i class="fa fa-fw fa-globe"></i> Controle de Entregas</a>
+                            </li>
+                            <li>
+                                <a ui-sref="gestao_pedidos"><i class="fa fa-fw fa-shopping-cart"></i> Seleção de Pedidos</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-fw fa-truck"></i> Alocação de Entregas</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <!-- <li>
                         <a href="charts.html"><i class="fa fa-fw fa-bar-chart-o"></i> Charts</a>
                     </li>
                     <li>
@@ -159,7 +174,7 @@
                     </li>
                     <li>
                         <a href="index-rtl.html"><i class="fa fa-fw fa-dashboard"></i> RTL Dashboard</a>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
             <!-- /.navbar-collapse -->

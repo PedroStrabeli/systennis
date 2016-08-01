@@ -1,3 +1,5 @@
+/*CRUD PROD*/
+
 .cadastro 
 {
 	margin-bottom: 30px;
@@ -30,3 +32,11 @@
     border-spacing: 0;
 }
 
+/*GESTAO PEDIDOS*/
+
+.selecionado {
+  background-color: #eee;
+}
+.negrito {
+  font-weight: bold;
+}
