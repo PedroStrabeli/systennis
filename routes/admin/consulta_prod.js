@@ -30,6 +30,7 @@ router.post('/', function(req, res) {
         estoque_prod	: input.estoque,
         url_imagem		: input.imagem
 	};
+
 	console.log(ProdutoParsedFromForm);
 	req.getConnection(function(err,connection){
         if(err) return res.status(400).json(err);
@@ -43,7 +44,7 @@ router.post('/', function(req, res) {
 
 		});
 	});
-	console.log("Sucesso!");	
+	console.log("Sucesso!");
 });
 
 
