@@ -54,13 +54,14 @@ app.use(express.static(path.join(__dirname, 'page')));
 
 
 app.use('/', routes);
+app.use('/mail', mail);
 app.use('/index', routes);
 app.use('/users', users);
 app.use('/catalog', catalog);
 app.use('/prod_detail', prod_detail);
 app.use('/cart', cart);
 app.use('/checkout', checkout);
-app.use('/mail', mail);
+
 
 //CRUD produto
 app.use('/cadastro_prod', cadastro_prod);

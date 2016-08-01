@@ -12,6 +12,17 @@ angular.module('systennis')
 				$scope.cart = checkoutService.checkout.cart;
 			});
 		}
+
+		$scope.changeItem=function(item){
+			$http({method: 'POST', 
+						data: {id_cliente: user.id_user, id_prod: item.id_prod, qte_prod:item.qte_prod},
+						url: '/cart/changeItem'})
+						.then(function(response){							
+						}).catch(function(err){
+							alert("Ocorreu um erro! \n"+err);
+						});
+		}
+
 		var calculaTotal=function(item){
 			var total=0;
 			
@@ -43,15 +54,15 @@ angular.module('systennis')
 		}
 		
 		//FAZER IR PARA O COOKIE
-		var removeCart=function(id_prod){
+		$scope.removeCart=function(id_prod){
 			console.log ('apagando')
 			if(user){
 				$http({method: 'POST', 
-						data: {id_cliente: id_cliente, id_prod: id_prod},
+						data: {id_cliente: user.id_user, id_prod: id_prod},
 						url: '/cart/removeCart'})
 						.then(function(response){
 							alert("Removido com sucesso.");
-							$route.reload();
+							$state.transitionTo('cart', $stateParams, { reload: true, inherit: false, notify: true });
 						}).catch(function(err){
 							alert("Ocorreu um erro! \n"+err);
 						});

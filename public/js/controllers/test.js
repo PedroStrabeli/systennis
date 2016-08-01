@@ -1,25 +1,28 @@
 angular.module('systennis')
-	.controller('test',function($scope, $state, $http, checkoutService){
+	.controller('test',function($scope, $state, $http, checkoutService, mailService){
 		$scope.fuck='FuckYou';
 
 	$scope.geraPagamento=function(){
 
 
-			date= new Date()
-			date= date.getFullYear()+'/'+date.getMonth()+'/'+date.getDate()+' '+date.getHours()+':'+date.getMinutes()+':'+date.getSeconds();
-			console.log(date);
+			//console.log(date);
 			$http({method: 'POST', 
 					data: {params: {cartao:'123456789023456',
 									boleto:'-1',
-									data:date,
 									valor:299.80}},//checkoutService.checkout.cart.total]},
 					url: '/checkout/payment'}).then(function(response){
+						params={
+							user:{email_cliente:'pedrostrabeli@gmail.com', nome:'Pedro Strabeli'}
+							,pedido:response.data}
 						
+						console.log(params);
+						enviaEmail1(mailService.paymentReceived(params))
 						
 					}).catch(function(err){
 					
-					});
+					})
 		}
+
 		$scope.geraPedido=function(){
 			$http({method: 'POST', 
 					data: {params: [$scope.pag.numero_cartao,
@@ -27,16 +30,21 @@ angular.module('systennis')
 									Date(),
 									299.80]},//checkoutService.checkout.cart.total]},
 					url: '/checkout/payment'}).then(function(response){
-						
-						
+						params={
+							user:{email_cliente:'pedrostrabeli@gmail.com', nome:'Pedro Strabeli'}
+							,pedido:response.data
+						}
+						console.log(params)
+						enviaEmail1(mailService.paymentReceived(params))
 					}).catch(function(err){
 					
 					});
 		}
 
-		$scope.enviaEmail1=function(params){
+		var enviaEmail1=function(params){
+			console.log(mailService.orderMade(params))
 				$http({method: 'POST', 
-							data: {mailOptions: mailService.orderMade(mail)},
+							data: {mailOptions: mailService.orderMade(params)},
 							url: '/checkout/payment'}
 						)
 							.then(function(response){
@@ -45,6 +53,6 @@ angular.module('systennis')
 							}).catch(function(err){
 							
 							});
-				$state.go('orders');
+				//$state.go('orders');
 		}
 	})

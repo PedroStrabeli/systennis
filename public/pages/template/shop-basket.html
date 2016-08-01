@@ -56,7 +56,7 @@ _________________________________________________________ -->
                                                 <td>{{item.tamanho_prod}}
                                                 </td>
                                                 <td>
-                                                    <input type="number" value="{{item.qte_prod}}" class="form-control">
+                                                    <input type="number" value="{{item.qte_prod}}" ng-model="item.qte_prod" ng-change="changeItem(item)" class="form-control">
                                                 </td>
                                                 <td>{{item.preco_prod.toFixed(2)}}</td>
                                                 <!--<td>$0.00</td>-->
@@ -68,7 +68,7 @@ _________________________________________________________ -->
                                         <tfoot>
                                             <tr>
                                                 <th colspan="5">Total</th>
-                                                <th colspan="2">{{cart.total}}</th>
+                                                <th colspan="2" ng-model="cart.total">{{cart.total}}</th>
                                             </tr>
                                         </tfoot>
                                     </table>

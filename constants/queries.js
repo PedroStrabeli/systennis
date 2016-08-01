@@ -19,13 +19,15 @@ queries.check_cart=  function (id_cliente, id_prod, tamanho_prod){return 'SELECT
 queries.get_cart= function (id_cliente){return   'SELECT id_prod, nome_prod, desc_prod,cor_prod, tamanho_prod, preco_prod, url_imagem, qte_prod FROM item_carrinho LEFT JOIN tb_produto using(id_prod) LEFT JOIN tb_cliente using(id_cliente) WHERE id_cliente = '+id_cliente;};
 
 queries.remove_cart=function(id_cliente,id_prod){return 'DELETE FROM item_carrinho WHERE id_cliente = '+id_cliente+' AND id_prod = '+id_prod;}
+
+queries.change_item=function(id_cliente,id_prod, qte_prod){return 'UPDATE item_carrinho SET qte_prod='+qte_prod+' WHERE id_cliente='+id_cliente+' AND id_prod='+id_prod};
 //CHECKOUT
 
 queries.get_address= function (id_cliente){return   'select * from cliente_endereco left join tb_endereco using(id_endereco) WHERE id_cliente = '+id_cliente};
 
-queries.payment = function (params){return   "INSERT INTO tb_pagamento (numero_cartao, numero_boleto, horario_pagamento, valor_pedido, status_pagamento) values ('"+params.cartao+"','"+params.boleto+"','"+params.data+"',"+params.valor+",'Pendente');"};
+queries.payment = function (params){return   "INSERT INTO tb_pagamento (numero_cartao, numero_boleto, horario_pagamento, valor_pedido, status_pagamento) values ('"+params.cartao+"','"+params.boleto+"',now(),"+params.valor+",'Pendente');"};
 
-queries.getpayid=function (){return" SELECT max(id_pagamento) from tb_pagamento;"}
+queries.getpayid=function (){return" SELECT max(id_pagamento) as id_pagamento from tb_pagamento;"}
 
 queries.update_payment = function (id_pagamento){return   "UPDATE tb_pagamento SET status_pagamento = 'Recebido' where id_pagamento="+id_pagamento+";"};
 

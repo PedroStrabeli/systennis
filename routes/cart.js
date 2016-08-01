@@ -59,7 +59,20 @@ router.post('/removeCart', function(req, res) {
     });
 });
   
+router.post('/changeItem', function(req, res) {
+    req.getConnection(function(err,connection){
+      var id_cliente=req.body.id_cliente;
+      var id_prod=req.body.id_prod;
+      var qte_prod=req.body.qte_prod;
+        if(err) return res.status(400).json(err);
+        //console.log(queries.queries.check_cart(req.body.id_cliente, req.body.id_prod))
+        connection.query(queries.queries.change_item(id_cliente, id_prod, qte_prod) ,[] ,function(err,result){
+        //  console.log(JSON.stringify(result));
 
+          return res.status(200).json(result);
+        });
+    });
+});
 
 module.exports = router;
 

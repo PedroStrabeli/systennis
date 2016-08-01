@@ -18,19 +18,22 @@ router.post('/payment',function(req,res){
 		req.getConnection(function(err,connection){
 	  		if(err) return res.status(400).json(err);
 	  			connection.query(queries.queries.update_payment(id_pagamento) ,[] ,function(err,result){	
-            console.log(queries.queries.update_payment(id_pagamento))
+            //console.log(queries.queries.update_payment(id_pagamento))
   			})
 	  	})
 	},10000);
-	console.log(queries.queries.payment(req.body.params));
+	//console.log(queries.queries.payment(req.body.params));
 		req.getConnection(function(err,connection){
 	  		if(err) return res.status(400).json(err);
-        var p=req.body.params;
-        console.log(p.cartao, p.boleto, p.data, p.valor)
-        
-    	connection.query(queries.queries.payment(req.body.params) ,[] ,function(err,result){
-     		id_pagamento=result;
-     		console.log(result)
+    	   connection.query(queries.queries.payment(req.body.params) ,[] ,function(err,result){
+     		
+          req.getConnection(function(err,connection){
+        if(err) return res.status(400).json(err);
+        connection.query(queries.queries.getpayid() ,[] ,function(err,result){
+     		//console.log(result[0].id_pagamento)
+        id_pagamento=result[0].id_pagamento;
+        res.json(result[0].id_pagamento);
+        })})
      	});
      });
 })

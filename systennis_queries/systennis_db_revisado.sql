@@ -202,7 +202,7 @@ CREATE TABLE tb_entrega (
 #--#15 - 
 DROP TABLE IF EXISTS item_pedido;
 CREATE TABLE item_pedido (
-	id_pedido int primary key NOT NULL UNIQUE AUTO_INCREMENT
+	id_pedido int not null
 	,id_prod int NOT NULL
     ,tamanho_prod int NOT NULL
 	,id_entrega int
