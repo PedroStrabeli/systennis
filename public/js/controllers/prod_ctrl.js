@@ -1,5 +1,3 @@
-
-
 angular.module('systennis')
 	.controller('prod_detail_ctrl',function($scope, $stateParams, $http, productService, cartService){
 			$scope.detail = productService.getProducts();
@@ -32,8 +30,12 @@ angular.module('systennis')
 			//$stateParams
 				.then(function(response){
 					$scope.sizes=response.data;
-					
 
 				})
-		}
-	);
+
+			$http.get('/prod_detail/prod='+$stateParams.id_prod+'/getcolors')
+				.then(function(response){
+					$scope.colors = response.data
+					// console.log($scope.colors);
+				});
+	});

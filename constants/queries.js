@@ -2,8 +2,8 @@
 
 
 //CATALOG
-//queries.catalog= function (){return 'SELECT DISTINCT id_prod, nome_prod, desc_prod,marca_prod, preco_prod, url_imagem FROM tb_produto';}
-queries.catalog= function (){return 'SELECT DISTINCT * FROM tb_produto';}
+// queries.catalog = function (){return 'SELECT DISTINCT id_prod, nome_prod, desc_prod,marca_prod, preco_prod, url_imagem FROM tb_produto';}
+queries.catalog = function (){return 'SELECT DISTINCT * FROM tb_produto';}
 
 
 //PROD_DETAIL
@@ -11,7 +11,9 @@ queries.prod_detail= function (id_prod){return  'SELECT DISTINCT id_prod, nome_p
 
 queries.tamanho_prod= function (id_prod){return  'SELECT tamanho_prod FROM tamanho_produto WHERE id_prod = '+ id_prod;}
 
-queries.prod_colors_available = 'SELECT DISTINCT cor_prod, id_prod FROM tb_produto WHERE nome_prod IN (SELECT nome_prod FROM tb_produto WHERE id_prod =';
+queries.prod_colors_available = function (id_prod){return 'SELECT DISTINCT cor_prod, id_prod FROM tb_produto WHERE nome_prod IN (SELECT nome_prod FROM tb_produto WHERE id_prod = ' + id_prod + "')ghg"}
+
+// queries.prod_colors_available = 'SELECT DISTINCT cor_prod, id_prod FROM tb_produto WHERE nome_prod IN (SELECT nome_prod FROM tb_produto WHERE id_prod =';
 
 queries.prod_sizes_available = 'SELECT DISTINCT tamanho_prod FROM tamanho_produto WHERE id_prod ='
 

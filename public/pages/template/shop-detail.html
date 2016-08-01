@@ -10,7 +10,6 @@ _________________________________________________________ -->
         <div ng-include="'pages/template/common/login-modal.html'"></div>
         <!-- *** LOGIN MODAL END *** -->
         <div ng-include="'pages/template/common/breadcrumbs.html'"></div>
-        
         <div id="content">
             <div class="container">
 
@@ -57,15 +56,6 @@ _________________________________________________________ -->
                                                 <a id="{{'size'+$index}}" ng-click="setSize(size.tamanho_prod, $index)">{{size.tamanho_prod}}</a>
                                                 <input type="radio" id="size_s" name="size" value="s" class="size-input">
                                             </label>
-                                            <!--<label for="size_m">
-                                                <a href="#">M</a>
-                                                <input type="radio" id="size_m" name="size" value="m" class="size-input">
-                                            </label>
-                                            <label for="size_l">
-                                                <a href="#">L</a>
-                                                <input type="radio" id="size_l" name="size" value="l" class="size-input">
-                                            </label>-->
-
                                         </div>
 
                                         <p class="price">R$ {{detail.preco_prod.toFixed(2)}}</p>
