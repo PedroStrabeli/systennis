@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html ng-app="systennis">
+	<head>
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+		<link rel="stylesheet" href="/stylesheets/login.css">
+	    <meta charset="utf-8">
+	    <title>{{title}}</title>
+	</head>
+	<title>Systennis - Página de Login</title>
+		<br><br><br><br><br><br><br><br><br><br>
+		<div class="login-body" ng-controller="login_ctrl" ng-init="session_check()">
+		    <article class="container-login center-block" ng-if="!isAuthenticated">
+				<section>
+					<ul id="top-bar" class="nav nav-tabs nav-justified">
+						<li class="active"><a>Login</a></li>
+						<li><a href="/#/users/register">Ainda não tenho cadastro</a></li>
+					</ul>
+					<div class="tab-content tabs-login col-lg-12 col-md-12 col-sm-12 cols-xs-12">
+						<div id="login-access" class="tab-pane fade active in">
+							<h2><i class="glyphicon glyphicon-log-in"></i> Login</h2>
+							<form method="post" accept-charset="utf-8" autocomplete="on" role="form" class="form-horizontal">
+								<div class="form-group ">
+									<label for="login" class="sr-only">E-Mail</label>
+										<input type="text" class="form-control" name="email" id="login_value"
+											placeholder="E-Mail" ng-model="loginData.email" tabindex="1" value="" />
+								</div>
+								<div class="form-group ">
+									<label for="password" class="sr-only">Senha</label>
+										<input type="password" class="form-control" name="password" id="password"
+											placeholder="Senha" ng-model="loginData.password" value="" tabindex="2" />
+								</div>
+								<div class="checkbox">
+										<label class="control-label" for="remember_me">
+											<input type="checkbox" name="remember_me" id="remember_me" value="1" class="" tabindex="3" /> Lembre-me
+										</label>
+										<span ng-if="errors">
+											<br><br>
+											<div class="alert alert-danger">E-mail e/ou senha incorreto(s)</div>
+										</span>
+								</div>
+								<br/>
+								<div class="form-group ">
+											<button type="submit" name="log-me-in" id="submit" tabindex="5" class="btn btn-lg" data-target="#myModal" ng-click="login(loginData)">Entrar</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</section>
+			</article>
+			<article class="container-login center-block" ng-if="isAuthenticated">
+				<section>
+					<ul id="top-bar" class="nav nav-tabs nav-justified">
+					</ul>
+					<div class="tab-content tabs-login col-lg-16 col-md-16 col-sm-16 cols-xs-16">
+						<div id="login-access" class="tab-pane fade active in">
+							<h2><i class="glyphicon glyphicon-exclamation-sign"></i> Atenção!</h2>
+								<div class="phrase ">
+									<h4>Você já está autenticado como
+										<br>
+										<span class="warning-email">{{user.email_cliente}}</span>
+										<br>
+									</h4>
+								</div>
+								<div class="shopping_msg">
+									<span><a href="/#/">Clique aqui</a> para voltar as compras</span>
+									<br>
+								</div>
+								<div class="logout_msg">
+									<span>Ou se desejar, <a href="/#/" ng-click=logout()>clique aqui para fazer logout</a></span>
+									<br>
+								</div>
+								<br/>
+								<div class="form-group ">
+								</div>
+						</div>
+					</div>
+				</section>
+			</article>
+		</div>
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+		      </div>
+		      <div class="modal-body">
+		      	<div>Aguarde, estamos te redirecionando...</div>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        <button type="button" class="btn btn-primary">Save changes</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		<!--<script source="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>-->
+		<script src="js/Angular/angular.js"></script>
+		<script src="js/ui-router/angular-ui-router.js"></script>
+		<script src="js/bootstrap/ui-bootstrap-tpls-0.12.0.min.js"></script>
+		<script src="js/Angular/angular-resource.min.js"></script>
+		<script src="js/config.js"></script>
+		<script src="jquery/dist/jquery.tel_rg_cpf_format.js"></script>
+		<!--<script src="js/ng-app.js"></script>		-->
+		<!--<script src="js/index.controller.js"></script>-->
+	</body>
+</html>

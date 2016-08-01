@@ -1,0 +1,84 @@
+<link rel="stylesheet" href="stylesheets/reg_bar.css" type="text/css">
+<div class="container" ng-controller="register_ctrl">
+	<div class="row">
+		<section>
+        <div class="wizard">
+            <div class="wizard-inner">
+                <div class="connecting-line"></div>
+                <ul class="nav nav-tabs" role="tablist">
+
+                    <li role="presentation" class="active">
+                        <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab" title="Step 1">
+                            <span class="round-tab">
+                                <b>1</b>
+                            </span>
+                        </a>
+                    </li>
+
+                    <li role="presentation" class={{activeBarTwo}}>
+                        <a href="#step2" data-toggle="tab" aria-controls="step2" role="tab" title="Step 2">
+                            <span class="round-tab">
+                                <b ng-if="activeBarTwo == 'active'">2</b>
+                                <span ng-if="activeBarTwo != 'active'">2</span>
+                            </span>
+                        </a>
+                    </li>
+                    <li role="presentation" class={{activeBarThree}}>
+                        <a href="#step3" data-toggle="tab" aria-controls="step3" role="tab" title="Step 3">
+                            <span class="round-tab">
+                                <b ng-if="activeBarThree == 'active'">3</b>
+                                <span ng-if="activeBarThree != 'active'">3</span>
+                            </span>
+                        </a>
+                    </li>
+
+                    <li role="presentation" class={{activeBarFour}}>
+                        <a href="#complete" data-toggle="tab" aria-controls="complete" role="tab" title="Complete">
+                            <span class="round-tab">
+                                <b ng-if="activeBarFour == 'active'">><i class="glyphicon glyphicon-ok"></i></b>
+                                <span ng-if="activeBarFour != 'active'"><i class="glyphicon glyphicon-ok"></i></span>
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+<!--             <form role="form">
+                <div class="tab-content">
+                    <div class="tab-pane active" role="tabpanel" id="step1">
+                        <h3>Step 1</h3>
+                        <p>This is step 1</p>
+                        <ul class="list-inline pull-right">
+                            <li><button type="button" class="btn btn-primary next-step">Save and continue</button></li>
+                        </ul>
+                    </div>
+                    <div class="tab-pane" role="tabpanel" id="step2">
+                        <h3>Step 2</h3>
+                        <p>This is step 2</p>
+                        <ul class="list-inline pull-right">
+                            <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
+                            <li><button type="button" class="btn btn-primary next-step">Save and continue</button></li>
+                        </ul>
+                    </div>
+                    <div class="tab-pane" role="tabpanel" id="step3">
+                        <h3>Step 3</h3>
+                        <p>This is step 3</p>
+                        <ul class="list-inline pull-right">
+                            <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
+                            <li><button type="button" class="btn btn-default next-step">Skip</button></li>
+                            <li><button type="button" class="btn btn-primary btn-info-full next-step">Save and continue</button></li>
+                        </ul>
+                    </div>
+                    <div class="tab-pane" role="tabpanel" id="complete">
+                        <h3>Complete</h3>
+                        <p>You have successfully completed all steps.</p>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </form> -->
+        </div>
+    </section>
+   </div>
+</div>
+
+<script src="pages/template/js/reg_bar.js"></script>

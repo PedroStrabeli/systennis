@@ -46,14 +46,13 @@
 	<body>
 
 	<div>
-	
-	<div ui-view></div>	
+	<!-- <header ng-include="'pages/template/navbar.html'"></header>	 -->
+	<div ui-view></div>
 	</div>
 
 		<!--<script source="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>-->
 		<script src="js/Angular/angular.js"></script>
 		<script src="js/Angular/angular-resource.min.js"></script>
-
 		<script src="js/ui-router/angular-ui-router.js"></script>
 		<script src="js/Angular/dirPagination.js"></script>
 
@@ -68,21 +67,19 @@
 	    <script src="pages/template/js/jquery.counterup.min.js"></script>
 	    <script src="pages/template/js/jquery.parallax-1.1.3.js"></script>
 	    <script src="pages/template/js/front.js"></script>
-
-    
+		<script src="js/angular-ui-mask/dist/mask.js"></script>
 		<!-- <script src="Bootstrap/ui-bootstrap-tpls-0.12.0.min.js"></script> -->
 		<!-- <script src="jquery/dist/jquery.js"></script> -->
 		<!-- <script
 			  src="https://code.jquery.com/jquery-2.2.4.js"
 			  integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
 			  crossorigin="anonymous"></script> -->
-		<script src="jquery/dist/jquery.js"></script>	 
-		<script src="jquery/dist/jquery.price_format.2.0.js"></script>
 
-		
+		<script src="jquery/dist/jquery.js"></script>
+		<script src="jquery/dist/jquery.price_format.2.0.js"></script>
+		<script src="jquery/dist/jquery.tel_rg_cpf_format.js"></script>
+		<script src="jquery/dist/jquery.maskedinput.js"></script>
 		<script src="Bootstrap/js/bootstrap.js"></script>
-		<script src="Bootstrap/js/bootstrap.min.js"></script>
-		
 
 		<!-- APP -->
 		<script src="js/config.js"></script>
@@ -96,16 +93,23 @@
 
 		<!-- Controllers -->
 		<script src="js/controllers/catalog_ctrl.js"></script>
-		<script src="js/controllers/cadastro_prod_ctrl.js"></script>
 		<script src="js/controllers/cart_ctrl.js"></script>
 		<script src="js/controllers/prod_ctrl.js"></script>
 		<script src="js/controllers/checkout_ctrl.js"></script>
-
 		<script src="js/controllers/test.js"></script>
+		<script src="js/controllers/register_ctrl.js"></script>
+		<script src="js/controllers/register_admin_ctrl.js"></script>
+		<script src="js/controllers/login_ctrl.js"></script>
+		<script src="js/controllers/login_admin_ctrl.js"></script>
 
+		<!-- Directives -->
+		<script src="js/directives/contentEditable.js"></script>
 
 		<!--<script src="js/ng-app.js"></script>		-->
 
 		<!--<script src="js/index.controller.js"></script>-->
+
+
+		<script src="pages/template/startbootstrap-sb-admin-1.0.4/js/dirPagination.js"></script>
 	</body>
 </html>

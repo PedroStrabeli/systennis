@@ -1,0 +1,46 @@
+<h3>{{title}}</h3>
+<div class="container-fluid">
+	<br/>
+ 	<div class="col-lg-6">
+		<label>Nome:</label>
+		<h5>{{produto.nome_prod}}</h5>
+
+		<label>Descrição:</label>
+		<h5>{{produto.desc_prod}}</h5>
+
+		<br/><br/>
+
+		<div class="col-lg-3">
+			<label>Tipo:</label>
+			<h5>{{produto.tipo_prod}}</h5>
+		</div>	
+		<div class="col-lg-3">
+			<label>Subtipo:</label>
+			<h5>{{produto.subtipo_prod}}</h5>
+		</div>
+		<div class="col-lg-3">
+			<label>Cor:</label>
+			<h5>{{produto.cor_prod}}</h5>
+		</div>
+		<div class="col-lg-3">
+			<label>Marca:</label>
+			<h5>{{produto.marca_prod}}</h5>
+
+		<br/><br/>
+
+		</div>
+		<div class="col-lg-3">
+			<label>Preço:</label>
+			<h5>R$ {{produto.preco_prod}}</h5>
+		</div>
+		<div class="col-lg-3">
+			<label>Estoque:</label>
+			<h5>{{produto.estoque_prod}}</h5>
+		</div>	
+	</div>
+	<div class="col-lg-6">
+		<img src="{{produto.url_imagem}}" width= "400px">
+	</div>	
+	<a class="btn btn-default" ui-sref="consulta_prod"> < Voltar</a>
+</div>
+

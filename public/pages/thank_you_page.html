@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html ng-app="systennis">
+	<head>
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+		<link rel="stylesheet" href="/stylesheets/jumbotron.css">
+	    <meta charset="utf-8">
+	    <title>{{title}}</title>
+	</head>
+	<title>Systennis - Página de Confirmação</title>
+	<body>
+		<div class="container" ng-app="systennis" ng-controller="register_ctrl" ng-init="check_where_am_i()">
+		  <h3 class="text-muted">Systennis</h3>
+ 		  <br><br>
+<!--  		  <div class="alert alert-warning" ng-if="whereAmI != 3">
+		  	<strong>Atenção!</strong> Você não está autorizado a entrar nesta página!
+		  </div> -->
+		    <div class="header clearfix">
+	 		<div class="register-view" ng-init="setActiveStep(4)">
+				<div ng-include="'pages/template/reg_bar.html'"></div>
+					<div class="ty_container">
+						<span class="glyphicon glyphicon-ok icon-success" aria-hidden="true"></span><br>
+						<span class="ty_message">Obrigado</span><br>
+						<span class="ty_submessage">Seu cadastro foi concluído com sucesso!</span><br>
+						<span class="ty_login"><a href="/#/users/login">Você já pode se autenticar aqui</a></span><br>
+					</div>
+			</div>
+		    </div>
+	  	<div class="row">
+	      <footer class="footer">
+	        <p>&copy; 2016 Systennis, Inc.</p>
+	      </footer>
+	    </div>
+		<!--<script source="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>-->
+		<script src="js/Angular/angular.js"></script>
+		<script src="js/ui-router/angular-ui-router.js"></script>
+		<script src="js/bootstrap/ui-bootstrap-tpls-0.12.0.min.js"></script>
+		<script src="js/Angular/angular-resource.min.js"></script>
+		<script src="js/config.js"></script>
+		<script src="jquery/dist/jquery.tel_rg_cpf_format.js"></script>
+		<!--<script src="js/ng-app.js"></script>		-->
+		<!--<script src="js/index.controller.js"></script>-->
+	</body>
+</html>

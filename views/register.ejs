@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html ng-app="systennis">
+	<head>
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+		<link rel="stylesheet" href="/stylesheets/jumbotron.css">
+	    <meta charset="utf-8">
+	    <title>{{title}}</title>
+	</head>
+	<title>Systennis - Página de Cadastro</title>
+	<body>
+	    <div class="container" ng-app="systennis" ng-controller="register_form_ctrl">
+	      <div class="header clearfix">
+	        <nav>
+	          <ul class="nav nav-pills pull-right">
+	            <li role="presentation"><a href="/">Página Principal</a></li>
+	            <li role="presentation"><a href="/users/login">Login</a></li>
+	            <li role="presentation"><a href="/users/register">Cadastro</a></li>
+	          </ul>
+	        </nav>
+	        <h3 class="text-muted">Systennis</h3>
+	      </div>
+<!-- 	      <div ui-view></div>
+ -->	  <div class="register-view">
+				 <h2 class="page-header">Cadastro</h2>
+				 	<% if(errors != null) { %>
+		    	<%    errors.forEach(function(item, index) { %>
+		    	<div class="alert alert-danger"><%=item.msg%></div>
+		    	<%    });%>
+		    	<%};		 %>
+					<form method="post" action="/users/register">
+					  <div class="form-group">
+					    <label>Nome</label>
+					    <input type="text" class="form-control" placeholder="Nome" name="name">
+					  </div>
+					  <div class="form-group">
+					    <label>Sobrenome</label>
+					    <input type="text" class="form-control" placeholder="Sobrenome" name="name2">
+					  </div>
+					  <div class="form-group">
+					    <label>CPF</label>
+					    <input type="text" class="form-control" placeholder="CPF" name="cpf">
+					  </div>
+					  <div class="form-group">
+					    <label>Telefone</label>
+					    <input type="text" class="form-control" placeholder="Telefone" name="phone">
+					  </div>
+					  <div class="form-group">
+					    <label>Celular</label>
+					    <input type="text" class="form-control" placeholder="Celular" name="cellphone">
+					  </div>
+					   <div class="form-group">
+					    <label>Data de Nascimento</label>
+					    <input type="date" class="form-control" placeholder="Data de Nascimento" name="birthdate">
+					  </div>
+					  <div class="form-group">
+					    <label>E-Mail</label>
+					    <input type="text" class="form-control" placeholder="E-Mail" name="email">
+					  </div>
+					  <div class="form-group">
+					    <label>Senha</label>
+					    <input type="password" class="form-control" placeholder="Senha" name="password">
+					  </div>
+					  <div class="form-group">
+					    <label>Confirmar Senha</label>
+					    <input type="password" class="form-control" placeholder="Confirmar senha" name="password2">
+					  </div>
+					  <br>
+					  <button type="submit" class="btn btn-default">Cadastrar</button>
+					</form>
+					<br>
+			</div>
+ 			<div class="row">
+	      <footer class="footer">
+	        <p>&copy; 2016 Systennis, Inc.</p>
+	      </footer>
+	    </div>
+	    </div>
+		<!--<script source="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>-->
+		<script src="js/Angular/angular.js"></script>
+		<script src="js/ui-router/angular-ui-router.js"></script>
+		<script src="js/bootstrap/ui-bootstrap-tpls-0.12.0.min.js"></script>
+		<script src="js/Angular/angular-resource.min.js"></script>
+		<script src="js/config.js"></script>
+		<!--<script src="js/ng-app.js"></script>		-->
+		<!--<script src="js/index.controller.js"></script>-->
+	</body>
+</html>
