@@ -11,21 +11,31 @@
 	</head>
 	<title>Systennis - Página de Confirmação</title>
 	<body>
-		<div class="container" ng-app="systennis" ng-controller="register_ctrl" ng-init="check_where_am_i()">
+		<div class="container" ng-app="systennis" ng-controller="register_admin_ctrl" ng-init="check_where_am_i()">
 		  <h3 class="text-muted">Systennis</h3>
  		  <br><br>
-<!--  		  <div class="alert alert-warning" ng-if="whereAmI != 3">
+ 		  <div class="alert alert-warning" ng-if="whereAmI != 1">
 		  	<strong>Atenção!</strong> Você não está autorizado a entrar nesta página!
-		  </div> -->
-		    <div class="header clearfix">
-	 		<div class="register-view" ng-init="setActiveStep(4)">
-				<div ng-include="'pages/template/reg_bar.html'"></div>
-					<div class="ty_container">
-						<span class="glyphicon glyphicon-ok icon-success" aria-hidden="true"></span><br>
-						<span class="ty_message">Obrigado</span><br>
-						<span class="ty_submessage">Seu cadastro foi concluído com sucesso!</span><br>
-						<span class="ty_login"><a href="/#/users/login">Você já pode se autenticar aqui</a></span><br>
-					</div>
+		  </div>
+		    <div class="header clearfix" ng-if="whereAmI == 1">
+	 		<div class="register-view" ng-init="setActiveStep(3)">
+	    	 	<h2 class="page-header">Confirme seus Dados - Acesso Restrito <span class="glyphicon glyphicon-lock"></span></h2>
+	    	 	<table class="table" ng-init="formatAndShowFuncData()">
+					<thead class="thead-default">
+					    <tr>
+					      <th>Dados cadastrais</th>
+					      <th></th>
+					    </tr>
+					  </thead>
+					  <tbody>
+					  	<tr ng-repeat="(key, value) in tbfUserData">
+					      <th scope="row">{{key}}</th>
+					      <td>{{value}}</td>
+					    </tr>
+					  </tbody>
+				</table>
+				<br>
+				<button type="submit" class="btn btn-default" ng-click="confirmar_funcdata()">Confirmar</button>
 			</div>
 		    </div>
 	  	<div class="row">

@@ -41,7 +41,7 @@ body {
 .container-login .nav-tabs.nav-justified > li > a,
 .container-login .nav-tabs.nav-justified > li > a:hover,
 .container-login .nav-tabs.nav-justified > li > a:focus {
-    background: #ea533f;
+    background: #FFAA00;
     border: medium none;
     color: #ffffff;
     margin-bottom: 0;
@@ -56,7 +56,7 @@ body {
 }
 .container-login .nav-tabs.nav-justified > li > a:hover,
 .container-login .nav-tabs.nav-justified > li > a:focus {
-    background: #de2f18;
+    background: #000;
 }
 .tabs-login {
     background: #ffffff;
@@ -65,7 +65,7 @@ body {
     padding: 10px 30px;
 }
 .container-login h2 {
-    color: #ea533f;
+    color: #000;
 }
 .form-control {
     background-color: #ffffff;
@@ -86,8 +86,8 @@ body {
     margin-top: -15px;
 }
 .container-login button {
-    background-color: #ea533f;
-    border-color: #e73e28;
+    background-color: #000;
+    border-color: #000;
     color: #ffffff;
     border-radius: 0;
     font-size: 18px;
@@ -97,6 +97,10 @@ body {
 }
 .container-login button:hover,
 .container-login button:focus {
-    background: #de2f18;
-    border-color: #be2815;
+    background: #FFAA00;
+    border-color: #FFFFFF;
+}
+
+.warning-email {
+    color: #ffAA00;
 }

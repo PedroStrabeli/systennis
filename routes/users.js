@@ -3,6 +3,8 @@ var http = require('http');
 var router = express.Router();
 var mysql = require('mysql');
 var passport = require('passport');
+// var Passport = passport.Passport;
+// var userPass = new Passport();
 var LocalStrategy = require('passport-local').Strategy;
 var jwt = require('jsonwebtoken');
 
@@ -292,48 +294,15 @@ router.post('/register_3', function(req, res) {
 
 });
 
-// Login process
-// router.post('/login', function(req, res) {
+passport.serializeUser(function(user, done) {
+  done(null, user.id_cliente);
+});
 
-// 	var emailCandidate = req.body.email;
-// 	var plainPassCandidate = req.body.password
-
-// 	var passport = require('passport')
-//     var LocalStrategy = require('passport-local').Strategy;
-
-	// passport.use(new LocalStrategy(
-	//   function(username, password, done) {
-
-	//   	console.log("Estou dentro do passport!");
-	//     // User.findOne({ username: username }, function (err, user) {
-	//     connection.query(queries.queries.fetch_email_for_login(emailCandidate),[],function(err,userData){
-
-	//       if (err) { return done(err); }
-
-	//       console.log(userData);
-
-	//       if (!userData) {
-	//         return done(null, false, { message: 'Usuário incorreto' });
-	//       }
-
- //          bcrypt.compare(plainPassCandidate, userData[0].hash_senha, function(err, res)
- //    	  {
-	// 		if (err) { return done(err); }
-
-	// 		if (!res)
-	// 		{
-	// 			return done(null, false, { message: 'Senha incorreta' });
-	// 		}
-	// 		else
-	// 		{
-	// 			return done(null, userData[0]);
-	// 		}
-	// 	  });
-
-	//     });
-	//  }
-// 	));
-// });
+passport.deserializeUser(function(id, done) {
+  User.getUserById(id, function(err, user) {
+    done(err, user);
+  });
+});
 
 passport.use(new LocalStrategy({
 	usernameField: 'email',
@@ -341,7 +310,7 @@ passport.use(new LocalStrategy({
   },
   function(email, password, done) {
 
-  	console.log("Hum");
+  	console.log("Estou no GETUSERBYEMAIL");
   	User.getUserByEmail(email, function(err, user){
   		if(err) throw(err);
 
@@ -355,7 +324,7 @@ passport.use(new LocalStrategy({
   		User.checkPassword(password, user.hash_senha, function(err2, isMatch){
 
   			console.log("Entrei no check password");
-  			if(err) throw(err);
+  			if(err2) throw(err2);
 
   			if(isMatch)
   			{
@@ -371,25 +340,6 @@ passport.use(new LocalStrategy({
   }
 ));
 
-passport.serializeUser(function(user, done) {
-  done(null, user.id_cliente);
-});
-
-passport.deserializeUser(function(id, done) {
-  User.getUserById(id, function(err, user) {
-    done(err, user);
-  });
-});
-
-// router.post('/login',
-// 	// passport.authenticate('local', {successRedirect: "/", failureRedirect: "/#/users/login"}),
-// 	passport.authenticate('local'),
-// 	function(req, res){
-// 		console.log("Authentication successful!");
-// 		console.log(req);
-// 		res.status(200).json(req.user);
-// 	});
-
 router.post('/login', function(req, res, next) {
   passport.authenticate('local', function(err, user, info) {
     if (err) { return next(err); }
@@ -401,20 +351,39 @@ router.post('/login', function(req, res, next) {
     }
 
     req.logIn(user, function(err) {
+      console.log(err);
       if (err) { return next(err); }
-      console.log(user.id_cliente);
 
+      console.log("DENTRO DO LOGIN");
       var token = jwt.sign({id_cliente: user.id_cliente, email_cliente:user.email_cliente, classe: "cliente"}, constants.jwt_param.secret);
-      console.log(token);
-      return res.status(200).json(token);
+
+      user.token = token;
+
+      req.session.user = user;
+      req.session.token = token;
+
+      console.log(req.session);
+
+      console.log(user);
+      return res.status(200).json(user);
     });
   })(req, res, next);
 });
 
-/* Login page. */
-// router.get('/login', function(req, res) {
-//     console.log('Login page');
-//     res.status(200).render('login');
-// });
+router.get('/logout', function(req, res) {
+
+	console.log('Eu estou fazendo logout');
+
+	req.logOut();
+	req.session.destroy(function(err){
+		if (err) { return next(err); }
+
+		res.redirect('/#/');
+	})
+});
+
+router.get('/get_session', function(req,res) {
+	return res.status(200).json(req.session);
+});
 
 module.exports = router;

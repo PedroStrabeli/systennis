@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html ng-app="systennis">
+	<head>
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+		<link rel="stylesheet" href="/stylesheets/jumbotron.css">
+	    <meta charset="utf-8">
+	    <title>{{title}}</title>
+	</head>
+	<title>Systennis - Página de Cadastro [ADMIN]</title>
+	<body>
+		<div class="container" ng-app="systennis" ng-controller="register_admin_ctrl" ng-init="autofill_supervisor()">
+	      <div class="header clearfix">
+	     <h3 class="text-muted">Systennis</h3>
+	     <br><br>
+ 		<div class="register-view">
+ 				 <br><br><br><br>
+		    	 <div class="alert alert-danger" ng-repeat="item in errors">{{item.msg}}</div>
+		    	 	<h2 class="page-header">Cadastro de funcionário - Acesso Restrito <span class="glyphicon glyphicon-lock"></span></h2>
+		    	 	<h4>Os campos marcados com (*) são de preenchimento obrigatório</h4><br>
+					<form method="post">
+					  <div class="form-group">
+					    <label>Nome(*)</label>
+					    <input type="text" class="form-control funcdata" ng-model="funcdata.name" placeholder="Nome" name="name">
+					  </div>
+					  <div class="form-group">
+					    <label>Sobrenome(*)</label>
+					    <input type="text" class="form-control funcdata" ng-model="funcdata.name2" placeholder="Sobrenome" name="name2">
+					  </div>
+					  <div content-editable class="form-group">
+					    <label>CPF(*)</label>
+					    <input type="text" class="form-control funcdata" ui-mask="999.999.999-99" ng-model="funcdata.cpf" name="cpf">
+					  </div>
+					  <div class="form-group">
+					    <label>Telefone(*)</label>
+					    <input type="text" class="form-control funcdata" ng-model="funcdata.phone" ui-mask="(99) 99999999?9" name="phone">
+					  </div>
+					  <br>
+					  <div class="form-group">
+				  		<label>Cargo</label>
+					  	<select class="select funcdata" id="cargo" style="margin-right: 30px; width: 233px"  ng-model="funcdata.cargo" name="cargo" placeholder="Selecione" ng-options="cargos for cargos in cargos" ng-change="refresh_filters()">
+						</select>
+						<label>Departamento</label>
+					  	<select class="select funcdata" id="depto" style="width: 283px"  ng-model="funcdata.depto" ng-options="departamentos for departamentos in departamentos" placeholder="Selecione um Departamento" ng-change="refresh_filters()">
+						</select>
+					   </div>
+					   <br>
+					  <div class="form-group">
+					    <label>Supervisor(*)</label>
+					    <select class="form-control funcdata" ng-model="funcdata.supervisor" placeholder="Supervisor" ng-options="(supervisor.nome_func + ' ' + supervisor.sobrenome_func) for supervisor in supervisores" name="supervisor" value="supervisor.id_func">
+					    <div class="checkbox">
+						  <label><input type="checkbox" id="dept_filter" name="dept_filter" ng-model="funcdata.dept_filter" ng-change="refresh_filters()" value="">Filtrar por Departamento</label>
+						  <label><input type="checkbox" id="hierarchy_filter" name="hierarchy_filter" ng-model="funcdata.hierarchy_filter" ng-change="refresh_filters()" value="">Filtrar por Hierarquia</label>
+						</div>
+					  </div>
+					  <div class="form-group">
+					    <label>E-Mail(*)</label>
+					    <input type="text" class="form-control funcdata" ng-model="funcdata.email" placeholder="E-Mail" name="email">
+					  </div>
+					  <div class="form-group">
+					    <label>Senha(*)</label>
+					    <input type="password" class="form-control funcdata" ng-model="funcdata.password" placeholder="Senha" name="password">
+					  </div>
+					  <div class="form-group">
+					    <label>Confirmar Senha(*)</label>
+					    <input type="password" class="form-control funcdata" ng-model="funcdata.password2" placeholder="Confirmar senha" name="password2">
+					  </div>
+					  <br>
+					  <button type="submit" class="btn btn-default" ng-click="cadastrar_func(funcdata)">Próximo</button>
+					</form>
+					<br>
+			</div>
+ 			<div class="row">
+	      <footer class="footer">
+	        <p>&copy; 2016 Systennis, Inc.</p>
+	      </footer>
+	    </div>
+	    </div>
+		<!--<script source="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>-->
+		<script src="js/Angular/angular.js"></script>
+		<script src="js/ui-router/angular-ui-router.js"></script>
+		<script src="js/bootstrap/ui-bootstrap-tpls-0.12.0.min.js"></script>
+		<script src="js/Angular/angular-resource.min.js"></script>
+		<script src="js/config.js"></script>
+		<script src="jquery/dist/jquery.tel_rg_cpf_format.js"></script>
+		<!--<script src="js/ng-app.js"></script>		-->
+		<!--<script src="js/index.controller.js"></script>-->
+	</body>
+</html>

@@ -38,7 +38,7 @@ var config = ['$urlRouterProvider', '$stateProvider', '$locationProvider', funct
               data: { title: 'Teste' },
           })
         .state('register', {
-              url: "/users/register2",
+              url: "/users/register",
               params: {
                 userData: null
               },
@@ -47,7 +47,7 @@ var config = ['$urlRouterProvider', '$stateProvider', '$locationProvider', funct
               data: { title: 'Página de Cadastro - Passo 1' },
           })
         .state('register_2', {
-              url: "/users/register2_2",
+              url: "/users/register_2",
               params: {
                 userData: null
               },
@@ -56,7 +56,7 @@ var config = ['$urlRouterProvider', '$stateProvider', '$locationProvider', funct
               data: { title: 'Página de Cadastro - Passo 2' },
           })
         .state('register_3', {
-              url: "/users/register2_3",
+              url: "/users/register_3",
               params: {
                 userData: null,
                 addressData: null
@@ -66,7 +66,7 @@ var config = ['$urlRouterProvider', '$stateProvider', '$locationProvider', funct
               data: { title: 'Página de Cadastro - Confirmação de Cadastro' },
           })
         .state('register_4', {
-              url: "/users/register2_4",
+              url: "/users/register_4",
               params: {
                 registrationStatus: null
               },
@@ -74,11 +74,44 @@ var config = ['$urlRouterProvider', '$stateProvider', '$locationProvider', funct
               controller: 'register_ctrl',
               data: { title: 'Página de Cadastro - Obrigado pelo cadastro!' },
           })
+        .state('register_admin', {
+              url: "/users_ad/register_admin",
+              params: {
+                userData: null
+              },
+              templateUrl: "pages/register_admin_page.html",
+              controller: 'register_admin_ctrl',
+              data: { title: 'Página de Cadastro [ADMIN] - Passo 1' },
+          })
+        .state('register_admin_2', {
+              url: "/users_ad/register_admin_2",
+              params: {
+                userData: null
+              },
+              templateUrl: "pages/reg_admin_confirmation_page.html",
+              controller: 'register_admin_ctrl',
+              data: { title: 'Página de Cadastro [ADMIN] - Passo 2' },
+          })
+        .state('register_admin_3', {
+              url: "/users_ad/register_admin_3",
+              params: {
+                registrationStatus: null
+              },
+              templateUrl: "pages/thank_you_page_admin.html",
+              controller: 'register_admin_ctrl',
+              data: { title: 'Página de Cadastro [ADMIN]'},
+          })
         .state('login', {
               url: "/users/login",
               templateUrl: "pages/login_page.html",
               controller: 'login_ctrl',
               data: { title: 'Página de Login' },
+          })
+        .state('login_admin', {
+              url: "/users_ad/login_admin",
+              templateUrl: "pages/login_page_admin.html",
+              controller: 'login_admin_ctrl',
+              data: { title: 'Página de Login [ADMIN]' },
           })
         // .state('outlook', {
         //     url: "/outlook",

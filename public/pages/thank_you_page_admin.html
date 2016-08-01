@@ -11,20 +11,15 @@
 	</head>
 	<title>Systennis - Página de Confirmação</title>
 	<body>
-		<div class="container" ng-app="systennis" ng-controller="register_ctrl" ng-init="check_where_am_i()">
+		<div class="container" ng-app="systennis" ng-controller="register_admin_ctrl" ng-init="check_where_am_i()">
 		  <h3 class="text-muted">Systennis</h3>
- 		  <br><br>
-<!--  		  <div class="alert alert-warning" ng-if="whereAmI != 3">
-		  	<strong>Atenção!</strong> Você não está autorizado a entrar nesta página!
-		  </div> -->
+ 		  <br><br><br><br>
 		    <div class="header clearfix">
-	 		<div class="register-view" ng-init="setActiveStep(4)">
-				<div ng-include="'pages/template/reg_bar.html'"></div>
+	 		<div class="register-view">
 					<div class="ty_container">
 						<span class="glyphicon glyphicon-ok icon-success" aria-hidden="true"></span><br>
-						<span class="ty_message">Obrigado</span><br>
 						<span class="ty_submessage">Seu cadastro foi concluído com sucesso!</span><br>
-						<span class="ty_login"><a href="/#/users/login">Você já pode se autenticar aqui</a></span><br>
+						<span class="ty_login"><a href="/#/users_ad/login_admin">Você já pode se autenticar aqui</a></span><br>
 					</div>
 			</div>
 		    </div>

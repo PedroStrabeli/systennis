@@ -9,12 +9,14 @@ var connection  = require('express-myconnection');
 var passport = require('passport');
 var expressJWT = require('express-jwt');
 var jwt = require('jsonwebtoken');
+var session = require('express-session');
 
 var flash = require('connect-flash');
 var expressValidator = require('express-validator');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var users_ad = require('./routes/users_ad');
 var catalog = require('./routes/catalog');
 var prod_detail = require('./routes/prod_detail');
 var cart = require('./routes/cart');
@@ -23,8 +25,6 @@ var queries = require('./constants/queries.js');
 
 //CRUD produto
 var cadastro_prod = require('./routes/cadastro_prod');
-
-// var products = require('./routes/products');
 
 var app = express();
 
@@ -105,11 +105,47 @@ app.use(expressValidator({
   }
 }));
 
+app.use(expressValidator({
+  customValidators: {
+    isEmailORCpfAvailableFunc: function(email_or_cpf) {
+      return new Promise(function(resolve, reject) {
+
+      var con = mysql.createConnection(
+      {
+        host: constants.db_param.host,
+        user: constants.db_param.user,
+        password : constants.db_param.password,
+        port : constants.db_param.port, //port mysql
+        database: constants.db_param.database
+      });
+
+      con.query(queries.queries.is_registration_available_func(email_or_cpf),[],
+        function(err, result){
+          if(err) throw err;
+
+          console.log(result[0].has_registration);
+
+          if(eval(result[0].has_registration))
+          {
+            reject(true);
+          }
+          else
+          {
+            resolve(true);
+          }
+
+        });
+      });
+      }
+  }
+}));
+
 // app.use(expressJWT({ secret: 'secret123' }).unless({ path: }))
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(passport.initialize());
+app.use(session({secret: "panda123", resave: false, saveUninitialized: true}));
 app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'page')));
@@ -117,6 +153,7 @@ app.use(express.static(path.join(__dirname, 'page')));
 app.use('/', routes);
 app.use('/index', routes);
 app.use('/users', users);
+app.use('/users_ad', users_ad);
 app.use('/catalog', catalog);
 app.use('/prod_detail', prod_detail);
 app.use('/cart', cart);
