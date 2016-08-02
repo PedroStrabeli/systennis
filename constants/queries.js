@@ -53,6 +53,6 @@ queries.delete_cart=function(id_cliente){return "DELETE FROM item_carrinho WHERE
 
 queries.get_orders=function(id_cliente){return "SELECT id_pedido, data_pedido, status_pedido, entr_parcial, valor_pedido from tb_pedido LEFT JOIN tb_pagamento USING(id_pagamento) where id_cliente = "+id_cliente;}
 
-queries.get_order_prods=function(id_cliente){return "SELECT * from tb_pedido LEFT JOIN item_pedido using(id_pedido) LEFT JOIN tb_pagamento USING(id_pagamento) where id_cliente = "+id_cliente;}
+queries.get_order_prods=function(id_cliente){return "SELECT * from tb_pedido LEFT JOIN (SELECT * from item_pedido left join tb_produto using(id_prod)) as sub using(id_pedido) LEFT JOIN tb_pagamento USING(id_pagamento) where id_cliente = "+id_cliente;}
 
 exports.queries = queries
