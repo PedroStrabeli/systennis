@@ -19,51 +19,45 @@ _________________________________________________________ -->
 		    _________________________________________________________ -->
             <div>
                     <div class="col-md-9">
-
                         <!--<p class="lead">{{detail.desc_prod}}
                         </p>-->
                         <!--<p class="goToDescription"><a href="#details" class="scroll-to text-uppercase">Scroll to product details, material & care and sizing</a>
                         </p>-->
-
                         <div class="row" id="productMain">
                             <div class="col-sm-6">
                                 <div id="mainImage">
                                     <img src="{{detail.url_imagem}}" alt="" class="img-responsive">
                                 </div>
-
                                 <div class="ribbon sale">
                                     <div class="theribbon">SALE</div>
                                     <div class="ribbon-background"></div>
                                 </div>
                                 <!-- /.ribbon -->
-
                                 <div class="ribbon new">
                                     <div class="theribbon">NEW</div>
                                     <div class="ribbon-background"></div>
                                 </div>
                                 <!-- /.ribbon -->
-
                             </div>
                             <div class="col-sm-6">
                                 <div class="box">
-
                                     <form>
                                         <div class="sizes">
 
                                             <h3>Tamanhos</h3>
 
                                             <label for="size_s" ng-repeat="size in sizes">
-                                                <a id="{{'size'+$index}}" ng-click="setSize(size.tamanho_prod, $index)">{{size.tamanho_prod}}</a>
+                                                <a id="{{'size'+$index}}" class="size_radio" ng-click="setSize(size.tamanho_prod, $index)">{{size.tamanho_prod}}</a>
                                                 <input type="radio" id="size_s" name="size" value="s" class="size-input">
                                             </label>
                                         </div>
-
                                         <p class="price">R$ {{detail.preco_prod.toFixed(2)}}</p>
-
                                         <p class="text-center">
                                             <button ng-click="addProduct(detail)" type="submit" class="btn btn-template-main"><i class="fa fa-shopping-cart"></i> Adicionar ao<br>carrinho</button>
-                                            <button type="submit" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Add to wishlist"><i class="fa fa-heart-o"></i>
-                                            </button>
+                                            <br><br><br>
+                                            <select class="select product_colors" id="product_colors" style=" width: 213px"  ng-model="product.color" name="product_color" ng-options="colors.cor_prod for colors in colors" placeholder="Selecione" ng-change="change_colors(product.color.id_prod)">
+                                            <option value="" disabled selected>Selecione a cor</option>
+                                            </select>
                                         </p>
 
                                     </form>
@@ -95,6 +89,7 @@ _________________________________________________________ -->
                             <p>
                                 <h4>Detalhes do Produto</h4>
                                 <p>{{detail.desc_prod}}</p>
+                                <br>
                                 <h4>Categorias</h4>
                                 <ul>
                                     <li>{{detail.tipo_prod}}</li>
@@ -108,7 +103,7 @@ _________________________________________________________ -->
                         </div>
 
                         <div class="box social" id="product-social">
-                            <h4>Show it to your friends</h4>
+                            <h4>Compartilhe nas redes sociais!</h4>
                             <p>
                                 <a href="#" class="external facebook" data-animate-hover="pulse"><i class="fa fa-facebook"></i></a>
                                 <a href="#" class="external gplus" data-animate-hover="pulse"><i class="fa fa-google-plus"></i></a>

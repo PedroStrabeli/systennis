@@ -3,7 +3,7 @@ angular.module('systennis')
   var productDetail;
 
   var sendProduct = function(newObj) {
-      productDetail= newObj; 
+      productDetail = newObj;
   };
 
   var getProducts = function(){

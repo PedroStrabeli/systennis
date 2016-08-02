@@ -1,47 +1,22 @@
-<div class="panel panel-default sidebar-menu">
+<div class="panel panel-default sidebar-menu" ng-controller="catalog_ctrl">
 
                             <div class="panel-heading">
-                                <h3 class="panel-title">Categories</h3>
+                                <h3 class="panel-title">Filtrar</h3>
                             </div>
 
                             <div class="panel-body">
                                 <ul class="nav nav-pills nav-stacked category-menu">
                                     <li>
-                                        <a href="shop-category.html">Men <span class="badge pull-right">42</span></a>
+                                        <a href="shop-category.html">Por marca <span class="badge pull-right"></a>
                                         <ul>
-                                            <li><a href="shop-category.html">T-shirts</a>
-                                            </li>
-                                            <li><a href="shop-category.html">Shirts</a>
-                                            </li>
-                                            <li><a href="shop-category.html">Pants</a>
-                                            </li>
-                                            <li><a href="shop-category.html">Accessories</a>
+                                            <li ng-repeat="brand in brands" ng-model="my_brand"><a ng-click="filterByBrand(brand.marca_prod)">{{brand.marca_prod}}</a>
                                             </li>
                                         </ul>
                                     </li>
                                     <li class="active">
-                                        <a href="shop-category.html">Ladies  <span class="badge pull-right">123</span></a>
+                                        <a href="shop-category.html">Por tipo</a>
                                         <ul>
-                                            <li><a href="shop-category.html">T-shirts</a>
-                                            </li>
-                                            <li><a href="shop-category.html">Skirts</a>
-                                            </li>
-                                            <li><a href="shop-category.html">Pants</a>
-                                            </li>
-                                            <li><a href="shop-category.html">Accessories</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="shop-category.html">Kids  <span class="badge pull-right">11</span></a>
-                                        <ul>
-                                            <li><a href="shop-category.html">T-shirts</a>
-                                            </li>
-                                            <li><a href="shop-category.html">Skirts</a>
-                                            </li>
-                                            <li><a href="shop-category.html">Pants</a>
-                                            </li>
-                                            <li><a href="shop-category.html">Accessories</a>
+                                            <li ng-repeat="type in types" ng-model="my_type"><a ng-click="filterByType(type.subtipo_prod)">{{type.subtipo_prod}}</a>
                                             </li>
                                         </ul>
                                     </li>
@@ -51,7 +26,7 @@
                             </div>
                         </div>
 
-                        <div class="panel panel-default sidebar-menu">
+                        <!-- <div class="panel panel-default sidebar-menu">
 
                             <div class="panel-heading">
                                 <h3 class="panel-title">Brands</h3>
@@ -89,9 +64,9 @@
                                 </form>
 
                             </div>
-                        </div>
+                        </div> -->
 
-                        <div class="panel panel-default sidebar-menu">
+                        <!-- <div class="panel panel-default sidebar-menu">
 
                             <div class="panel-heading">
                                 <h3 class="panel-title clearfix">Colours</h3>
@@ -134,4 +109,4 @@
                                 </form>
 
                             </div>
-                        </div>
+                        </div> -->

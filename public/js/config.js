@@ -8,6 +8,11 @@ var config = ['$urlRouterProvider', '$stateProvider', '$locationProvider', funct
     $stateProvider
         .state('catalog', {
               url: "/",
+              params: {
+                keywordFilter: null,
+                brandFilter: null,
+                typeFilter: null
+              },
               templateUrl: "pages/template/shop-category.html",
               controller: 'catalog_ctrl',
               data: { pageTitle: 'Pagina Principal'}

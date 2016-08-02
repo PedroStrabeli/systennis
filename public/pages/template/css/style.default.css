@@ -1083,6 +1083,9 @@ fieldset[disabled] .btn-template-primary.active {
   width: 0;
   height: 0;
 }
+.reset_button_size {
+  background-color: #000;
+}
 .ribbon .theribbon:after {
   left: 0px;
   top: 100%;

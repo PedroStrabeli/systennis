@@ -2,6 +2,7 @@
 
 angular.module('systennis')
 	.controller('register_ctrl', function($scope, $state, $http){
+
 		$scope.title = "Página de cadastro";
         $scope.address = {};
 		$scope.errors = [];
@@ -12,6 +13,49 @@ angular.module('systennis')
 		$scope.bairro = "";
 		$scope.estado = "";
 		$scope.cidade = "";
+
+        // $rootScope.getUserAsync = function(callback) {
+        //     $http.get('/users/get_session').success(function(response)
+        //     {
+        //         if(response.user)
+        //         {
+        //             callback(response.user);
+        //         }
+        //         else
+        //         {
+        //             callback(false);
+        //         }
+        //     })
+        // };
+
+        // $rootScope.getFuncAsync = function(callback) {
+        //     $http.get('/users/get_session').success(function(response)
+        //     {
+        //         if(response.func)
+        //         {
+        //             callback(response.func);
+        //         }
+        //         else
+        //         {
+        //             callback(false);
+        //         }
+        //     })
+        // };
+
+        // $rootScope.getUser = function (){
+        //     $rootScope.getUserAsync(function(callback){
+        //         return callback;
+        //     });
+        // };
+
+        // $rootScope.getFunc = function (){
+        //     $rootScope.getFuncAsync(function(callback){
+        //         return callback;
+        //     });
+        // };
+
+        // var user = $rootScope.getUser();
+        // console.log(user);
 
 		$scope.check_where_am_i = function() {
             var page = 0;

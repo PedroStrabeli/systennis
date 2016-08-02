@@ -5,19 +5,27 @@
 // queries.catalog = function (){return 'SELECT DISTINCT id_prod, nome_prod, desc_prod,marca_prod, preco_prod, url_imagem FROM tb_produto';}
 queries.catalog = function (){return 'SELECT DISTINCT * FROM tb_produto';}
 
+queries.fetch_brands = function (){return 'SELECT DISTINCT marca_prod FROM tb_produto';}
+
+queries.fetch_types = function (){return 'SELECT DISTINCT subtipo_prod FROM tb_produto';}
+
+queries.filter_by_brand = function(brand){return "SELECT DISTINCT * FROM tb_produto WHERE marca_prod = '" + brand + "'";}
+
+queries.filter_by_type = function(type){return "SELECT DISTINCT * FROM tb_produto WHERE subtipo_prod = '" + type + "'";}
+
 
 //PROD_DETAIL
 queries.prod_detail= function (id_prod){return  'SELECT DISTINCT id_prod, nome_prod, desc_prod, tipo_prod, subtipo_prod, cor_prod, marca_prod, preco_prod, url_imagem FROM tb_produto where id_prod = '+ id_prod;}
 
 queries.tamanho_prod= function (id_prod){return  'SELECT tamanho_prod FROM tamanho_produto WHERE id_prod = '+ id_prod;}
 
-queries.prod_colors_available = function (id_prod){return 'SELECT DISTINCT cor_prod, id_prod FROM tb_produto WHERE nome_prod IN (SELECT nome_prod FROM tb_produto WHERE id_prod = ' + id_prod + "')ghg"}
+queries.prod_colors_available = function (id_prod){return "SELECT DISTINCT cor_prod, id_prod FROM tb_produto WHERE nome_prod IN (SELECT nome_prod FROM tb_produto WHERE id_prod =" + id_prod + ")"};
 
 // queries.prod_colors_available = 'SELECT DISTINCT cor_prod, id_prod FROM tb_produto WHERE nome_prod IN (SELECT nome_prod FROM tb_produto WHERE id_prod =';
 
 queries.prod_sizes_available = 'SELECT DISTINCT tamanho_prod FROM tamanho_produto WHERE id_prod ='
 
-queries.search = "SELECT DISTINCT id_prod, nome_prod, desc_prod, tipo_prod, subtipo_prod, cor_prod, marca_prod, preco_prod, url_imagem FROM tb_produto WHERE nome_prod LIKE '%";
+queries.search = function(keyword) {return "SELECT DISTINCT id_prod, nome_prod, desc_prod, tipo_prod, subtipo_prod, cor_prod, marca_prod, preco_prod, url_imagem FROM tb_produto WHERE nome_prod LIKE '%" + keyword + "%'"};
 
 queries.show_one = 'LIMIT 1'
 
