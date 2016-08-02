@@ -1,19 +1,19 @@
 <div class="container-fluid">
     <div class="row">
-            <div class="col-lg-12">
-                <h1 class="page-header">
-                    {{title}}
-                </h1>
-                <ol class="breadcrumb">
-                    <li>
-                        <i class="fa fa-dashboard"></i>  <a href="index.html">Dashboard</a>
-                    </li>
-                    <li class="active">
-                        <i class="fa fa-shopping-cart"></i> {{title}}
-                    </li>
-                </ol>
-            </div>
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                {{title}}
+            </h1>
+            <ol class="breadcrumb">
+                <li>
+                    <i class="fa fa-dashboard"></i>  <a ui-sref="dashboard">Dashboard</a>
+                </li>
+                <li class="active">
+                    <i class="fa fa-shopping-cart"></i> {{title}}
+                </li>
+            </ol>
         </div>
+    </div>
     <div class="row">
         
         <div class="col-lg-12">
@@ -51,7 +51,7 @@
                                 <tr ng-class="{'selecionado negrito': pedido.selecionado}" ng-repeat="pedido in pedidos | filter:procurar | orderBy:sortKey:reverse | startFrom: (currentPage - 1) * maxSize | limitTo: pedidos.length">
                                     <td><input type="checkbox" ng-model="pedido.selecionado"/></td>
                                     <td>{{pedido.id_pedido}}</td>
-                                    <td>{{pedido.id_cliente}}</td>
+                                    <td>{{pedido.nome_cliente}} {{pedido.sobrenome_cliente}} </td>
                                     <td>{{pedido.data}}</td>
                                     <td>{{pedido.hora}}</td>
                                     <td class="center">{{pedido.status_pedido}}</td>

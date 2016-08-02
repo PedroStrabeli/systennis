@@ -1,6 +1,6 @@
 angular.module('systennis')
-	.controller('gestao_pedidos_ctrl',function($scope, $http, $timeout, $state){
-		$scope.title = "Seleção de Pedidos";
+	.controller('controle_entregas_ctrl',function($scope, $http, $timeout, $state){
+		$scope.title = "Controle de Entregas";
 
 		// Query de Pedidos
 		$scope.pedidos = []; 
@@ -8,7 +8,7 @@ angular.module('systennis')
 		// Id supervisor dummy
 		sessionStorage.loggedID = 1;  
 
-		$http.get('/gestao_entregas/pedidos_aprovados').success(function(response){		
+		$http.get('/gestao_entregas/pedidos_supervisor' + sessionStorage.loggedID).success(function(response){		
 		 	$scope.pedidos = response;
 		 	for (i = 0; i < $scope.pedidos.length ; i ++) {
 		 		$scope.pedidos[i].data = $scope.pedidos[i].data_pedido.slice(0, 10);
@@ -34,7 +34,7 @@ angular.module('systennis')
 				if (pedidos[i].selecionado){
 					pedidos[i].status_pedido = 'Encaminhado';
 					pedidos[i].id_supervisor = sessionStorage.loggedID;
-					$http.post('/gestao_entregas/selecionar_pedidos', pedidos[i]); 
+					$http.post('/gestao_pedidos/selecionar_pedidos', pedidos[i]); 
 				}
 			}
 			$timeout(function() {

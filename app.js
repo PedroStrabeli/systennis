@@ -17,7 +17,7 @@ var constants = require('./constants/constants.js')
 
 //Admin
 var crud_prod = require('./routes/admin/crud_prod');
-var gestao_pedidos = require('./routes/admin/gestao_pedidos');
+var gestao_entregas = require('./routes/admin/gestao_entregas');
 
 // var products = require('./routes/products');
 
@@ -63,7 +63,7 @@ app.use('/cart', cart);
 
 //Admin
 app.use('/crud_prod', crud_prod);
-app.use('/gestao_pedidos', gestao_pedidos);
+app.use('/gestao_entregas', gestao_entregas);
 
 
 // catch 404 and forward to error handler
