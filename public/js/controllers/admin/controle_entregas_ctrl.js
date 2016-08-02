@@ -27,20 +27,11 @@ angular.module('systennis')
 		$scope.maxSize = 5;
 		$scope.currentPage = 1;	
 
-		// Adicionar Pedidos
-		$scope.adicionarPedidos = function (pedidos) {
-			adicionarPedidos = [];
-			for (i=0;i<pedidos.length;i++) {
-				if (pedidos[i].selecionado){
-					pedidos[i].status_pedido = 'Encaminhado';
-					pedidos[i].id_supervisor = sessionStorage.loggedID;
-					$http.post('/gestao_pedidos/selecionar_pedidos', pedidos[i]); 
-				}
-			}
-			$timeout(function() {
-				$state.go($state.current, {}, {reload: true});
-			}, 500);
-		}
+		$scope.visualizarPedido = function(pedido){
+	        sessionStorage.id_pedido = pedido.id_pedido;
+	        sessionStorage.id_supervisor = pedido.id_supervisor;
+	        sessionStorage.id_endereco = pedido.id_endereco;
+    	};
 
 		$scope.ordenar = function(keyname){
 	        $scope.sortKey = keyname;
