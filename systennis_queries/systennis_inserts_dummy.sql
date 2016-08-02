@@ -34,10 +34,13 @@ VALUES (1, 39)
  INSERT INTO tb_cliente (nome_cliente, sobrenome_cliente, email_cliente, hash_senha, cpf_cliente, rg_cliente, member_since, data_nasc,sexo_cliente)
  VALUES ('Pedro','Strabeli','pedrostrabeli@gmail.com','1234567890987654321234567890','11111129288','8172839182', date(now()), '19930329', 'M');
  
- INSERT INTO item_carrinho(pais_end, estado_end, cidade_end, bairro_end, cep_end, rua_end, numero_end, complemento_end)
+ INSERT INTO tb_endereco(pais_end, estado_end, cidade_end, bairro_end, cep_end, rua_end, numero_end, complemento_end)
  VALUES ('Brasil','SP' ,'São Paulo', 'Belém','03062-003','Rua Alzira Sacchi',7,'Herval, 925');
  
-  INSERT INTO tb_endereco(id_cliente,id_prod,tamanho_prod,qte_prod)
+ INSERT INTO cliente_endereco
+ VALUES (1,1);
+ 
+  INSERT INTO item_carrinho(id_cliente,id_prod,tamanho_prod,qte_prod)
  VALUES (1,1,40,1),(1,3,36,1);
  
  
