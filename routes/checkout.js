@@ -14,30 +14,66 @@ router.get('/getAddress/cli:id_cliente',function(req, res){
 
 router.post('/payment',function(req,res){
 	var id_pagamento;
-	setTimeout(function() {
-		req.getConnection(function(err,connection){
-	  		if(err) return res.status(400).json(err);
-	  			connection.query(queries.queries.update_payment(id_pagamento) ,[] ,function(err,result){	
-            //console.log(queries.queries.update_payment(id_pagamento))
-  			})
-	  	})
-	},10000);
-	//console.log(queries.queries.payment(req.body.params));
-		req.getConnection(function(err,connection){
-	  		if(err) return res.status(400).json(err);
-    	   connection.query(queries.queries.payment(req.body.params) ,[] ,function(err,result){
-     		
-          req.getConnection(function(err,connection){
-        if(err) return res.status(400).json(err);
-        connection.query(queries.queries.getpayid() ,[] ,function(err,result){
-     		//console.log(result[0].id_pagamento)
-        id_pagamento=result[0].id_pagamento;
-        res.json(result[0].id_pagamento);
-        })})
-     	});
-     });
-})
+  var id_pedido;
+  var p=req.body;
+  //console.log(p.checkout.total);
 
+  req.getConnection(function(err,connection){
+        if(err) return res.status(400).json(err);
+  	setTimeout(function() {
+  		
+            console.log("Iniciando processo de pedido")
+  	  			connection.query(queries.queries.update_payment_order(id_pagamento),[] ,function(err,result){	
+              console.log('erro: '+JSON.stringify(err))
+              console.log("atualizando pgto " +id_pagamento)
+              res.json(id_pagamento);
+    			})
+  	  	
+  	},12000);
+  	
+  		  ////CRIANDO O PAGAMENTO
+            //console.log(queries.queries.payment(p.pag));
+      	   connection.query(queries.queries.payment(p.pag, p.checkout.total) ,[] ,function(err,result){
+             		//console.log(result[0].id_pagamento)
+                id_pagamento=result[1][0].id_pagamento;
+                console.log("pagamento registrado. id = "+id_pagamento)
+
+                //// CRIANDO O PEDIDO
+                var orderParam=[p.checkout.user.id_cliente, p.checkout.parcial, p.checkout.address.id_endereco, 'null', id_pagamento]
+                  connection.query(queries.queries.order(orderParam) ,[] ,function(err,result){
+                      console.log('erro: '+JSON.stringify(err))
+                      id_pedido=result[1][0].id_pedido;
+                      console.log("criando pedido de id= "+id_pedido)
+
+                        ////COLOCANDO ITENS NO PEDIDO e tira do carrinho
+                          connection.query(queries.queries.insert_order_items(id_pagamento, p.checkout.cart, p.checkout.user.id_cliente) ,[] ,function(err,result){
+                              console.log('erro: '+JSON.stringify(err))
+                              console.log("Itens inseridos com sucesso.")
+
+                          })
+                            //console.log(result[0].id_pagamento)
+
+                            // id_pedido=result[0].id_pedido;
+                            //console.log("pedido registrado. id = "+result[0].id_pedido)
+                            console.log(result[1][0]);
+
+                            // res.json(result[0].id_pedido);
+                        
+              })
+         })
+              
+       	});
+        
+  })
+     
+
+router.post('/order',function(req,res){
+  req.getConnection(function(err,connection){
+        if(err) return res.status(400).json(err);
+          console.log(queries.queries.order(req.body.params))//create
+         
+       })
+})
 // router.get('/getAddress',function(req, res){
 // 	req.getConnection(function(err,connection){
 //   		var id_cliente=req.params.id_cliente;

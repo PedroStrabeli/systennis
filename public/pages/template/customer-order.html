@@ -26,50 +26,37 @@ _________________________________________________________ -->
 
                     <div class="col-md-9 clearfix" id="customer-order">
 
-                        <p class="lead">Order #1735 was placed on <strong>22/06/2013</strong> and is currently <strong>Being prepared</strong>.</p>
-                        <p class="lead text-muted">If you have any questions, please feel free to <a href="contact.html">contact us</a>, our customer service center is working for you 24/7.</p>
+                        <p class="lead">Pedido #{{pedido.id_pedido}} realizado em  <strong>{{pedido.data_pedido}}</strong> e está atualmente <strong>{{pedido.status_pedido}}</strong>.</p>
+                        <!--<p class="lead text-muted">If you have any questions, please feel free to <a href="contact.html">contact us</a>, our customer service center is working for you 24/7.</p>-->
 
                         <div class="box">
                             <div class="table-responsive">
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <th colspan="2">Product</th>
-                                            <th>Quantity</th>
-                                            <th>Unit price</th>
-                                            <th>Discount</th>
+                                            <th colspan="2">Produto</th>
+                                            <th>Quantidade</th>
+                                            <th>Preço Unitário</th>
+                                            <!--<th>Discount</th>-->
                                             <th>Total</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
+                                        <tr ng-repeat="produto in detail">
                                             <td>
                                                 <a href="#">
-                                                    <img src="img/detailsquare.jpg" alt="White Blouse Armani">
+                                                    <img src="{{produto.url_imagem}}" alt="{{produto.nome_prod}}">
                                                 </a>
                                             </td>
-                                            <td><a href="#">White Blouse Armani</a>
+                                            <td><a href="#">{{produto.nome_prod}}</a>
                                             </td>
-                                            <td>2</td>
-                                            <td>$123.00</td>
-                                            <td>$0.00</td>
-                                            <td>$246.00</td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <a href="#">
-                                                    <img src="img/basketsquare.jpg" alt="Black Blouse Armani">
-                                                </a>
-                                            </td>
-                                            <td><a href="#">Black Blouse Armani</a>
-                                            </td>
-                                            <td>1</td>
-                                            <td>$200.00</td>
-                                            <td>$0.00</td>
-                                            <td>$200.00</td>
+                                            <td>{{produto.qte_prod}}</td>
+                                            <td>R${{produto.preco_prod.toFixed(2)}}</td>
+                                            <!--<td>$0.00</td>-->
+                                            <td>R${{(produto.preco_prod*produto.qte_prod).toFixed(2)}}</td>
                                         </tr>
                                     </tbody>
-                                    <tfoot>
+                                    <!--<tfoot>
                                         <tr>
                                             <th colspan="5" class="text-right">Order subtotal</th>
                                             <th>$446.00</th>
@@ -86,13 +73,13 @@ _________________________________________________________ -->
                                             <th colspan="5" class="text-right">Total</th>
                                             <th>$456.00</th>
                                         </tr>
-                                    </tfoot>
+                                    </tfoot>-->
                                 </table>
 
                             </div>
                             <!-- /.table-responsive -->
 
-                            <div class="row addresses">
+                            <!--<div class="row addresses">
                                 <div class="col-sm-6">
                                     <h3 class="text-uppercase">Invoice address</h3>
                                     <p>John Brown
@@ -111,7 +98,7 @@ _________________________________________________________ -->
                                         <br>England
                                         <br>Great Britain</p>
                                 </div>
-                            </div>
+                            </div>-->
                             <!-- /.addresses -->
 
                         </div>

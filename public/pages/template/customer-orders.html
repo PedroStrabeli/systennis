@@ -27,7 +27,7 @@ _________________________________________________________ -->
 
                     <div class="col-md-9" id="customer-orders">
 
-                        <p class="text-muted lead">If you have any questions, please feel free to <a href="contact.html">contact us</a>, our customer service center is working for you 24/7.</p>
+                        <p class="text-muted lead">Acompanhe seus  pedidos abaixo:</p>
 
                         <div class="box">
 
@@ -35,60 +35,26 @@ _________________________________________________________ -->
                                 <table class="table table-hover">
                                     <thead>
                                         <tr>
-                                            <th>Order</th>
-                                            <th>Date</th>
-                                            <th>Total</th>
+                                            <th>Pedido</th>
+                                            <th>Data</th>
+                                            <th>Valor</th>
+                                            <!--<th>Entrega</th>-->
                                             <th>Status</th>
-                                            <th>Action</th>
+                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <th># 1735</th>
-                                            <td>22/06/2013</td>
-                                            <td>$ 150.00</td>
-                                            <td><span class="label label-info">Being prepared</span>
+                                        <tr ng-repeat="pedido in pedidos">
+                                            <th>{{pedido.id_pedido}}</th>
+                                            <td>{{pedido.data_pedido}}</td>
+                                            <td>{{pedido.valor_pedido}}</td>
+                                            <!--<td>{{pedido.entrega}}</td>-->
+                                            <td><span class="label label-info">{{pedido.status_pedido}}</span>
                                             </td>
-                                            <td><a ui-sref="order_detail" class="btn btn-template-main btn-sm">View</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th># 1735</th>
-                                            <td>22/06/2013</td>
-                                            <td>$ 150.00</td>
-                                            <td><span class="label label-info">Being prepared</span>
-                                            </td>
-                                            <td><a href="customer-order.html" class="btn btn-template-main btn-sm">View</a>
+                                            <td><a ui-sref="order_detail" ng-click="sendOrder(pedido)" class="btn btn-template-main btn-sm">Ver</a>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <th># 1735</th>
-                                            <td>22/06/2013</td>
-                                            <td>$ 150.00</td>
-                                            <td><span class="label label-success">Received</span>
-                                            </td>
-                                            <td><a href="customer-order.html" class="btn btn-template-main btn-sm">View</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th># 1735</th>
-                                            <td>22/06/2013</td>
-                                            <td>$ 150.00</td>
-                                            <td><span class="label label-danger">Cancelled</span>
-                                            </td>
-                                            <td><a href="customer-order.html" class="btn btn-template-main btn-sm">View</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th># 1735</th>
-                                            <td>22/06/2013</td>
-                                            <td>$ 150.00</td>
-                                            <td><span class="label label-warning">On hold</span>
-                                            </td>
-                                            <td><a href="customer-order.html" class="btn btn-template-main btn-sm">View</a>
-                                            </td>
-                                        </tr>
-                                    </tbody>
+                                        
                                 </table>
                             </div>
                             <!-- /.table-responsive -->
