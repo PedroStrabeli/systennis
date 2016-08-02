@@ -195,7 +195,7 @@ var config = ['$urlRouterProvider', '$stateProvider', '$locationProvider', funct
 
 
 angular
-    .module('systennis',['ui.router', 'ui.mask'])
+    .module('systennis',['ui.router', 'ui.mask', 'ui.bootstrap'])
     .config(config)
     // .run(function($rootScope, $state) {
     //     $rootScope.$state = $state;

@@ -5,7 +5,7 @@ USE systennis_db;
  ,('TÊNIS ADIDAS BREEZE 102','Escolha perfeita para os pés femininos, o Tênis Adidas Breeze 102 combina um formato aerodinâmico com um solado flexível, conferindo uma sensação mais natural e confortável para sua corrida.','Calçado','Tenis','Branco','Adidas', '129.90', 100, 'adidas_breeze_wht.jpg')
  ,('TÊNIS ADIDAS BREEZE 102','Escolha perfeita para os pés femininos, o Tênis Adidas Breeze 102 combina um formato aerodinâmico com um solado flexível, conferindo uma sensação mais natural e confortável para sua corrida.','Calçado','Tenis','Preto','Adidas', '129.90', 100, 'adidas_breeze_blk.jpg');
 */
-INSERT INTO tamanho_produto (id_prod, tamanho_prod)
+/*INSERT INTO tamanho_produto (id_prod, tamanho_prod)
 VALUES (1, 39)
 ,(1, 40)
 ,(1, 41)
@@ -29,7 +29,7 @@ VALUES (1, 39)
 ,(6, 37)
 ,(6, 38)
 ,(6, 39);
- 
+ */
  
  INSERT INTO tb_cliente (nome_cliente, sobrenome_cliente, email_cliente, hash_senha, cpf_cliente, rg_cliente, member_since, data_nasc,sexo_cliente)
  VALUES ('Pedro','Strabeli','pedrostrabeli@gmail.com','1234567890987654321234567890','11111129288','8172839182', date(now()), '19930329', 'M');

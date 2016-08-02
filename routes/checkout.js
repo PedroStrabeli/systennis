@@ -1,5 +1,6 @@
 var express = require('express');
 var queries = require('../constants/queries.js')
+var mail = require('../constants/emails.js')
 var router = express.Router();
 
 router.get('/getAddress/cli:id_cliente',function(req, res){
@@ -21,16 +22,21 @@ router.post('/payment',function(req,res){
   req.getConnection(function(err,connection){
         if(err) return res.status(400).json(err);
   	setTimeout(function() {
-  		
             console.log("Iniciando processo de pedido")
   	  			connection.query(queries.queries.update_payment_order(id_pagamento),[] ,function(err,result){	
               console.log('erro: '+JSON.stringify(err))
               console.log("atualizando pgto " +id_pagamento)
               res.json(id_pagamento);
+              //EMAIL PAGAMENTO APROVADO
+              transporter.sendMail(mail.mail.orderMade({user:{email_cliente:p.checkout.user.email_cliente, nome:p.checkout.user.nome_cliente}}), function(error, info){
+                    if(error){
+                        return console.log(error);
+                    }
+                    console.log('Message sent: ' + info.response);
+                    //transporter.close();
+                });
     			})
-  	  	
   	},12000);
-  	
   		  ////CRIANDO O PAGAMENTO
             //console.log(queries.queries.payment(p.pag));
       	   connection.query(queries.queries.payment(p.pag, p.checkout.total) ,[] ,function(err,result){
@@ -44,6 +50,14 @@ router.post('/payment',function(req,res){
                       console.log('erro: '+JSON.stringify(err))
                       id_pedido=result[1][0].id_pedido;
                       console.log("criando pedido de id= "+id_pedido)
+                      //EMAIL PEDIDO FEITO
+                      transporter.sendMail(mail.mail.paymentReceived({user:{email_cliente:p.checkout.user.email_cliente, nome:p.checkout.user.nome_cliente}, pedido:{id_pedido:id_pedido}}), function(error, info){
+                          if(error){
+                              return console.log(error);
+                          }
+                          console.log('Message sent: ' + info.response);
+                          //transporter.close();
+                      });
 
                         ////COLOCANDO ITENS NO PEDIDO e tira do carrinho
                           connection.query(queries.queries.insert_order_items(id_pagamento, p.checkout.cart, p.checkout.user.id_cliente) ,[] ,function(err,result){
@@ -58,20 +72,15 @@ router.post('/payment',function(req,res){
                             console.log(result[1][0]);
 
                             // res.json(result[0].id_pedido);
-                        
               })
          })
-              
        	});
-        
   })
-     
 
 router.post('/order',function(req,res){
   req.getConnection(function(err,connection){
         if(err) return res.status(400).json(err);
           console.log(queries.queries.order(req.body.params))//create
-         
        })
 })
 // router.get('/getAddress',function(req, res){
