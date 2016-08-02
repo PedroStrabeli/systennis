@@ -2349,7 +2349,7 @@ fieldset[disabled] .btn-template-primary.active {
 #productMain .sizes a.active,
 #productMain .sizes a:hover {
   background: #4fbfa8;
-  color: #fff;
+  color: red;
 }
 #productMain .sizes input {
   display: none;

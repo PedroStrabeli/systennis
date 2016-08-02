@@ -1,50 +1,110 @@
 <!DOCTYPE html>
-<html  ng-app="systennis">
-	<head>
-		<!-- Latest compiled and minified CSS -->
-		<link rel="stylesheet" href="Bootstrap/css/bootstrap.css" type="text/css">
-		<link rel="stylesheet" href="stylesheets/style.css" type="text/css">
-		
-		<!-- Optional theme -->
-		<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous"> -->
-	    <meta charset="utf-8">
-	    <title>{{title}}</title>
+<html lang="pt" ng-app="systennis">
 
-	</head>
+<head>
+    <meta charset="utf-8">
+    <meta name="robots" content="all,follow">
+    <meta name="googlebot" content="index,follow,snippet,archive">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{{title}}</title>
+
+    <meta name="keywords" content="">
+
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,500,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- Bootstrap and Font Awesome css -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+    <!-- Css animations  -->
+    <link href="pages/template/css/animate.css" rel="stylesheet">
+
+    <!-- Theme stylesheet, if possible do not edit this stylesheet -->
+    <link href="pages/template/css/style.default.css" rel="stylesheet" id="theme-stylesheet">
+
+    <!-- Custom stylesheet - for your changes -->
+    <link href="pages/template/css/custom.css" rel="stylesheet">
+
+    <!-- Responsivity for older IE -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+    <!-- Favicon and apple touch icons-->
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="img/apple-touch-icon.png" />
+    <link rel="apple-touch-icon" sizes="57x57" href="img/apple-touch-icon-57x57.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="img/apple-touch-icon-72x72.png" />
+    <link rel="apple-touch-icon" sizes="76x76" href="img/apple-touch-icon-76x76.png" />
+    <link rel="apple-touch-icon" sizes="114x114" href="img/apple-touch-icon-114x114.png" />
+    <link rel="apple-touch-icon" sizes="120x120" href="img/apple-touch-icon-120x120.png" />
+    <link rel="apple-touch-icon" sizes="144x144" href="img/apple-touch-icon-144x144.png" />
+    <link rel="apple-touch-icon" sizes="152x152" href="img/apple-touch-icon-152x152.png" />
+</head>
 	<body>
 
 	<div>
-	<!-- <header ng-include="'pages/template/navbar.html'"></header>	 -->
-	<div ui-view></div>	
+<!-- 	<header ng-include="'pages/template/navbar.html'"></header>
+ -->	<div ui-view></div>
 	</div>
 
 		<!--<script source="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>-->
 		<script src="js/Angular/angular.js"></script>
 		<script src="js/Angular/angular-resource.min.js"></script>
-
 		<script src="js/ui-router/angular-ui-router.js"></script>
+		<script src="js/Angular/dirPagination.js"></script>
+
+
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	    <script> window.jQuery || document.write('<script src="pages/template/js/jquery-1.11.0.min.js"><\/script>')
+	    </script>
+	    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+	    <script src="pages/template/js/jquery.cookie.js"></script>
+	    <script src="pages/template/js/waypoints.min.js"></script>
+	    <script src="pages/template/js/jquery.counterup.min.js"></script>
+	    <script src="pages/template/js/jquery.parallax-1.1.3.js"></script>
+	    <script src="pages/template/js/front.js"></script>
+		<script src="js/angular-ui-mask/dist/mask.js"></script>
 		<!-- <script src="Bootstrap/ui-bootstrap-tpls-0.12.0.min.js"></script> -->
 		<!-- <script src="jquery/dist/jquery.js"></script> -->
 		<!-- <script
 			  src="https://code.jquery.com/jquery-2.2.4.js"
 			  integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
 			  crossorigin="anonymous"></script> -->
+
+		<script src="jquery/dist/jquery.js"></script>
+		<script src="jquery/dist/jquery.price_format.2.0.js"></script>
+		<script src="jquery/dist/jquery.tel_rg_cpf_format.js"></script>
+		<script src="jquery/dist/jquery.maskedinput.js"></script>
 		<script src="Bootstrap/js/bootstrap.js"></script>
-		<script src="Bootstrap/js/bootstrap.min.js"></script>
-		
 
 		<!-- APP -->
 		<script src="js/config.js"></script>
 
 
 		<!-- Services -->
+		<script src="js/services/login_service.js"></script>
 		<script src="js/services/prod_detail_service.js"></script>
 		<script src="js/services/send_cart_service.js"></script>
+		<script src="js/services/checkout_service.js"></script>
+		<script src="js/services/mail_service.js"></script>
 
 		<!-- Controllers -->
 		<script src="js/controllers/catalog_ctrl.js"></script>
 		<script src="js/controllers/cart_ctrl.js"></script>
 		<script src="js/controllers/prod_ctrl.js"></script>
+		<script src="js/controllers/checkout_ctrl.js"></script>
+		<script src="js/controllers/test.js"></script>
+		<script src="js/controllers/register_ctrl.js"></script>
+		<script src="js/controllers/register_admin_ctrl.js"></script>
+		<script src="js/controllers/login_ctrl.js"></script>
+		<script src="js/controllers/login_admin_ctrl.js"></script>
+
+		<!-- Directives -->
+		<script src="js/directives/contentEditable.js"></script>
 
 		<!--<script src="js/ng-app.js"></script>		-->
 

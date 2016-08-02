@@ -8,7 +8,7 @@ router.get('/:id_cliente', function(req, res) {
   		var id_cliente=req.params.id_cliente;
         if(err) return res.status(400).json(err);
 
-        connection.query(queries.queries.get_cart+id_cliente ,[] ,function(err,result){
+        connection.query(queries.queries.get_cart(id_cliente) ,[] ,function(err,result){
 
         	return res.status(200).json(result);
         });
@@ -18,12 +18,13 @@ router.get('/:id_cliente', function(req, res) {
 
 router.post('/CheckProd', function(req, res) {
   	req.getConnection(function(err,connection){
-  		var id_cliente=req.params.id_cliente;
-  		var id_prod=req.params.id_prod;
+  		var id_cliente=req.body.id_cliente;
+  		var id_prod=req.body.id_prod;
+      var tamanho_prod=req.body.tamanho_prod;
         if(err) return res.status(400).json(err);
-        console.log(queries.queries.check_cart(req.body.id_cliente, req.body.id_prod))
-        connection.query(queries.queries.check_cart(req.body.id_cliente, req.body.id_prod) ,[] ,function(err,result){
-        	console.log(JSON.stringify(result));
+        //console.log(queries.queries.check_cart(req.body.id_cliente, req.body.id_prod))
+        connection.query(queries.queries.check_cart(id_cliente, id_prod, tamanho_prod) ,[] ,function(err,result){
+        //	console.log(JSON.stringify(result));
 
         	return res.status(200).json(result);
         });
@@ -36,15 +37,42 @@ router.post('/addCartProduct', function(req, res){
         if(err) return res.status(400).json(err);
         var insert=[req.body.id_cliente, req.body.id_prod, req.body.tamanho_prod, req.body.qte_prod];
         
-        console.log(queries.queries.add_cart(insert));
+        //console.log(queries.queries.add_cart(insert));
         connection.query(queries.queries.add_cart(insert) ,[] ,function(err,result){
-          console.log(JSON.stringify(result));
+        //  console.log(JSON.stringify(result));
+          return res.status(200).json(result);
+        });
+    });
+});
+
+router.post('/removeCart', function(req, res) {
+    req.getConnection(function(err,connection){
+      var id_cliente=req.body.id_cliente;
+      var id_prod=req.body.id_prod;
+        if(err) return res.status(400).json(err);
+        //console.log(queries.queries.check_cart(req.body.id_cliente, req.body.id_prod))
+        connection.query(queries.queries.remove_cart(id_cliente, id_prod) ,[] ,function(err,result){
+        //  console.log(JSON.stringify(result));
+
           return res.status(200).json(result);
         });
     });
 });
   
+router.post('/changeItem', function(req, res) {
+    req.getConnection(function(err,connection){
+      var id_cliente=req.body.id_cliente;
+      var id_prod=req.body.id_prod;
+      var qte_prod=req.body.qte_prod;
+        if(err) return res.status(400).json(err);
+        //console.log(queries.queries.check_cart(req.body.id_cliente, req.body.id_prod))
+        connection.query(queries.queries.change_item(id_cliente, id_prod, qte_prod) ,[] ,function(err,result){
+        //  console.log(JSON.stringify(result));
 
+          return res.status(200).json(result);
+        });
+    });
+});
 
 module.exports = router;
 

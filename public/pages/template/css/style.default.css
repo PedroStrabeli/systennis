@@ -1083,6 +1083,9 @@ fieldset[disabled] .btn-template-primary.active {
   width: 0;
   height: 0;
 }
+.reset_button_size {
+  background-color: #000;
+}
 .ribbon .theribbon:after {
   left: 0px;
   top: 100%;
@@ -1662,12 +1665,12 @@ fieldset[disabled] .btn-template-primary.active {
 /* universal box */
 .box {
   background: #fff;
-  margin: 0 0 30px;
+  margin: 10px 10px 30px;
   border: solid 1px #ccc;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  padding: 20px 0;
+  padding: 20px 20px 20px 20px ;
   border-left: none;
   border-right: none;
 }
@@ -2346,7 +2349,11 @@ fieldset[disabled] .btn-template-primary.active {
   text-decoration: none;
   font-family: "Roboto", Helvetica, Arial, sans-serif;
 }
-#productMain .sizes a.active,
+#productMain .sizes a.isClicked
+{
+  background: #38a7bb;
+  color: #fff;
+}
 #productMain .sizes a:hover {
   background: #38a7bb;
   color: #fff;

@@ -1,0 +1,26 @@
+<div class="box" id="order-summary" ng-controller="checkout_summary_ctrl">
+                            <div class="box-header">
+                                <h3>Resumo do Pedido</h3>
+                            </div>
+                            <p class="text-muted"></p>
+
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td>Total do Pedido</td>
+                                            <th>R${{total}}</th>
+                                        </tr>
+                                        <tr>
+                                            <td>Modo de entrega</td>
+                                            <th>{{checkout.entrega}}</th>
+                                        </tr>
+                                        <tr>
+                                            <td>Pagamento</td>
+                                            <th>{{checkout.pagamento}}</th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>

@@ -42,7 +42,7 @@ CREATE TABLE tb_cliente (
 	,email_cliente varchar (64) NOT NULL
 	,hash_senha varchar (512) NOT NULL
 	,cpf_cliente varchar (16) NOT NULL
-	,rg_cliente varchar (16) NOT NULL
+	,rg_cliente varchar (16)
 	,member_since date
 	,tel_fixo varchar(16) 
 	,tel_cel varchar(16) 
@@ -87,7 +87,7 @@ CREATE TABLE item_carrinho (
 	id_cliente int NOT NULL
 	,id_prod int NOT NULL
     ,tamanho_prod int NOT NULL
-	,qte_produto int NOT NULL
+	,qte_prod int NOT NULL
 );
 
 #---------------------------------------------------------------
@@ -150,10 +150,11 @@ CREATE TABLE alerta_destino (
 DROP TABLE IF EXISTS tb_pagamento;
 CREATE TABLE tb_pagamento (
 	id_pagamento int primary key NOT NULL UNIQUE AUTO_INCREMENT
-	,numero_cartao char(19) NOT NULL
-	,numero_boleto char (44) NOT NULL
+	,numero_cartao char(19) 
+	,numero_boleto char (44)
 	,horario_pagamento datetime NOT NULL
 	,valor_pedido decimal(10,2) NOT NULL
+	,status_pagamento varchar(15) not null 	
 );
 
 #--#11 - 
@@ -175,8 +176,7 @@ CREATE TABLE tb_pedido (
 	,status_pedido varchar(32) NOT NULL
 	,entr_parcial bool NOT NULL
 	,id_endereco int NOT NULL
-	,id_cortesia int NOT NULL
-	,id_func int NOT NULL
+	,id_cortesia int NULL
 	,id_pagamento int NOT NULL
 );
 
@@ -202,10 +202,10 @@ CREATE TABLE tb_entrega (
 #--#15 - 
 DROP TABLE IF EXISTS item_pedido;
 CREATE TABLE item_pedido (
-	id_pedido int primary key NOT NULL UNIQUE AUTO_INCREMENT
+	id_pedido int not null
 	,id_prod int NOT NULL
     ,tamanho_prod int NOT NULL
-	,id_entrega int NOT NULL 
+	,id_entrega int
 	,qte_prod int NOT NULL
 );
 
@@ -242,7 +242,6 @@ ALTER TABLE tb_pedido
 ADD FOREIGN KEY (id_cliente) REFERENCES tb_cliente(id_cliente)
 ,ADD FOREIGN KEY (id_endereco) REFERENCES tb_endereco(id_endereco)
 ,ADD FOREIGN KEY (id_cortesia) REFERENCES tb_cortesia(id_cortesia)
-,ADD FOREIGN KEY (id_func) REFERENCES tb_funcionario(id_func)
 ,ADD FOREIGN KEY (id_pagamento) REFERENCES tb_pagamento(id_pagamento);
 
 

@@ -9,7 +9,7 @@ router.get('/', function(req, res) {
   	req.getConnection(function(err,connection){
         if(err) return res.status(400).json(err);
 
-        connection.query(queries.queries.catalog ,[],function(err,result){
+        connection.query(queries.queries.catalog() ,[],function(err,result){
         	 return res.status(200).json(result);
         });
   	});
