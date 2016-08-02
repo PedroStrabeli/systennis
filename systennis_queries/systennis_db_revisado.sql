@@ -176,6 +176,7 @@ CREATE TABLE tb_pedido (
 	,status_pedido varchar(32) NOT NULL
 	,entr_parcial bool NOT NULL
 	,id_endereco int NOT NULL
+	,id_supervisor int null
 	,id_cortesia int NULL
 	,id_pagamento int NOT NULL
 );
@@ -195,6 +196,8 @@ CREATE TABLE tb_entrega (
 	,id_pedido  int NOT NULL
 	,horario_entrega datetime NOT NULL
 	,status_entrega varchar(32) NOT NULL
+	,id_func int
+	,id_supervisor int
 	,id_nf int NOT NULL
 
 );
@@ -242,18 +245,20 @@ ALTER TABLE tb_pedido
 ADD FOREIGN KEY (id_cliente) REFERENCES tb_cliente(id_cliente)
 ,ADD FOREIGN KEY (id_endereco) REFERENCES tb_endereco(id_endereco)
 ,ADD FOREIGN KEY (id_cortesia) REFERENCES tb_cortesia(id_cortesia)
-,ADD FOREIGN KEY (id_pagamento) REFERENCES tb_pagamento(id_pagamento);
+,ADD FOREIGN KEY (id_pagamento) REFERENCES tb_pagamento(id_pagamento)
+,ADD FOREIGN KEY (id_supervisor) REFERENCES tb_funcionario(id_func);
 
 
 ALTER TABLE tb_entrega
 ADD FOREIGN KEY (id_pedido) REFERENCES tb_pedido(id_pedido)
-,ADD FOREIGN KEY (id_nf) REFERENCES tb_nota_fiscal(id_nf); 
+,ADD FOREIGN KEY (id_nf) REFERENCES tb_nota_fiscal(id_nf) 
+,ADD FOREIGN KEY (id_func) REFERENCES tb_funcionario(id_func) 
+,ADD FOREIGN KEY (id_supervisor) REFERENCES tb_funcionario(id_func); 
 
 
 ALTER TABLE item_pedido
 ADD FOREIGN KEY (id_prod) REFERENCES tb_produto(id_prod) ON DELETE CASCADE
-,ADD FOREIGN KEY (id_pedido) REFERENCES tb_pedido(id_pedido) ON DELETE CASCADE
-,ADD FOREIGN KEY (id_entrega) REFERENCES tb_entrega(id_entrega) ON DELETE CASCADE;
+,ADD FOREIGN KEY (id_pedido) REFERENCES tb_pedido(id_pedido) ON DELETE CASCADE;
 
 ALTER TABLE tamanho_produto
 ADD FOREIGN KEY (id_prod) references tb_produto(id_prod) ON DELETE CASCADE;

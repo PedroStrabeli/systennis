@@ -26,23 +26,23 @@ _________________________________________________________ -->
 
                     <div class="col-md-9 clearfix" id="customer-order">
 
-                        <p class="lead">Order #1735 was placed on <strong>22/06/2013</strong> and is currently <strong>Being prepared</strong>.</p>
-                        <p class="lead text-muted">If you have any questions, please feel free to <a href="contact.html">contact us</a>, our customer service center is working for you 24/7.</p>
+                        <p class="lead">Pedido #{{pedido.id_pedido}} realizado em  <strong>{{pedido.data_pedido}}</strong> e está atualmente <strong>{{pedido.status_pedido}}</strong>.</p>
+                        <!--<p class="lead text-muted">If you have any questions, please feel free to <a href="contact.html">contact us</a>, our customer service center is working for you 24/7.</p>-->
 
                         <div class="box">
                             <div class="table-responsive">
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <th colspan="2">Product</th>
-                                            <th>Quantity</th>
-                                            <th>Unit price</th>
-                                            <th>Discount</th>
+                                            <th colspan="2">Produto</th>
+                                            <th>Quantidade</th>
+                                            <th>Preço Unitário</th>
+                                            <!--<th>Discount</th>-->
                                             <th>Total</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
+                                        <tr ng-repeat="produto in produtos">
                                             <td>
                                                 <a href="#">
                                                     <img src="img/detailsquare.jpg" alt="White Blouse Armani">

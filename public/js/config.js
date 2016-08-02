@@ -76,13 +76,13 @@ var config = ['$urlRouterProvider', '$stateProvider', '$locationProvider', funct
         .state('order_detail', {
               url: "/detalhes_pedido",
               templateUrl: "pages/template/customer-order.html",
-              controller: '',
+              controller: 'order_detail_ctrl',
               data: { title: 'Detalhes de Pedido' },
           })
         .state('orders', {
               url: "/pedidos",
               templateUrl: "pages/template/customer-orders.html",
-              controller: '',
+              controller: 'orders_ctrl',
               data: { title: 'Pedidos' },
           })
         .state('wishlist', {

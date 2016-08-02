@@ -4,10 +4,11 @@ angular.module('systennis')
 		
 		$scope.pagename='Carrinho';
 
-		var getCart=function(id_user){
-			$http.get('/cart/'+id_user).then(function(response){
+		var getCart=function(id_cliente){
+			$http.get('/cart/'+id_cliente).then(function(response){
 				checkoutService.checkout.cart=response.data;
 				checkoutService.checkout.cart.total=calculaTotal(response.data);
+				checkoutService.checkout.total=calculaTotal(response.data);
 				//console.log (checkoutService.checkout.cart)
 				$scope.cart = checkoutService.checkout.cart;
 			});
@@ -15,12 +16,13 @@ angular.module('systennis')
 
 		$scope.changeItem=function(item){
 			$http({method: 'POST', 
-						data: {id_cliente: user.id_user, id_prod: item.id_prod, qte_prod:item.qte_prod},
+						data: {id_cliente: user.id_cliente, id_prod: item.id_prod, qte_prod:item.qte_prod},
 						url: '/cart/changeItem'})
 						.then(function(response){							
 						}).catch(function(err){
 							alert("Ocorreu um erro! \n"+err);
 						});
+			getCart(user.id_cliente);
 		}
 
 		var calculaTotal=function(item){
@@ -31,7 +33,7 @@ angular.module('systennis')
 			}
 			return total.toFixed(2);
 		}
-		var user={id_user:1, email_cliente:'pedrostrabeli@gmail.com'};
+		var user={id_cliente:1, nome_cliente:"Pedro Strabeli", email_cliente:'pedrostrabeli@gmail.com'};
 		if(user){
 			console.log('Usuario logado')
 			//checa se existe algo no carrinho local.
@@ -40,7 +42,7 @@ angular.module('systennis')
 				Checker();
 			}
 			else {
-				getCart(user.id_user);
+				getCart(user.id_cliente);
 			}
 		}
 		else{
@@ -58,7 +60,7 @@ angular.module('systennis')
 			console.log ('apagando')
 			if(user){
 				$http({method: 'POST', 
-						data: {id_cliente: user.id_user, id_prod: id_prod},
+						data: {id_cliente: user.id_cliente, id_prod: id_prod},
 						url: '/cart/removeCart'})
 						.then(function(response){
 							alert("Removido com sucesso.");
@@ -78,7 +80,7 @@ angular.module('systennis')
 				item=lista.pop();
 				itemCart={
 					id_prod: item.id_prod,
-					id_cliente: user.id_user,
+					id_cliente: user.id_cliente,
 					qte_prod: 1,
 					tamanho_prod: item.tamanho_prod
 				};
@@ -91,11 +93,11 @@ angular.module('systennis')
 							$http({method: 'POST', data: itemCart, url: '/cart/addCartProduct'})
 								.then(function(){
 									console.log("Produto adicionado ao carrinho: " + item.id_prod);
-									getCart(user.id_user);
+									getCart(user.id_cliente);
 								});	
 							
 						} else{
-							getCart(user.id_user);
+							getCart(user.id_cliente);
 						}
 						
 					});	

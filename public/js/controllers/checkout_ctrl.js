@@ -1,10 +1,10 @@
 
 angular.module('systennis')
 	.controller('checkout_address_ctrl',function($scope, $state, $http, checkoutService){
-		//var user={id_user: 1};
+		//var user={id_cliente: 1};
 		//$scope.address;
 
-		$http.get('/checkout/getAddress/cli'+checkoutService.checkout.user.id_user)
+		$http.get('/checkout/getAddress/cli'+checkoutService.checkout.user.id_cliente)
 						.then(function(response){
 							$scope.addresses=response.data
 							// $route.reload();
@@ -30,7 +30,7 @@ angular.module('systennis')
 })
 ///////////////////////////////////////////////////////////////
 	.controller('checkout_delivery_ctrl',function($scope, $state, $http, checkoutService){
-		//var user={id_user: 1};
+		//var user={id_cliente: 1};
 		$scope.entrega;
 		
 		$scope.validateEntr=function(){
@@ -45,7 +45,7 @@ angular.module('systennis')
 		}	
 })
 		.controller('checkout_payment_ctrl',function($scope, $state, $http, checkoutService, mailService){
-		//var user={id_user: 1};
+		//var user={id_cliente: 1};
 		$scope.pag={numero_cartao:'',nome_portador:'',mes_val:"", ano_val:'',cvv:''};
 
 		//$scope.pagamento.tipo;
@@ -54,11 +54,11 @@ angular.module('systennis')
 		    $scope.currentPartial = 'pages/template/common/pagamento/' + link + '.html';
 		    if( link ==="cartao"){
 		    	checkoutService.checkout.pagamento="Cartão de Crédito";
-		    	$scope.pag.numero_boleto=null;
+		    	$scope.pag.numero_boleto='null';
 		    }
 		    else {
 		    	checkoutService.checkout.pagamento="Boleto Bancario";
-		    	$scope.pag.numero_cartao=null;
+		    	$scope.pag.numero_cartao='null';
 		    }
 		}
 
@@ -66,7 +66,7 @@ angular.module('systennis')
 		$scope.validatePayment= function(){
 			console.log(checkoutService.checkout)
 			console.log($scope.pag)
-			if ($scope.pag.numero_cartao === null){
+			if ($scope.pag.numero_cartao === 'null'){
 
 			}
 			else{
@@ -81,8 +81,8 @@ angular.module('systennis')
 				else if ($scope.pag.nome_portador == '')
 					alert("Insira o nome do portador do cartão")
 				else{			
-						geraPagamento();
-						
+						geraPedido();
+						$state.go('pedidos');
 						//geraPedido();
 						//MANDAR EMAIL
 
@@ -94,28 +94,11 @@ angular.module('systennis')
 			
 		};
 		
-		var geraPagamento=function(){
-			date= new Date()
-			date= date.getFullYear()+'/'+date.getMonth()+'/'+date.getDate()+' '+date.getHours()+':'+date.getMinutes()+':'+date.getSeconds();
-			console.log(date);
-			$http({method: 'POST', 
-					data: {params: [$scope.pag.numero_cartao,
-									$scope.pag.numero_boleto,
-									date.getYear(),
-									299.80]},//checkoutService.checkout.cart.total]},
-					url: '/checkout/payment'}).then(function(response){
-						
-						
-					}).catch(function(err){
-					
-					});
-		}
 		var geraPedido=function(){
 			$http({method: 'POST', 
-					data: {params: [$scope.pag.numero_cartao,
-									$scope.pag.numero_boleto,
-									Date(),
-									299.80]},//checkoutService.checkout.cart.total]},
+					data: {pag:$scope.pag, 
+							checkout:checkoutService.checkout
+									},//checkoutService.checkout.cart.total]},
 					url: '/checkout/payment'}).then(function(response){
 						
 						
@@ -123,6 +106,7 @@ angular.module('systennis')
 					
 					});
 		}
+		
 
 		var enviaEmail1=function(params){
 				$http({method: 'POST', 
@@ -144,12 +128,12 @@ angular.module('systennis')
 
 
 	.controller('checkout_review_ctrl',function($scope, $state, $http, checkoutService){
-		//var user={id_user: 1};
+		//var user={id_cliente: 1};
 		$scope.order=checkoutService.checkout.cart;	
 })
 
 	.controller('checkout_summary_ctrl',function($scope, $state, $http, checkoutService){
-		//var user={id_user: 1};
+		//var user={id_cliente: 1};
 		$scope.checkout=checkoutService.checkout;
 		$scope.total=checkoutService.checkout.cart.total;
 })

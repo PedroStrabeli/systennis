@@ -5,6 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mysql = require('mysql');
+var nodemailer= require('nodemailer');
 var connection  = require('express-myconnection');
 
 var routes = require('./routes/index');
@@ -13,6 +14,7 @@ var catalog = require('./routes/catalog');
 var prod_detail = require('./routes/prod_detail');
 var cart = require('./routes/cart');
 var checkout = require('./routes/checkout');
+var orders = require('./routes/orders');
 var mail = require('./routes/mail');
 var constants = require('./constants/constants.js')
 
@@ -30,10 +32,12 @@ app.use(
      user: constants.db_param.user,
      password : constants.db_param.password,
      port : constants.db_param.port, //port mysql
-     database: constants.db_param.database
+     database: constants.db_param.database,
+     multipleStatements: true
    },'request')
 );
 
+var transporter = nodemailer.createTransport('smtps://systennisltda%40gmail.com:systennis123@smtp.gmail.com');
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 
@@ -61,6 +65,7 @@ app.use('/catalog', catalog);
 app.use('/prod_detail', prod_detail);
 app.use('/cart', cart);
 app.use('/checkout', checkout);
+app.use('/orders', orders);
 
 
 //CRUD produto
