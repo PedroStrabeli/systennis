@@ -49,7 +49,7 @@ app.use(
    },'request')
 );
 
-var transporter = nodemailer.createTransport('smtps://systennisltda%40gmail.com:systennis123@smtp.gmail.com');
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 

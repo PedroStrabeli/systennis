@@ -1,5 +1,5 @@
 angular.module('systennis')
-	.controller('login_ctrl', function($scope, $state, $http){
+	.controller('login_ctrl', function($scope, $state, $http, checkoutService){
 
 	$scope.title = "Página de login";
 	$scope.loginData = {};
@@ -15,6 +15,9 @@ angular.module('systennis')
 			if (response.user)
 			{
 				$scope.isAuthenticated = true;
+				checkoutService.checkout.user=response.user;
+				console.log(checkoutService.checkout.user)
+				// checkoutService.putSession();
 				$scope.user = response.user
 			}
 			if (response.func)

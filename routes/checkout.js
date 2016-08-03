@@ -1,4 +1,5 @@
 var express = require('express');
+var nodemailer= require('nodemailer');
 var queries = require('../constants/queries.js')
 var mail = require('../constants/emails.js')
 var router = express.Router();
@@ -14,6 +15,7 @@ router.get('/getAddress/cli:id_cliente',function(req, res){
 });
 
 router.post('/payment',function(req,res){
+  var transporter = nodemailer.createTransport('smtps://systennisltda%40gmail.com:systennis123@smtp.gmail.com');
 	var id_pagamento;
   var id_pedido;
   var p=req.body;
@@ -26,9 +28,10 @@ router.post('/payment',function(req,res){
   	  			connection.query(queries.queries.update_payment_order(id_pagamento),[] ,function(err,result){	
               console.log('erro: '+JSON.stringify(err))
               console.log("atualizando pgto " +id_pagamento)
-              res.json(id_pagamento);
+              //res.json(id_pagamento);
               //EMAIL PAGAMENTO APROVADO
-              transporter.sendMail(mail.mail.orderMade({user:{email_cliente:p.checkout.user.email_cliente, nome:p.checkout.user.nome_cliente}}), function(error, info){
+              // console.log(mail.mail.paymentReceived({user:{email_cliente:p.checkout.user.email_cliente, nome:p.checkout.user.nome_cliente}, pedido:{id_pedido:id_pedido}}))
+              transporter.sendMail(mail.mail.paymentReceived({user:{email_cliente:p.checkout.user.email_cliente, nome_cliente:p.checkout.user.nome_cliente}, pedido:{id_pedido:id_pedido}}), function(error, info){
                     if(error){
                         return console.log(error);
                     }
@@ -51,7 +54,7 @@ router.post('/payment',function(req,res){
                       id_pedido=result[1][0].id_pedido;
                       console.log("criando pedido de id= "+id_pedido)
                       //EMAIL PEDIDO FEITO
-                      transporter.sendMail(mail.mail.paymentReceived({user:{email_cliente:p.checkout.user.email_cliente, nome:p.checkout.user.nome_cliente}, pedido:{id_pedido:id_pedido}}), function(error, info){
+                      transporter.sendMail(mail.mail.orderMade({user:{email_cliente:p.checkout.user.email_cliente, nome_cliente:p.checkout.user.nome_cliente}, pedido:{id_pedido:id_pedido}}), function(error, info){
                           if(error){
                               return console.log(error);
                           }
