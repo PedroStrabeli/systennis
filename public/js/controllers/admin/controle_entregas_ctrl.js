@@ -3,10 +3,10 @@ angular.module('systennis')
 		$scope.title = "Controle de Entregas";
 
 		// Query de Pedidos
-		$scope.pedidos = []; 
+		$scope.pedidos = [];
 
 		// Id supervisor dummy
-		sessionStorage.loggedID = 1;  
+		sessionStorage.loggedID = 1;
 
 		$http.get('/gestao_entregas/pedidos_supervisor' + sessionStorage.loggedID).success(function(response){		
 		 	$scope.pedidos = response;
@@ -16,40 +16,31 @@ angular.module('systennis')
 
 		 		if($scope.pedidos[i].entr_parcial == 1){
 		 			$scope.pedidos[i].entr_parcial = "Sim";
-		 		} else { 
+		 		} else {
 		 			$scope.pedidos[i].entr_parcial = "Não";
 		 		}
 		 	}
 		});
-		
+
 		// Paginação
 		$scope.totalItems = $scope.pedidos.length
 		$scope.maxSize = 5;
-		$scope.currentPage = 1;	
+		$scope.currentPage = 1;
 
-		// Adicionar Pedidos
-		$scope.adicionarPedidos = function (pedidos) {
-			adicionarPedidos = [];
-			for (i=0;i<pedidos.length;i++) {
-				if (pedidos[i].selecionado){
-					pedidos[i].status_pedido = 'Encaminhado';
-					pedidos[i].id_supervisor = sessionStorage.loggedID;
-					$http.post('/gestao_pedidos/selecionar_pedidos', pedidos[i]); 
-				}
-			}
-			$timeout(function() {
-				$state.go($state.current, {}, {reload: true});
-			}, 500);
-		}
+		$scope.visualizarPedido = function(pedido){
+	        sessionStorage.id_pedido = pedido.id_pedido;
+	        sessionStorage.id_supervisor = pedido.id_supervisor;
+	        sessionStorage.id_endereco = pedido.id_endereco;
+    	};
 
 		$scope.ordenar = function(keyname){
 	        $scope.sortKey = keyname;
 	        $scope.reverse = !$scope.reverse;
     	};
-		  
+
 	})
 
-	// Filtro para paginação 
+	// Filtro para paginação
 	.filter('startFrom', function(){
        return function(data, start){
         return data.slice(start);
