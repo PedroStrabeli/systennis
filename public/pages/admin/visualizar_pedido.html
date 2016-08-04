@@ -1,5 +1,5 @@
 <div class="container-fluid">
-	<div class="row"> 
+	<div class="row">
 		<div class="col-lg-12">
             <h1 class="page-header">
                 {{title}} <small>Detalhamento</small>
@@ -64,14 +64,14 @@
                     <p>{{endereco.cidade_end}}, {{endereco.estado_end}}, {{endereco.pais_end}}</p>
                     <p>CEP:{{endereco.cep_end}}</p>
                 </div>
-			</div>	
-		</div>	
+			</div>
+		</div>
 	</div>
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-                    <h3 class="panel-title"><i class="fa fa-shopping-bag fa-fw"></i> Itens do Pedido 
+                    <h3 class="panel-title"><i class="fa fa-shopping-bag fa-fw"></i> Itens do Pedido
                 </div>
                 <div class="panel-body">
 					<table class="table" cellspacing="0" cellpadding="0">
@@ -92,7 +92,7 @@
 								<td>{{item_pedido.id_prod}}</td>
 								<td>{{item_pedido.nome_prod}}</td>
 					  			<td style="width= 200px">R$ {{item_pedido.preco_prod}}</td>
-					  			<td><img src="{{item_pedido.url_imagem}}" width = "75"/></td>
+					  			<td><img src="{{item_pedido.url_imagem}}" width = "50"/></td>
 					  			<td>{{item_pedido.tipo_prod}}</td>
 					  			<td>{{item_pedido.subtipo_prod}}</td>
 								<td>{{item_pedido.tamanho_prod}}</td>
@@ -108,7 +108,7 @@
 		<div class="col-lg-12">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-                    <h3 class="panel-title"><i class="fa fa-truck fa-fw"></i> Gerar Entrega 
+                    <h3 class="panel-title"><i class="fa fa-truck fa-fw"></i> Delegar Entrega
                 </div>
                 <div class="panel-body">
                 	<form>
@@ -138,7 +138,7 @@
 									<td>{{item_pedido.id_prod}}</td>
 									<td>{{item_pedido.nome_prod}}</td>
 						  			<td style="width= 200px">R$ {{item_pedido.preco_prod}}</td>
-						  			<td><img src="{{item_pedido.url_imagem}}" width = "75"/></td>
+						  			<td><img src="{{item_pedido.url_imagem}}" width = "50"/></td>
 						  			<td>{{item_pedido.tipo_prod}}</td>
 						  			<td>{{item_pedido.subtipo_prod}}</td>
 									<td>{{item_pedido.tamanho_prod}}</td>
@@ -149,6 +149,45 @@
                 		<button type="submit" class="btn btn-primary btn-block" ng-click="criarEntrega(funcionario)" ng-disabled="!funcionario">Criar Entrega</button>
                 	</form>
                 </div>
+            </div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+	                    <h3 class="panel-title"><i class="fa fa-truck fa-fw"></i> Entregas Associadas
+	            </div>
+	            <div class="panel-body" ng-repeat="entrega in entregas">
+	            	<div  class="col-lg-1">
+	            		<b>ID:</b>
+	            		<p>{{entrega.id_entrega}}</p>
+	            	</div>
+	            	<div  class="col-lg-2">
+	            		<b><i class="fa fa-user fa-fw"></i> Funcionário:</b>
+	            		<p>{{entrega.nome_func}} {{entrega.sobrenome_func}}</p>
+	            	</div>
+	            	<div  class="col-lg-3">
+	            		<b><i class="fa fa-calendar fa-fw"></i> Data de Encaminhamento:</b>
+	            		<p>{{entrega.data}} {{entrega.hora}}</p>
+	            	</div>
+	            	<div  class="col-lg-3">
+	            		<br/>
+	            		<p><span class="badge">{{entrega.status_entrega}}</span></p>
+	            	</div>
+	            </div>
+            </div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+	                    <h3 class="panel-title"><i class="fa fa-truck fa-fw"></i> Entregas Associadas
+	            </div>
+	            <div class="panel-body" ng-repeat="entrega in entregas">
+	            	{{entrega}}
+	            </div>
             </div>
 		</div>
 	</div>

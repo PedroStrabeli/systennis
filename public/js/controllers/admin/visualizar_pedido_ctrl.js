@@ -13,16 +13,12 @@ angular.module('systennis')
 		$scope.supervisor = [];
 		$scope.equipe = [];
 		$scope.itens_pedido = [];
+		$scope.entregas = [];
+
+
 		$scope.id_endereco = [];
 		$scope.tel_cliente = [];
 		$scope.cel_cliente = [];
-
-		$scope.tipo_entrega = [
-			'Parcial',
-			'Unica',
-			'Final'
-		]
-
 
 		// Recupera Pedido
 		$http.get('/gestao_entregas/pedido' + sessionStorage.id_pedido).success(function(response){		
@@ -45,7 +41,7 @@ angular.module('systennis')
 		});
 
 		// Recupera Equipe
-		$http.get('/gestao_entregas/equipe' + sessionStorage.id_supervisor).success(function(response){		
+		$http.get('/gestao_entregas/equipe' + sessionStorage.id_supervisor).success(function(response){
 		 	for (i=0;i<response.length;i++){
 		 		if (response[i].id_func == response[i].id_supervisor){
 		 			$scope.supervisor = response[i];
@@ -56,14 +52,24 @@ angular.module('systennis')
 		});
 
 		// Recupera Endereco
-		$http.get('/gestao_entregas/endereco' + sessionStorage.id_endereco).success(function(response){		
+		$http.get('/gestao_entregas/endereco' + sessionStorage.id_endereco).success(function(response){
 		 	$scope.endereco = response[0];
 		});
 
 		// Recupera Itens Pedido
-		$http.get('/gestao_entregas/itens_pedido' + sessionStorage.id_pedido).success(function(response){		
+		$http.get('/gestao_entregas/itens_pedido' + sessionStorage.id_pedido).success(function(response){
 		 	$scope.itens_pedido = response;
 		});
+
+		// Recupera Entregas
+		$http.get('/gestao_entregas/entregas' + sessionStorage.id_pedido).success(function(response){
+		 	$scope.entregas = response;
+		 	for (i=0;i<$scope.entregas.length;i++){
+		 		$scope.entregas[i].data = $scope.entregas[i].horario_entrega.slice(0, 10);
+		 		$scope.entregas[i].hora = $scope.entregas[i].horario_entrega.slice(11, 19);
+		 	}
+		});
+
 
 		$scope.criarEntrega = function(funcionario){
 	        var existeProdutoSelecionado = false;
@@ -91,6 +97,8 @@ angular.module('systennis')
 						$scope.itens_pedido[i].id_entrega = response.data.id;
 						$http.post('/gestao_entregas/edit_item_pedido', $scope.itens_pedido[i]);
 					}
+					$timeout(function() {
+						$state.go($state.current, {}, {reload: true});}, 500);
 				}
 			}, function(error){});
 	        } else {

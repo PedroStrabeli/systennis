@@ -75,6 +75,18 @@ router.get('/itens_pedido:id_pedido', function(req, res) {
     });
 });
 
+/* Envia Entregas. */
+router.get('/entregas:id_pedido', function(req, res) {
+    console.log('got a GET request');
+    req.getConnection(function(err,connection){
+        if(err) return res.status(400).json(err);
+
+        connection.query("SELECT e.id_entrega, f.nome_func, f.sobrenome_func, e.horario_entrega, e.status_entrega FROM systennis_db.tb_entrega e INNER JOIN tb_funcionario f ON e.id_func=f.id_func WHERE id_pedido=?;" ,req.params.id_pedido,function(err,result){
+             return res.status(200).json(result);
+        });
+    });
+});
+
 /* Aloca pedidos para o gerente */
 router.post('/selecionar_pedidos', function(req, res) {
     console.log(req.body);
