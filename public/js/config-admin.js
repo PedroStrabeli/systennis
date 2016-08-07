@@ -37,11 +37,11 @@ var config = ['$urlRouterProvider', '$stateProvider', '$locationProvider', funct
               data: { title: 'Visualização de Produtos' },
           })
         //GESTÃO DE ENTREGAS
-        .state('controle_entregas', {
-              url: "/controle_entregas",
-              templateUrl: "pages/admin/controle_entregas.html",
-              controller: 'controle_entregas_ctrl',
-              data: { title: 'Controle de Entregas' },
+        .state('controle_pedidos', {
+              url: "/controle_pedidos",
+              templateUrl: "pages/admin/controle_pedidos.html",
+              controller: 'controle_pedidos_ctrl',
+              data: { title: 'Controle de Pedidos' },
           })
         .state('visualizar_pedido', {
               url: "/visualizar_pedido",
@@ -49,18 +49,18 @@ var config = ['$urlRouterProvider', '$stateProvider', '$locationProvider', funct
               controller: 'visualizar_pedido_ctrl',
               data: { title: 'Visualizar Pedidos' },
           })
-        .state('gestao_pedidos', {
-              url: "/gestao_pedidos",
-              templateUrl: "pages/admin/gestao_pedidos.html",
-              controller: 'gestao_pedidos_ctrl',
-              data: { title: 'Gestão de Pedidos' },
+        .state('selecao_pedidos', {
+              url: "/selecao_pedidos",
+              templateUrl: "pages/admin/selecao_pedidos.html",
+              controller: 'selecao_pedidos_ctrl',
+              data: { title: 'Seleção de Pedidos' },
           })
 }];
-    
+
 
 var app = angular
     .module('systennis',['ui.router', 'ui.bootstrap'])
-    
+
     app.config(config);
     app.service('edit', function (){
       this.item = {};
