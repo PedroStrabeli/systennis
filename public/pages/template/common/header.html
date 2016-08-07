@@ -57,19 +57,20 @@
 
                             <ul class="nav navbar-nav navbar-right">
                                 <li class="dropdown">
-                                    <a ui-sref="" class="dropdown-toggle" data-toggle="modal" data-target="#myModal">Busca <b class="caret"></b></a>
+                                    <a class="dropdown-toggle" data-toggle="modal" data-target="#myModal">Busca <b class="caret"></b></a>
                                 </li>
                                 <li class="dropdown">
-                                    <a ui-sref="catalog" class="dropdown-toggle">Home <b class="caret"></b></a>
+                                    <a ui-sref="catalog({keywordFilter: null, brandFilter: null, typeFilter: null})" class="dropdown-toggle">Home <b class="caret"></b></a>
                                 </li>
-                                <li class="dropdown"><!-- use-yamm yamm-fw-->
-                                    <a href="javascript: void(0)" class="dropdown-toggle" data-toggle="dropdown">Perfil<b class="caret"></b></a>
+                                <li class="dropdown" ng-controller="login_ctrl"><!-- use-yamm yamm-fw-->
+                                    <span ng-init="session_check()"></span>
+                                    <a href="javascript: void(0)" class="dropdown-toggle" data-toggle="dropdown" ng-if="isAuthenticated">Perfil<b class="caret"></b></a>
                                     <ul class="dropdown-menu">
                                         <li>
                                             <div class="yamm-content">
                                                 <div class="row">
                                                     <div class="col-sm-3">
-                                                        <h5>Shortcodes</h5>
+                                                        <h5>{{user.nome_cliente + " " + user.sobrenome_cliente}}</h5>
                                                         <ul>
                                                             <li><a ui-sref="perfil">Perfil</a>
                                                             </li>
@@ -301,10 +302,10 @@
             </div>
 
 <!-- Modal -->
+
 <div id="myModal" class="modal fade" role="dialog" ng-controller="catalog_ctrl">
   <div class="modal-dialog">
 
-    <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>

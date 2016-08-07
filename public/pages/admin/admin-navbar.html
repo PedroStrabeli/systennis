@@ -1,4 +1,5 @@
 <!-- Navigation -->
+<html ng-app="systennis">
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -113,11 +114,14 @@
             </ul>
             <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
-                <ul class="nav navbar-nav side-nav">
-                    <li>
+                <ul class="nav navbar-nav side-nav" ng-init="session_check()">
+                    <li ng-if="!isAuthenticatedAsAdmin">
+                        <a href="/#/users_ad/login_admin"><i class="fa fa-fw fa-lock"></i> Login</a>
+                    </li>
+                    <li ng-if="isAuthenticatedAsAdmin">
                         <a ui-sref="dashboard"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                     </li>
-                    <li>
+                    <li ng-if="isAuthenticatedAsAdmin">
                         <a href="javascript:;" data-toggle="collapse" data-target="#produtos"><i class="fa fa-fw fa-shopping-bag"></i> Produto <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="produtos" class="collapse">
                             <li>
@@ -128,7 +132,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li>
+                    <li ng-if="isAuthenticatedAsAdmin">
                         <a href="javascript:;" data-toggle="collapse" data-target="#gentregas"><i class="fa fa-fw fa-share-alt"></i> Gestão de Entregas <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="gentregas" class="collapse">
                             <li>
@@ -179,3 +183,4 @@
             </div>
             <!-- /.navbar-collapse -->
         </nav>
+    </html>

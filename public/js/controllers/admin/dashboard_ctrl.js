@@ -2,13 +2,34 @@ angular.module('systennis')
 	.controller('dashboard_ctrl',function($scope, $http, $timeout, $state){
 		$scope.title = "Controle de Entregas";
 
+		$scope.isAuthenticated = false;
+		$scope.isAuthenticatedAsAdmin = false;
+
+		$scope.session_check = function ()
+		{
+			$http.get('/users/get_session').success(function(response)
+			{
+				console.log(response);
+				if (response.user)
+				{
+					$scope.isAuthenticated = true;
+					$scope.user = response.user
+				}
+				if (response.func)
+				{
+					$scope.isAuthenticatedAsAdmin = true;
+					$scope.func = response.func
+				}
+			})
+		};
+
 		// Query de Pedidos
-		$scope.pedidos = []; 
+		$scope.pedidos = [];
 
 		// Id supervisor dummy
-		sessionStorage.loggedID = 1;  
+		sessionStorage.loggedID = 1;
 
-		$http.get('/gestao_pedidos').success(function(response){		
+		$http.get('/gestao_pedidos').success(function(response){
 		 	$scope.pedidos = response;
 		 	for (i = 0; i < $scope.pedidos.length ; i ++) {
 		 		$scope.pedidos[i].data = $scope.pedidos[i].data_pedido.slice(0, 10);
@@ -16,16 +37,16 @@ angular.module('systennis')
 
 		 		if($scope.pedidos[i].entr_parcial == 1){
 		 			$scope.pedidos[i].entr_parcial = "Sim";
-		 		} else { 
+		 		} else {
 		 			$scope.pedidos[i].entr_parcial = "Não";
 		 		}
 		 	}
 		});
-		
+
 		// Paginação
 		$scope.totalItems = $scope.pedidos.length
 		$scope.maxSize = 5;
-		$scope.currentPage = 1;	
+		$scope.currentPage = 1;
 
 		// Adicionar Pedidos
 		$scope.adicionarPedidos = function (pedidos) {
@@ -34,7 +55,7 @@ angular.module('systennis')
 				if (pedidos[i].selecionado){
 					pedidos[i].status_pedido = 'Encaminhado';
 					pedidos[i].id_supervisor = sessionStorage.loggedID;
-					$http.post('/gestao_pedidos/selecionar_pedidos', pedidos[i]); 
+					$http.post('/gestao_pedidos/selecionar_pedidos', pedidos[i]);
 				}
 			}
 			$timeout(function() {
@@ -46,10 +67,10 @@ angular.module('systennis')
 	        $scope.sortKey = keyname;
 	        $scope.reverse = !$scope.reverse;
     	};
-		  
+
 	})
 
-	// Filtro para paginação 
+	// Filtro para paginação
 	.filter('startFrom', function(){
        return function(data, start){
         return data.slice(start);

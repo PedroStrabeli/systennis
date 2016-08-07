@@ -5,7 +5,7 @@
 // queries.catalog = function (){return 'SELECT DISTINCT id_prod, nome_prod, desc_prod,marca_prod, preco_prod, url_imagem FROM tb_produto';}
 queries.catalog = function (){return 'SELECT DISTINCT * FROM tb_produto';}
 
-queries.fetch_brands = function (){return 'SELECT DISTINCT marca_prod FROM tb_produto';}
+queries.fetch_brands = function (){return 'SELECT DISTINCT marca_prod FROM tb_produto ORDER BY marca_prod';}
 
 queries.fetch_types = function (){return 'SELECT DISTINCT subtipo_prod FROM tb_produto';}
 

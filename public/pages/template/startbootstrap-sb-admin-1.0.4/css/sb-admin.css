@@ -225,3 +225,24 @@ ul.alert-dropdown {
 .panel-yellow > a:hover {
     color: #df8a13;
 }
+
+.systennis-loginmsg {
+    font-size: 40px;
+    text-align: center;
+}
+
+.systennis-loginsubmsg {
+    font-size: 30px;
+    text-align: center;
+}
+
+.systennis-lockicon {
+    font-size: 250px;
+    text-align: center;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.systennis-lockicon:hover {
+    color: #ffaa00;
+}

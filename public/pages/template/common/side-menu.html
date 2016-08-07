@@ -7,14 +7,14 @@
                             <div class="panel-body">
                                 <ul class="nav nav-pills nav-stacked category-menu">
                                     <li>
-                                        <a href="shop-category.html">Por marca <span class="badge pull-right"></a>
+                                        <a >Por marca <span class="badge pull-right"></a>
                                         <ul>
                                             <li ng-repeat="brand in brands" ng-model="my_brand"><a ng-click="filterByBrand(brand.marca_prod)">{{brand.marca_prod}}</a>
                                             </li>
                                         </ul>
                                     </li>
                                     <li class="active">
-                                        <a href="shop-category.html">Por tipo</a>
+                                        <span>Por tipo</span>
                                         <ul>
                                             <li ng-repeat="type in types" ng-model="my_type"><a ng-click="filterByType(type.subtipo_prod)">{{type.subtipo_prod}}</a>
                                             </li>
