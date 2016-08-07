@@ -1,23 +1,23 @@
 <div id="page-wrapper">
 
-            <div class="container-fluid">
+            <div class="container-fluid" ng-init="session_check()">
 
                 <!-- Page Heading -->
-                <div class="row" ng-if="isAuthenticated">
+                <div class="row" ng-if="isAuthenticatedAsAdmin">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            Dashboard <small></small>
+                            Dashboard - {{func.nome_func + " " + func.sobrenome_func}} <small></small>
                         </h1>
                         <ol class="breadcrumb">
                             <li class="active">
-                                <i class="fa fa-dashboard"></i> Dashboard
+                                <i class="fa fa-dashboard"></i> Dashboard - {{func.nome_func + " " + func.sobrenome_func}}
                             </li>
                         </ol>
                     </div>
                 </div>
                 <!-- /.row -->
 
-                <div class="row" ng-if="isAuthenticated">
+                <div class="row" ng-if="isAuthenticatedAsAdmin">
                     <div class="col-lg-12">
                         <div class="alert alert-info alert-dismissable">
                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -26,7 +26,7 @@
                     </div>
                 </div>
 
-                <div class="row" ng-if="!isAuthenticated">
+                <div class="row" ng-if="!isAuthenticatedAsAdmin">
                     <div class="col-lg-12">
                         <h1 class="systennis-loginmsg">Você precisa se autenticar antes de continuar</h1>
                         <row>
@@ -39,13 +39,15 @@
                             </div>
                         </row>
                         </div>
-                        <h2 class="systennis-loginsubmsg">Clique aqui</h2>
+                            <a href="/#/users_ad/login_admin">
+                                <h2 class="systennis-loginsubmsg">Clique aqui</h2>
+                            </a>
                         <br><br><br><br><br><br>
                     </div>
                 </div>
                 <!-- /.row -->
 
-                <div class="row" ng-if="isAuthenticated">
+                <div class="row" ng-if="isAuthenticatedAsAdmin">
                     <div class="col-lg-3 col-md-6">
                         <div class="panel panel-primary">
                             <div class="panel-heading">
@@ -137,7 +139,7 @@
                 </div>
                 <!-- /.row -->
 
-                <div class="row" ng-if="isAuthenticated">
+                <div class="row" ng-if="isAuthenticatedAsAdmin">
                     <div class="col-lg-12">
                         <div class="panel panel-default">
                             <div class="panel-heading">
@@ -151,7 +153,7 @@
                 </div>
                 <!-- /.row -->
 
-                <div class="row" ng-if="isAuthenticated">
+                <div class="row" ng-if="isAuthenticatedAsAdmin">
                     <div class="col-lg-4">
                         <div class="panel panel-default">
                             <div class="panel-heading">

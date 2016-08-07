@@ -1,5 +1,5 @@
 angular.module('systennis')
-	.controller('login_admin_ctrl', function($scope, $state, $http){
+	.controller('login_admin_ctrl', function($scope, $state, $http, $window){
 
 	$scope.title = "Página de login - [ADMIN]";
 	$scope.loginData = {};
@@ -35,7 +35,8 @@ angular.module('systennis')
 					$scope.sessionToken = response.data.token
 
 					$scope.loginSuccessful = true;
-					$state.go('dashboard');
+					$window.location.href = '/admin#/';
+					// $state.go('catalog');
 				}
 				else
 				{

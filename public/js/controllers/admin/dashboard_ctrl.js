@@ -10,15 +10,17 @@ angular.module('systennis')
 			$http.get('/users/get_session').success(function(response)
 			{
 				console.log(response);
+				console.log("Estou checando a sessao!");
 				if (response.user)
 				{
 					$scope.isAuthenticated = true;
-					$scope.user = response.user
+					$scope.user = response.user;
 				}
 				if (response.func)
 				{
 					$scope.isAuthenticatedAsAdmin = true;
-					$scope.func = response.func
+					$scope.func = response.func;
+					console.log("Estou autenticado como funcionario.")
 				}
 			})
 		};
