@@ -4,7 +4,7 @@ var router = express.Router();
 
 /* POST -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
-/* Envia lista de pedidos. */
+/* Envia lista de pedidos Aprovados. */
 router.get('/pedidos_aprovados', function(req, res) {
 	console.log('got a GET request');
   	req.getConnection(function(err,connection){
@@ -16,7 +16,7 @@ router.get('/pedidos_aprovados', function(req, res) {
   	});
 });
 
-/* Envia lista de pedidos do gestor. */
+/* Envia lista de pedidos do Supervisor. */
 router.get('/pedidos_supervisor:id_supervisor', function(req, res) {
     console.log('got a GET request');
     console.log(req.params.id_supervisor);
@@ -24,6 +24,19 @@ router.get('/pedidos_supervisor:id_supervisor', function(req, res) {
         if(err) return res.status(400).json(err);
 
         connection.query("SELECT * FROM systennis_db.tb_pedido WHERE id_supervisor=?;" ,req.params.id_supervisor,function(err,result){
+             return res.status(200).json(result);
+        });
+    });
+});
+
+/* Envia lista de entregas do Funcionário. */
+router.get('/entregas_funcionario:id_func', function(req, res) {
+    console.log('got a GET request');
+    console.log(req.params.id_func);
+    req.getConnection(function(err,connection){
+        if(err) return res.status(400).json(err);
+
+        connection.query("SELECT * FROM systennis_db.tb_entrega WHERE id_func=?;" ,req.params.id_func,function(err,result){
              return res.status(200).json(result);
         });
     });
