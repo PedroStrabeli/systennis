@@ -2,6 +2,8 @@ var express = require('express');
 var queries = require('../../constants/queries.js')
 var router = express.Router();
 
+/* POST -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
 /* Envia lista de pedidos. */
 router.get('/pedidos_aprovados', function(req, res) {
 	console.log('got a GET request');
@@ -86,6 +88,22 @@ router.get('/entregas:id_pedido', function(req, res) {
         });
     });
 });
+
+/* Envia Itens de Entrega*/
+router.get('/entregaitens:id_entrega', function(req, res) {
+    console.log(req.params.id_entrega);
+    req.getConnection(function(err,connection){
+        if(err) return res.status(400).json(err);
+
+        connection.query("SELECT * FROM systennis_db.item_pedido i INNER JOIN tb_produto p ON i.id_prod = p.id_prod WHERE id_entrega=?" ,req.params.id_entrega,function(err,result){
+             return res.status(200).json(result);
+             console.log(result);
+        });
+    });
+});
+
+
+/* POST -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 /* Aloca pedidos para o gerente */
 router.post('/selecionar_pedidos', function(req, res) {

@@ -9,7 +9,7 @@
                     <i class="fa fa-dashboard"></i>  <a ui-sref="dashboard">Dashboard</a>
                 </li>
                 <li class="active">
-                    <i class="fa fa-globe"></i> <a ui-sref="controle_entregas">Controle de Entregas</a>
+                    <i class="fa fa-globe"></i> <a ui-sref="controle_entregas">Controle de Pedidos</a>
                 </li>
                 <li class="active">
                     <i class="fa fa-desktop"></i> {{title}}
@@ -77,14 +77,15 @@
 					<table class="table" cellspacing="0" cellpadding="0">
 						<thead>
 							<tr>
-								<th>ID<i class="fa fa-fw fa-caret-down" ng-click="ordenar('id_prod')"></i></th>
-								<th style="width : 40%">Nome<i class="fa fa-fw fa-caret-down" ng-click="ordenar('nome_prod')"></i></th>
-								<th>Preço<i class="fa fa-fw fa-caret-down" ng-click="ordenar('preco_prod')"></th>
+								<th>ID</th>
+								<th style="width : 40%">Nome</th>
+								<th>Preço</th>
 								<th>Imagem</th>
-								<th>Tipo<i class="fa fa-fw fa-caret-down" ng-click="ordenar('tipo_prod')"></th>
-								<th>Subtipo<i class="fa fa-fw fa-caret-down" ng-click="ordenar('subtipo_prod')"></th>
-								<th>Tamanho<i class="fa fa-fw fa-caret-down" ng-click="ordenar('tamanho_prod')"></th>
-								<th>Quantidade<i class="fa fa-fw fa-caret-down" ng-click="ordenar('qte_prod')"></th>
+								<th>Tipo</th>
+								<th>Subtipo</th>
+								<th>Tamanho</th>
+								<th>Quantidade</th>
+								<th>Estoque</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -97,6 +98,7 @@
 					  			<td>{{item_pedido.subtipo_prod}}</td>
 								<td>{{item_pedido.tamanho_prod}}</td>
 								<td>{{item_pedido.qte_prod}}</td>
+								<td>{{item_pedido.estoque_prod}}</td>
 							</tr>
 						</tbody>
 					</table>
@@ -118,27 +120,27 @@
 								<option value="">Selecione</option>
 							</select>
                 		</div>
-                		<table class="table" cellspacing="0" cellpadding="0">
+                		<table class="table table table-bordered table-hover" id="dataTables-example" cellspacing="0" cellpadding="0">
 							<thead>
 								<tr>
 									<th></th>
-									<th>ID<i class="fa fa-fw fa-caret-down" ng-click="ordenar('id_prod')"></i></th>
-									<th style="width : 40%">Nome<i class="fa fa-fw fa-caret-down" ng-click="ordenar('nome_prod')"></i></th>
-									<th>Preço<i class="fa fa-fw fa-caret-down" ng-click="ordenar('preco_prod')"></th>
-									<th>Imagem</th>
-									<th>Tipo<i class="fa fa-fw fa-caret-down" ng-click="ordenar('tipo_prod')"></th>
-									<th>Subtipo<i class="fa fa-fw fa-caret-down" ng-click="ordenar('subtipo_prod')"></th>
-									<th>Tamanho<i class="fa fa-fw fa-caret-down" ng-click="ordenar('tamanho_prod')"></th>
-									<th>Quantidade<i class="fa fa-fw fa-caret-down" ng-click="ordenar('qte_prod')"></th>
+									<th>ID</th>
+									<th style="width : 40%">Nome</th>
+									<th>Preço</th>
+									<!-- <th>Imagem</th> -->
+									<th>Tipo</th>
+									<th>Subtipo</th>
+									<th>Tamanho</th>
+									<th>Quantidade</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr ng-repeat="item_pedido in itens_pedido | filter:procurar | orderBy:sortKey:reverse" >
+								<tr ng-repeat="item_pedido in itens_selecao | filter:procurar | orderBy:sortKey:reverse" >
 									<td><input type="checkbox" ng-model="item_pedido.selecionado"/></td>
 									<td>{{item_pedido.id_prod}}</td>
 									<td>{{item_pedido.nome_prod}}</td>
 						  			<td style="width= 200px">R$ {{item_pedido.preco_prod}}</td>
-						  			<td><img src="{{item_pedido.url_imagem}}" width = "50"/></td>
+						  			<!-- <td><img src="{{item_pedido.url_imagem}}" width = "50"/></td> -->
 						  			<td>{{item_pedido.tipo_prod}}</td>
 						  			<td>{{item_pedido.subtipo_prod}}</td>
 									<td>{{item_pedido.tamanho_prod}}</td>
@@ -158,35 +160,57 @@
 				<div class="panel-heading">
 	                    <h3 class="panel-title"><i class="fa fa-truck fa-fw"></i> Entregas Associadas
 	            </div>
-	            <div class="panel-body" ng-repeat="entrega in entregas">
-	            	<div  class="col-lg-1">
-	            		<b>ID:</b>
-	            		<p>{{entrega.id_entrega}}</p>
-	            	</div>
-	            	<div  class="col-lg-2">
-	            		<b><i class="fa fa-user fa-fw"></i> Funcionário:</b>
-	            		<p>{{entrega.nome_func}} {{entrega.sobrenome_func}}</p>
-	            	</div>
-	            	<div  class="col-lg-3">
-	            		<b><i class="fa fa-calendar fa-fw"></i> Data de Encaminhamento:</b>
-	            		<p>{{entrega.data}} {{entrega.hora}}</p>
-	            	</div>
-	            	<div  class="col-lg-3">
-	            		<br/>
-	            		<p><span class="badge">{{entrega.status_entrega}}</span></p>
-	            	</div>
-	            </div>
-            </div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-lg-12">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-	                    <h3 class="panel-title"><i class="fa fa-truck fa-fw"></i> Entregas Associadas
-	            </div>
-	            <div class="panel-body" ng-repeat="entrega in entregas">
-	            	{{entrega}}
+	            <div class="panel-body">
+		            <div class="panel panel-default" ng-repeat="entrega in entregas">
+			            <div class="panel-body">
+			            	<div class="row">
+				            	<div  class="col-lg-1">
+				            		<b>ID:</b>
+				            		<p>{{entrega.id_entrega}}</p>
+				            	</div>
+				            	<div  class="col-lg-2">
+				            		<b><i class="fa fa-user fa-fw"></i> Funcionário:</b>
+				            		<p>{{entrega.nome_func}} {{entrega.sobrenome_func}}</p>
+				            	</div>
+				            	<div  class="col-lg-2">
+				            		<b><i class="fa fa-calendar fa-fw"></i> Data:</b>
+				            		<p>{{entrega.data}}</p>
+				            	</div>
+				            	<div  class="col-lg-2">
+				            		<b><i class="fa fa-clock-o fa-fw"></i> Horário:</b>
+				            		<p>{{entrega.hora}}</p>
+				            	</div>
+				            	<div  class="col-lg-3">
+				            		<b>Status da Entrega:</b><br/>
+				            		<p><span class="badge">{{entrega.status_entrega}}</span></p>
+				            	</div>
+				            </div>
+				            <div class="row">
+				            	<div class="col-lg-12">
+				            		<div class="panel panel-default">
+				            			<div class="panel-body">
+							            	<b><i class="fa fa-shopping-bag fa-fw"></i> Itens da Entrega:</b>
+							            	<br/><br/>
+							            	<table class="table ">
+							            		<thead>
+							            			<th>ID</th>
+							            			<th>Nome</th>
+							            			<th>Tamanho</th>
+							            			<th>Quantidade</th>
+							            		</thead>
+							            		<tbody ng-repeat="item_entrega in entrega.itens_entrega">
+							            			<td>{{item_entrega.id_prod}}</td>
+							            			<td>{{item_entrega.nome_prod}}</td>
+							            			<td>{{item_entrega.tamanho_prod}}</td>
+							            			<td>{{item_entrega.qte_prod}}</td>
+							            		</tbody>
+							            	</table>
+					            		<div>
+				            		</div>
+			            		</div>
+				            </div>
+			            </div>
+	  				</div>
 	            </div>
             </div>
 		</div>
