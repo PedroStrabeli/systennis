@@ -35,7 +35,7 @@ angular.module('systennis')
 					$scope.sessionToken = response.data.token
 
 					$scope.loginSuccessful = true;
-					$state.go('catalog');
+					$state.go('dashboard');
 				}
 				else
 				{

@@ -5,7 +5,7 @@ angular.module('systennis')
 	$scope.loginData = {};
 	$scope.authError = false;
 	$scope.isAuthenticated = false;
-	$scope.isAuthenticatedAdmin = false;
+	$scope.isAuthenticatedAsAdmin = false;
 
 	$scope.session_check = function ()
 	{

@@ -3,10 +3,10 @@
             <div class="container-fluid">
 
                 <!-- Page Heading -->
-                <div class="row">
+                <div class="row" ng-if="isAuthenticated">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            Dashboard <small>Statistics Overview</small>
+                            Dashboard <small></small>
                         </h1>
                         <ol class="breadcrumb">
                             <li class="active">
@@ -17,7 +17,7 @@
                 </div>
                 <!-- /.row -->
 
-                <div class="row">
+                <div class="row" ng-if="isAuthenticated">
                     <div class="col-lg-12">
                         <div class="alert alert-info alert-dismissable">
                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -25,9 +25,27 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="row" ng-if="!isAuthenticated">
+                    <div class="col-lg-12">
+                        <h1 class="systennis-loginmsg">Você precisa se autenticar antes de continuar</h1>
+                        <row>
+                            <div class="col-lg-2">
+                            </div>
+                            <a href="/#/users_ad/login_admin">
+                                <span class="systennis-lockicon"><i class="fa fa-lock" id="loque"></i></span>
+                            </a>
+                            <div class="col-lg-3">
+                            </div>
+                        </row>
+                        </div>
+                        <h2 class="systennis-loginsubmsg">Clique aqui</h2>
+                        <br><br><br><br><br><br>
+                    </div>
+                </div>
                 <!-- /.row -->
 
-                <div class="row">
+                <div class="row" ng-if="isAuthenticated">
                     <div class="col-lg-3 col-md-6">
                         <div class="panel panel-primary">
                             <div class="panel-heading">
@@ -119,7 +137,7 @@
                 </div>
                 <!-- /.row -->
 
-                <div class="row">
+                <div class="row" ng-if="isAuthenticated">
                     <div class="col-lg-12">
                         <div class="panel panel-default">
                             <div class="panel-heading">
@@ -133,7 +151,7 @@
                 </div>
                 <!-- /.row -->
 
-                <div class="row">
+                <div class="row" ng-if="isAuthenticated">
                     <div class="col-lg-4">
                         <div class="panel panel-default">
                             <div class="panel-heading">

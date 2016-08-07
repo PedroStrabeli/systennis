@@ -9,14 +9,14 @@ var config = ['$urlRouterProvider', '$stateProvider', '$locationProvider', funct
               url: "/dashboard",
               templateUrl: "pages/admin/dashboard.html",
               controller: 'dashboard_ctrl',
-              data: { title: 'Dashboard' }, 
+              data: { title: 'Dashboard' },
           })
         //CRUD PRODUTOS
         .state('cadastro_prod', {
               url: "/cadastro_prod",
               templateUrl: "pages/admin/cadastro_prod.html",
               controller: 'cadastro_prod_ctrl',
-              data: { title: 'Cadastro de Produtos' }, 
+              data: { title: 'Cadastro de Produtos' },
           })
         .state('consulta_prod', {
               url: "/consulta_prod",
