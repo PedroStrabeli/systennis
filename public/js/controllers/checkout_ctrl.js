@@ -80,18 +80,15 @@ angular.module('systennis')
 					alert("Verifique a data de validade do cartão")
 				else if ($scope.pag.nome_portador == '')
 					alert("Insira o nome do portador do cartão")
-				else{			
+				else{
 						geraPedido();
-						$state.go('pedidos');
 						//geraPedido();
 						//MANDAR EMAIL
 
 
-						var mail={user:checkoutService.checkout.user}						
+						var mail={user:checkoutService.checkout.user}
 				}
 			}
-
-			
 		};
 		
 		var geraPedido=function(){
@@ -100,27 +97,22 @@ angular.module('systennis')
 							checkout:checkoutService.checkout
 									},//checkoutService.checkout.cart.total]},
 					url: '/checkout/payment'}).then(function(response){
-						
-						
+						$state.go('pedidos');
 					}).catch(function(err){
-					
+						console.log(JSON.stringify(err));
 					});
 		}
-		
 
-		var enviaEmail1=function(params){
-				$http({method: 'POST', 
-							data: {mailOptions: mailService.orderMade(mail)},
-							url: '/checkout/payment'}
-						)
-							.then(function(response){
-								
-								
-							}).catch(function(err){
-							
-							});
-				$state.go('orders');
-		}
+		// var enviaEmail1=function(params){
+		// 		$http({method: 'POST', 
+		// 					data: {mailOptions: mailService.orderMade(mail)},
+		// 					url: '/checkout/payment'}
+		// 				)
+		// 					.then(function(response){
+		// 					}).catch(function(err){
+		// 					});
+		// 		$state.go('orders');
+		// }
 		//console.log($scope.pagamento)
 })
 

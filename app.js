@@ -26,8 +26,10 @@ var cart = require('./routes/cart');
 var checkout = require('./routes/checkout');
 var orders = require('./routes/orders');
 var mail = require('./routes/mail');
+var tamanho = require('./routes/tamanhos');
 var constants = require('./constants/constants.js');
 var queries = require('./constants/queries.js');
+
 
 //Admin
 var crud_prod = require('./routes/admin/crud_prod');
@@ -47,7 +49,7 @@ app.use(
    },'request')
 );
 
-var transporter = nodemailer.createTransport('smtps://systennisltda%40gmail.com:systennis123@smtp.gmail.com');
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 
@@ -170,6 +172,7 @@ app.use('/prod_detail', prod_detail);
 app.use('/cart', cart);
 app.use('/checkout', checkout);
 app.use('/orders', orders);
+app.use('/tamanho', tamanho);
 
 
 //Admin

@@ -75,7 +75,7 @@ queries.fetch_user_by_email = function(user_email) {return "SELECT id_cliente, n
 
 queries.fetch_user_by_id = function(id_ciente) {return "SELECT id_cliente, nome_cliente, sobrenome_cliente, email_cliente, hash_senha, cpf_cliente, member_since, tel_fixo, tel_cel FROM tb_cliente WHERE id_cliente = '" + id_cliente + "' LIMIT 1"};
 
-queries.fetch_supervisors = function(depto = '', cargo = '')
+queries.fetch_supervisors = function(depto, cargo)
 {
 	var supervisor_query = "SELECT DISTINCT nome_func, sobrenome_func, id_func FROM tb_funcionario ";
 	var departamento_query = '';
