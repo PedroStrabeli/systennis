@@ -136,10 +136,10 @@
                     <li ng-if="isAuthenticatedAsAdmin">
                         <a href="javascript:;" data-toggle="collapse" data-target="#gentregas"><i class="fa fa-fw fa-share-alt"></i> Gestão de Entregas <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="gentregas" class="collapse">
-                            <li>
+                            <li ng-if="func.cargo_func=='Supervisor'">
                                 <a ui-sref="controle_pedidos"><i class="fa fa-fw fa-globe"></i> Controle de Pedidos</a>
                             </li>
-                            <li>
+                            <li ng-if="func.cargo_func=='Supervisor'">
                                 <a ui-sref="selecao_pedidos"><i class="fa fa-fw fa-shopping-cart"></i> Seleção de Pedidos</a>
                             </li>
                             <li>

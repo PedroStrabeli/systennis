@@ -126,7 +126,7 @@ queries.insert_new_func = function(nome_func, sobrenome_func, cpf_func, cargo_fu
 		nome_func + "', '" + sobrenome_func + "', '" + cpf_func + "', '" + cargo_func + "', '" + departamento_func + "', '" + hash_senha + "', '" + id_supervisor + "', '" + tel_func + "', '" + email_func + "')");
 }
 
-queries.fetch_func_by_email = function(func_email) {return "SELECT id_func, nome_func, sobrenome_func, email_func, hash_senha, cpf_func, tel_func FROM tb_funcionario WHERE email_func = '" + func_email + "' LIMIT 1"};
+queries.fetch_func_by_email = function(func_email) {return "SELECT id_func, nome_func, sobrenome_func, email_func, cargo_func, hash_senha, cpf_func, tel_func FROM tb_funcionario WHERE email_func = '" + func_email + "' LIMIT 1"};
 
 queries.fetch_func_by_id = function(id_func) {return "SELECT id_func, nome_func, sobrenome_func, email_func, hash_senha, cpf_func, tel_func FROM tb_funcionario WHERE id_func = '" + id_func + "' LIMIT 1"};
 
