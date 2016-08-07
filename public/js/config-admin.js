@@ -9,14 +9,14 @@ var config = ['$urlRouterProvider', '$stateProvider', '$locationProvider', funct
               url: "/dashboard",
               templateUrl: "pages/admin/dashboard.html",
               controller: 'dashboard_ctrl',
-              data: { title: 'Dashboard' }, 
+              data: { title: 'Dashboard' },
           })
         //CRUD PRODUTOS
         .state('cadastro_prod', {
               url: "/cadastro_prod",
               templateUrl: "pages/admin/cadastro_prod.html",
               controller: 'cadastro_prod_ctrl',
-              data: { title: 'Cadastro de Produtos' }, 
+              data: { title: 'Cadastro de Produtos' },
           })
         .state('consulta_prod', {
               url: "/consulta_prod",
@@ -43,6 +43,12 @@ var config = ['$urlRouterProvider', '$stateProvider', '$locationProvider', funct
               controller: 'controle_pedidos_ctrl',
               data: { title: 'Controle de Pedidos' },
           })
+        .state('controle_entregas', {
+              url: "/controle_entregas",
+              templateUrl: "pages/admin/controle_entregas.html",
+              controller: 'controle_entregas_ctrl',
+              data: { title: 'Controle de Entregas' },
+          })
         .state('visualizar_pedido', {
               url: "/visualizar_pedido",
               templateUrl: "pages/admin/visualizar_pedido.html",
@@ -68,4 +74,3 @@ var app = angular
         this.item.id = id;
       }
     });
-    
