@@ -13,6 +13,7 @@ angular.module('systennis')
 		$scope.supervisor = [];
 		$scope.equipe = [];
 		$scope.itens_pedido = [];
+		$scope.itens_selecao = [];
 		$scope.entregas = [];
 
 
@@ -59,20 +60,37 @@ angular.module('systennis')
 		// Recupera Itens Pedido
 		$http.get('/gestao_entregas/itens_pedido' + sessionStorage.id_pedido).success(function(response){
 		 	$scope.itens_pedido = response;
+		 	for (i=0;i<response.length;i++){
+		 		if(response[i].id_entrega === null){
+		 			$scope.itens_selecao.push(response[i]);
+		 		}
+		 	}
 		});
 
 		// Recupera Entregas
 		$http.get('/gestao_entregas/entregas' + sessionStorage.id_pedido).success(function(response){
 		 	$scope.entregas = response;
 		 	for (i=0;i<$scope.entregas.length;i++){
+		 		//Formata data e horario
 		 		$scope.entregas[i].data = $scope.entregas[i].horario_entrega.slice(0, 10);
 		 		$scope.entregas[i].hora = $scope.entregas[i].horario_entrega.slice(11, 19);
+		 		//recupera itens de entrega
+		 		$http.get('/gestao_entregas/entregaitens' + $scope.entregas[i].id_entrega).success(function(response){
+		 			for (i=0;i<$scope.entregas.length;i++){
+		 				if (response.length >= 1){
+			 				if($scope.entregas[i].id_entrega == response[0].id_entrega){
+			 					$scope.entregas[i].itens_entrega = response;
+			 				}
+			 			}
+		 			}
+		 		});
 		 	}
 		});
 
 
 		$scope.criarEntrega = function(funcionario){
 	        var existeProdutoSelecionado = false;
+	        var itens_selecionados = [];
 	        var data = new Date();
 	        var stringData = data.getFullYear() + "-" + data.getMonth() + "-" + data.getDay() + " " + data.getHours() + ":" + data.getMinutes() + ":" + data.getSeconds();
 	        var entrega = {
@@ -83,45 +101,40 @@ angular.module('systennis')
 	        	id_func			: funcionario.id_func,
 	        	horario_entrega : stringData,
 	        };
-	        for (i=0;i<$scope.itens_pedido.length;i++) {
-	        	if ($scope.itens_pedido[i].hasOwnProperty('selecionado')) {
+	        for (i=0;i<$scope.itens_selecao.length;i++) {
+	        	if ($scope.itens_selecao[i].hasOwnProperty('selecionado')) {
 	        		existeProdutoSelecionado = true;
+	        		itens_selecionados.push($scope.itens_selecao[i]);
 	        	}
 	        }
 	        if (existeProdutoSelecionado) {
 	        	console.log(entrega);
 	        	console.log(funcionario);
 	        	$http.post('/gestao_entregas/create_entrega', entrega).then(function(response){
-				for (i=0;i<$scope.itens_pedido.length;i++) {
-					if ($scope.itens_pedido[i].hasOwnProperty('selecionado')) {
-						$scope.itens_pedido[i].id_entrega = response.data.id;
-						$http.post('/gestao_entregas/edit_item_pedido', $scope.itens_pedido[i]);
+					for (i=0;i<$scope.itens_selecao.length;i++) {
+						if ($scope.itens_selecao[i].hasOwnProperty('selecionado')) {
+							$scope.itens_selecao[i].id_entrega = response.data.id;
+							$http.post('/gestao_entregas/edit_item_pedido', $scope.itens_selecao[i]);
+						}
 					}
-					$timeout(function() {
-						$state.go($state.current, {}, {reload: true});}, 500);
-				}
-			}, function(error){});
+				}, function(error){});
 	        } else {
 	        	console.log('Erro!!!')
 	        }
+	        if ($scope.itens_selecao.length == itens_selecionados.length) {
+	        	console.log("Encaminhado.");
+	        	$scope.pedido.status_pedido = 'Encaminhado';
+	        	$http.post('/gestao_entregas/selecionar_pedidos', $scope.pedido);
+	        } else {
+	        	console.log("Encaminhado Parcialmente.")
+	        	$scope.pedido.status_pedido = 'Encaminhado Parcialmente';
+	        	$http.post('/gestao_entregas/selecionar_pedidos', $scope.pedido);
+	        }
+	        $timeout(function() {
+						$state.go($state.current, {}, {reload: true});}, 500);
 
     	};
 
-		// Adicionar Pedidos
-		$scope.adicionarPedidos = function (pedidos) {
-			adicionarPedidos = [];
-			for (i=0;i<pedidos.length;i++) {
-				if (pedidos[i].selecionado){
-					pedidos[i].status_pedido = 'Encaminhado';
-					pedidos[i].id_supervisor = sessionStorage.loggedID;
-					$http.post('/gestao_pedidos/selecionar_pedidos', pedidos[i]); 
-				}
-			}
-			$http.post
-			$timeout(function() {
-				$state.go($state.current, {}, {reload: true});
-			}, 500);
-		}
 
 		$scope.ordenar = function(keyname){
 	        $scope.sortKey = keyname;

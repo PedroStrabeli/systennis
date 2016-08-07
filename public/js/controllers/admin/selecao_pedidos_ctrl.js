@@ -1,6 +1,6 @@
 angular.module('systennis')
-	.controller('controle_entregas_ctrl',function($scope, $http, $timeout, $state){
-		$scope.title = "Controle de Entregas";
+	.controller('selecao_pedidos_ctrl',function($scope, $http, $timeout, $state){
+		$scope.title = "Seleção de Pedidos";
 
 		// Query de Pedidos
 		$scope.pedidos = [];
@@ -8,7 +8,7 @@ angular.module('systennis')
 		// Id supervisor dummy
 		sessionStorage.loggedID = 1;
 
-		$http.get('/gestao_entregas/pedidos_supervisor' + sessionStorage.loggedID).success(function(response){		
+		$http.get('/gestao_entregas/pedidos_aprovados').success(function(response){
 		 	$scope.pedidos = response;
 		 	for (i = 0; i < $scope.pedidos.length ; i ++) {
 		 		$scope.pedidos[i].data = $scope.pedidos[i].data_pedido.slice(0, 10);
@@ -27,11 +27,20 @@ angular.module('systennis')
 		$scope.maxSize = 5;
 		$scope.currentPage = 1;
 
-		$scope.visualizarPedido = function(pedido){
-	        sessionStorage.id_pedido = pedido.id_pedido;
-	        sessionStorage.id_supervisor = pedido.id_supervisor;
-	        sessionStorage.id_endereco = pedido.id_endereco;
-    	};
+		// Adicionar Pedidos
+		$scope.adicionarPedidos = function (pedidos) {
+			adicionarPedidos = [];
+			for (i=0;i<pedidos.length;i++) {
+				if (pedidos[i].selecionado){
+					pedidos[i].status_pedido = 'Preparando Entrega';
+					pedidos[i].id_supervisor = sessionStorage.loggedID;
+					$http.post('/gestao_entregas/selecionar_pedidos', pedidos[i]);
+				}
+			}
+			$timeout(function() {
+				$state.go($state.current, {}, {reload: true});
+			}, 500);
+		}
 
 		$scope.ordenar = function(keyname){
 	        $scope.sortKey = keyname;
