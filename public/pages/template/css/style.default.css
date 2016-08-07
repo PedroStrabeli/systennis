@@ -7,6 +7,11 @@
   content: " ";
   display: table;
 }
+
+div.modal div.modal-backdrop {
+    z-index: 0;
+}
+
 .clearfix:after,
 .navbar:after,
 .navbar-header:after {

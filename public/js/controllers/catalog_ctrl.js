@@ -1,12 +1,9 @@
 angular.module('systennis')
-	.filter('offset', function() {
-	  return function(input, start) {
-	    start = parseInt(start, 10);
-	    return input.slice(start);
-	  };
-	})
+	
 	.controller('catalog_ctrl', function($scope, $http, $state, productService, cartService){
 		// $scope.title = 'Systennis'
+		$scope.maxSize = 30;
+		$scope.currentPage = 1;	
 
 		$http.get('/catalog/brands').success(function(response){
 			$scope.brands = response;
@@ -14,7 +11,7 @@ angular.module('systennis')
 
 	    $http.get('/catalog/types').success(function(response){
 			$scope.types = response;
-			console.log("Os tipos que encontrei foram: " + $scope.types);
+			//console.log("Os tipos que encontrei foram: " + $scope.types);
 	    });
 
 	    console.log("KW = " + $state.params.keywordFilter);
@@ -31,7 +28,7 @@ angular.module('systennis')
 				$scope.currentPage = 0;
 			    $scope.pageSize = 10;
 
-			    console.log($scope.result);
+			   // console.log($scope.result);
 			    //$scope.data = [];
 			    $scope.numberOfPages=function(){
 		        return Math.ceil($scope.result.length/$scope.pageSize);
@@ -99,4 +96,10 @@ angular.module('systennis')
 		// 	});
 		// };
 
-	});
+	})
+	.filter('startFrom', function(){
+       return function(data, start){
+       	if (!data || !data.length) { return; }
+        return data.slice(start);
+      }
+    })

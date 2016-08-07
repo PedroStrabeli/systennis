@@ -3,6 +3,7 @@ angular.module('systennis')
 	.controller('cart_ctrl',function($scope, $state, $http, cartService, checkoutService){
 		
 		$scope.pagename='Carrinho';
+		var user=checkoutService.checkout.user;
 
 		var getCart=function(id_cliente){
 			$http.get('/cart/'+id_cliente).then(function(response){
@@ -33,7 +34,7 @@ angular.module('systennis')
 			}
 			return total.toFixed(2);
 		}
-		var user={id_cliente:1, nome_cliente:"Pedro Strabeli", email_cliente:'pedrostrabeli@gmail.com'};
+		//var user={id_cliente:1, nome_cliente:"Pedro Strabeli", email_cliente:'pedrostrabeli@gmail.com'};
 		if(user){
 			console.log('Usuario logado')
 			//checa se existe algo no carrinho local.
@@ -103,5 +104,4 @@ angular.module('systennis')
 					});	
 			}
 		};
-		checkoutService.checkout.user=user;
 	});
