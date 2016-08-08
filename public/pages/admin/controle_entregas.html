@@ -13,6 +13,7 @@
                 </li>
             </ol>
         </div>
+    </div>
     <div class="row">
         <div class="col-lg-6">
             <div class="panel panel-default">
@@ -29,7 +30,7 @@
                         </span>
                     </div>
                     <div class="list-group">
-                        <a ui-sref="visualizar_pedido" class="list-group-item" ng-repeat="entrega in entregas | filter:procurar | orderBy:sortKey:reverse | startFrom: (currentPage - 1) * maxSize | limitTo: entregas.length" ng-click="visualizarentrega(entrega)">
+                        <a ui-sref="visualizar_entrega" class="list-group-item" ng-repeat="entrega in entregas | filter:procurar | orderBy:sortKey:reverse | startFrom: (currentPage - 1) * maxSize | limitTo: entregas.length" ng-click="visualizarEntrega(entrega)">
                             <span class="badge">{{entrega.status_entrega}}</span>
                             <b>ID: </b>{{entrega.id_entrega}} &nbsp <i class="fa fa-fw fa-calendar"></i> {{entrega.data}} &nbsp <i class="fa fa-fw fa-clock-o"></i> {{entrega.hora}}
                         </a>

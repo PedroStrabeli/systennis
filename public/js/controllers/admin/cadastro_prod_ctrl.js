@@ -18,7 +18,7 @@ angular.module('systennis')
 
 		//RECUPERA PRODUTOS
 		$scope.produtos = [];
-		$http.get('/crud_prod').success(function(response){		
+		$http.get('/crud_prod').success(function(response){
 		 	$scope.produtos = response;
 		});
 
@@ -44,7 +44,7 @@ angular.module('systennis')
 		};
 
 		//CADASTRO DE TAMANHOS
-		$scope.tamanhos = [];		
+		$scope.tamanhos = [];
 
 		$scope.adicionarTamanho = function (tamanho) {
 			var teste =1;

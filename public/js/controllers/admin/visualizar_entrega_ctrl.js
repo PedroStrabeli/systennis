@@ -1,6 +1,6 @@
 angular.module('systennis')
-	.controller('visualizar_pedido_ctrl',function($scope, $http, $timeout, $state){
-		$scope.title = "Pedido";
+	.controller('visualizar_entrega_ctrl',function($scope, $http, $timeout, $state){
+		$scope.title = "Entrega";
 
 		// Query de Pedidos
 		$scope.pedidos = [];
@@ -13,8 +13,8 @@ angular.module('systennis')
 		$scope.supervisor = [];
 		$scope.equipe = [];
 		$scope.itens_pedido = [];
-		$scope.itens_selecao = [];
 		$scope.entregas = [];
+		$scope.entregaSelecionada = [];
 
 
 		$scope.id_endereco = [];
@@ -22,9 +22,10 @@ angular.module('systennis')
 		$scope.cel_cliente = [];
 
 		// Recupera Pedido
-		$http.get('/gestao_entregas/pedido' + sessionStorage.id_pedido).success(function(response){		
+		$http.get('/gestao_entregas/pedido' + sessionStorage.id_pedido).success(function(response){
 		 	$scope.pedido = response[0];
 	 		$scope.pedido.data = $scope.pedido.data_pedido.slice(0, 10);
+	 		$scope.pedido.data = $scope.pedido.data.replace("-", "/");
 	 		$scope.pedido.hora = $scope.pedido.data_pedido.slice(11, 19);
 	 		if($scope.pedido.entr_parcial == 1){
 	 			$scope.pedido.entr_parcial = "Sim";
@@ -41,16 +42,6 @@ angular.module('systennis')
 	 		};
 		});
 
-		// Recupera Equipe
-		$http.get('/gestao_entregas/equipe' + sessionStorage.id_supervisor).success(function(response){
-		 	for (i=0;i<response.length;i++){
-		 		if (response[i].id_func == response[i].id_supervisor){
-		 			$scope.supervisor = response[i];
-		 		} else {
-		 			$scope.equipe.push(response[i]);
-		 		}
-		 	}
-		});
 
 		// Recupera Endereco
 		$http.get('/gestao_entregas/endereco' + sessionStorage.id_endereco).success(function(response){
@@ -73,6 +64,8 @@ angular.module('systennis')
 		 	for (i=0;i<$scope.entregas.length;i++){
 		 		//Formata data e horario
 		 		$scope.entregas[i].data = $scope.entregas[i].horario_entrega.slice(0, 10);
+		 		$scope.entregas[i].data = $scope.entregas[i].data.replace("-", "/");
+		 		$scope.entregas[i].data = $scope.entregas[i].data.replace("-", "/");
 		 		$scope.entregas[i].hora = $scope.entregas[i].horario_entrega.slice(11, 19);
 		 		//recupera itens de entrega
 		 		$http.get('/gestao_entregas/entregaitens' + $scope.entregas[i].id_entrega).success(function(response){
@@ -85,52 +78,49 @@ angular.module('systennis')
 		 			}
 		 		});
 		 	}
+		 	for (i=0;i<$scope.entregas.length;i++){
+		 		if($scope.entregas[i].id_entrega == sessionStorage.id_entrega){
+		 			$scope.entregaSelecionada = $scope.entregas[i];
+		 		}
+		 	}
 		});
 
 
-		$scope.criarEntrega = function(funcionario){
-	        var existeProdutoSelecionado = false;
-	        var itens_selecionados = [];
-	        var data = new Date();
-	        var stringData = data.toJSON().slice(0,10) + " " + data.toJSON().slice(11,19);
-	        var entrega = {
-	        	id_pedido 		: $scope.pedido.id_pedido,
-	        	status_entrega  : 'Pendente',
-	        	id_nf  			: 9999,
-	        	id_supervisor   : $scope.supervisor.id_supervisor,
-	        	id_func			: funcionario.id_func,
-	        	horario_entrega : stringData,
+		$scope.finalizarEntrega = function(){
+	        var atualizarPedido = 0;
+	        // Atualiza status para Entregue
+	        var input = {
+	        	status_entrega :  "Entregue"
 	        };
-	        for (i=0;i<$scope.itens_selecao.length;i++) {
-	        	if ($scope.itens_selecao[i].hasOwnProperty('selecionado')) {
-	        		existeProdutoSelecionado = true;
-	        		itens_selecionados.push($scope.itens_selecao[i]);
+	        for (i=0;i<$scope.entregas.length;i++){
+	        	if(sessionStorage.id_entrega == $scope.entregas[i].id_entrega){
+	        		$scope.entregas[i].status_entrega = "Entregue";
 	        	}
 	        }
-	        if (existeProdutoSelecionado) {
-	        	console.log(entrega);
-	        	console.log(funcionario);
-	        	$http.post('/gestao_entregas/create_entrega', entrega).then(function(response){
-					for (i=0;i<$scope.itens_selecao.length;i++) {
-						if ($scope.itens_selecao[i].hasOwnProperty('selecionado')) {
-							$scope.itens_selecao[i].id_entrega = response.data.id;
-							$http.post('/gestao_entregas/edit_item_pedido', $scope.itens_selecao[i]);
-						}
-					}
-				}, function(error){});
-	        } else {
-	        	console.log('Erro!!!')
-	        }
-	        if ($scope.itens_selecao.length == itens_selecionados.length) {
-	        	console.log("Encaminhado.");
-	        	$scope.pedido.status_pedido = 'Encaminhado';
-	        	$http.post('/gestao_entregas/selecionar_pedidos', $scope.pedido);
-	        } else {
-	        	console.log("Encaminhado Parcialmente.")
-	        	$scope.pedido.status_pedido = 'Encaminhado Parcialmente';
-	        	$http.post('/gestao_entregas/selecionar_pedidos', $scope.pedido);
-	        }
-	        $timeout(function() {
+	        // Atualiza Estoques dos pedidos
+	        $http.post('/gestao_entregas/finalizar_entrega' + sessionStorage.id_entrega, input);
+	        for (i=0;i<$scope.entregaSelecionada.itens_entrega.length;i++) {
+        		var atualizarEstoque = $scope.entregaSelecionada.itens_entrega[i].estoque_prod - $scope.entregaSelecionada.itens_entrega[i].qte_prod;
+        		$scope.entregaSelecionada.itens_entrega[i].estoque_prod = atualizarEstoque;
+        		var input = {
+        			estoque_prod : atualizarEstoque
+        		};
+        		$http.post('/gestao_entregas/atualizar_estoque' + $scope.entregaSelecionada.itens_entrega[i].id_prod, input);
+       		}
+       		// Atualiza Status do Pedido
+       		for (i=0;i<$scope.entregas.length;i++){
+       			if($scope.entregas[i].status_entrega == "Entregue") {
+       				var atualizarPedido = atualizarPedido + 1;
+       			}
+       		}
+       		console.log($scope.entregas.length);
+       		console.log(atualizarPedido);
+       		if ($scope.entregas.length == atualizarPedido) {
+       			console.log("Fechar Pedido!")
+       			$scope.pedido.status_pedido = "Entregue";
+       			$http.post('/gestao_entregas/selecionar_pedidos', $scope.pedido);
+       		}
+       		$timeout(function() {
 						$state.go($state.current, {}, {reload: true});}, 500);
 
     	};

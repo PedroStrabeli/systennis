@@ -159,7 +159,7 @@ router.post('/create_entrega', function(req, res) {
     console.log("Sucesso!");
 });
 
-/* Aloca pedidos para o gerente */
+/* Atualiza itens de pedido para entrega */
 router.post('/edit_item_pedido', function(req, res) {
     var input = JSON.parse(JSON.stringify(req.body));
     var pedido = {
@@ -170,6 +170,38 @@ router.post('/edit_item_pedido', function(req, res) {
     req.getConnection(function(err,connection){
         if(err) return res.status(400).json(err);
         connection.query("UPDATE item_pedido set id_entrega=? WHERE id_pedido=? AND id_prod=? ",[pedido.id_entrega, pedido.id_pedido, pedido.id_prod], function(err, result)
+        {
+
+            if (err)
+                console.log("Error inserting : %s ",err );
+
+        });
+    });
+    console.log("Sucesso!");
+});
+
+/* Altera Status de Entrega para "Entregue"*/
+router.post('/finalizar_entrega:id_entrega', function(req, res) {
+    console.log(req.body);
+    req.getConnection(function(err,connection){
+        if(err) return res.status(400).json(err);
+        connection.query("UPDATE tb_entrega set status_entrega=? WHERE id_entrega=? ",[req.body.status_entrega, req.params.id_entrega], function(err, result)
+        {
+
+            if (err)
+                console.log("Error inserting : %s ",err );
+
+        });
+    });
+    console.log("Sucesso!");
+});
+
+/* Atualiza estoque do produto*/
+router.post('/atualizar_estoque:id_prod', function(req, res) {
+    console.log(req.body);
+    req.getConnection(function(err,connection){
+        if(err) return res.status(400).json(err);
+        connection.query("UPDATE tb_produto set estoque_prod=? WHERE id_prod=? ",[req.body.estoque_prod, req.params.id_prod], function(err, result)
         {
 
             if (err)

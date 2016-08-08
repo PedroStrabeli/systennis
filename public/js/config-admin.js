@@ -55,6 +55,12 @@ var config = ['$urlRouterProvider', '$stateProvider', '$locationProvider', funct
               controller: 'visualizar_pedido_ctrl',
               data: { title: 'Visualizar Pedidos' },
           })
+        .state('visualizar_entrega', {
+              url: "/visualizar_entrega",
+              templateUrl: "pages/admin/visualizar_entrega.html",
+              controller: 'visualizar_entrega_ctrl',
+              data: { title: 'Visualizar Entregas' },
+          })
         .state('selecao_pedidos', {
               url: "/selecao_pedidos",
               templateUrl: "pages/admin/selecao_pedidos.html",

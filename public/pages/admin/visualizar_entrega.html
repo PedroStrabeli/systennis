@@ -1,0 +1,163 @@
+<div class="container-fluid">
+    {{pedido}}
+	<div class="row">
+		<div class="col-lg-12">
+            <h1 class="page-header">
+                {{title}} <small>ID: {{entregaSelecionada.id_entrega}}</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li>
+                    <i class="fa fa-dashboard"></i>  <a ui-sref="dashboard">Dashboard</a>
+                </li>
+                <li class="active">
+                    <i class="fa fa-truck"></i> <a ui-sref="controle_entregas">Controle de Entregas</a>
+                </li>
+                <li class="active">
+                    <i class="fa fa-desktop"></i> {{title}}
+                </li>
+            </ol>
+        </div>
+	</div>
+    <div class="row">
+        <div class="col-lg-6">
+            Status: <span class="badge">{{entregaSelecionada.status_entrega}}</span> &nbsp
+            <i class="fa fa-fw fa-calendar"></i> {{entregaSelecionada.data}} &nbsp <i class="fa fa-fw fa-clock-o"></i> {{entregaSelecionada.hora}} &nbsp ID Pedido: {{pedido.id_pedido}}
+        </div>
+    </div>
+    <br/>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><i class="fa fa-user fa-fw"></i> Dados do Cliente &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp<b>ID:</b> {{pedido.id_cliente}}</h3>
+                </div>
+                <table class="table table-bordered table-hover table">
+                    <tbody>
+                         <tr>
+                            <th>Nome:</th>
+                            <td>{{pedido.nome_cliente}} {{pedido.sobrenome_cliente}}</td>
+                         </tr>
+                         <tr>
+                            <th>CPF:</th>
+                            <td>{{pedido.cpf_cliente}}</td>
+                         </tr>
+                         <tr>
+                            <th>e-mail:</th>
+                            <td>{{pedido.email_cliente}}</td>
+                         </tr>
+                         <tr>
+                            <th>Telefone Fixo:</th>
+                            <td>({{tel_cliente.ddd}}){{tel_cliente.numero}}</td>
+                         </tr>
+                         <tr>
+                            <th>Telefone Celular:</th>
+                            <td>({{cel_cliente.ddd}}){{cel_cliente.numero}}</td>
+                         </tr>
+                         <tr>
+                            <th>Entregas Parciais:</th>
+                            <td>{{pedido.entr_parcial}}</td>
+                         </tr>
+                    </tbody>
+                </table>
+            </div>  
+        </div>
+        <div class="col-lg-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><i class="fa fa-location-arrow fa-fw"></i> Endereço de Entrega &nbsp &nbsp</h3>
+                </div>
+                <div class="panel-body">
+                    <p>{{endereco.rua_end}}, Nº {{endereco.numero_end}}</p>
+                    <p>{{endereco.complemento_end}}, {{endereco.bairro_end}}</p>
+                    <p>{{endereco.cidade_end}}, {{endereco.estado_end}}, {{endereco.pais_end}}</p>
+                    <p>CEP:{{endereco.cep_end}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><i class="fa fa-shopping-bag fa-fw"></i> Itens da Entrega
+                </div>
+                <div class="panel-body">
+                    <table class="table" cellspacing="0" cellpadding="0">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th style="width : 40%">Nome</th>
+                                <th>Preço</th>
+                                <th>Imagem</th>
+                                <th>Tipo</th>
+                                <th>Subtipo</th>
+                                <th>Tamanho</th>
+                                <th>Quantidade</th>
+                                <th>Estoque</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item_pedido in entregaSelecionada.itens_entrega | filter:procurar | orderBy:sortKey:reverse" >
+                                <td>{{item_pedido.id_prod}}</td>
+                                <td>{{item_pedido.nome_prod}}</td>
+                                <td style="width= 200px">R$ {{item_pedido.preco_prod}}</td>
+                                <td><img src="{{item_pedido.url_imagem}}" width = "50"/></td>
+                                <td>{{item_pedido.tipo_prod}}</td>
+                                <td>{{item_pedido.subtipo_prod}}</td>
+                                <td>{{item_pedido.tamanho_prod}}</td>
+                                <td>{{item_pedido.qte_prod}}</td>
+                                <td>{{item_pedido.estoque_prod}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <div>
+                <a class="btn btn-primary btn-block" data-toggle="modal" data-target="#entrega-realizada" ng-disabled="entregaSelecionada.status_entrega == 'Entregue'">Entrega Realizada</a>
+            </div>
+        </div>
+        <!-- <div class="col-lg-6">
+            <div>
+                <a class="btn btn-danger btn-block" data-toggle="modal" data-target="#cancelar-entrega">Cancelar Entrega</a>
+            </div>
+        </div> -->
+    </div>
+    <div class="modal fade" id="entrega-realizada" tabindex="-1" role="dialog" aria-labelledby="modalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="modalLabel">Finalizar Entrega</h4>
+                </div>
+                <div class="modal-body">
+                    Deseja realmente mudar o status da entrega para "Entregue"?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" ng-click="finalizarEntrega()" data-dismiss="modal">Confirmar</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="cancelar-entrega" tabindex="-1" role="dialog" aria-labelledby="modalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="modalLabel">Cancelar Entrega</h4>
+                </div>
+                <div class="modal-body">
+                    Você tem certeza que deseja cancelar a entrega?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" ng-click="deletarProduto(produtoSelecionado)" data-dismiss="modal">Sim</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">N&atilde;o</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
