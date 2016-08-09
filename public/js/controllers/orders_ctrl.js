@@ -1,7 +1,7 @@
 angular.module('systennis')
 	.controller('orders_ctrl',function($scope, $state, $http, checkoutService, orderService){
 		//console.log(checkoutService.checkout)
-		$http.get('/orders/cli'+1).then(function(response){
+		$http.get('/orders/cli'+checkoutService.checkout.user.id_cliente).then(function(response){
 			$scope.sendOrder=orderService.sendOrder;
 			$scope.pedidos=response.data;
 			// for (item in $scope.pedidos){
@@ -15,7 +15,7 @@ angular.module('systennis')
 		$scope.pedido=orderService.getOrder();
 		console.log($scope.pedido);
 
-			$http.get('/orders/cli'+1+'/getprod'+1).then(function(response){
+			$http.get('/orders/cli'+checkoutService.checkout.user.id_cliente+'/getorder'+orderService.getOrder().id_pedido).then(function(response){
 				$scope.detail=response.data;
 				$scope.detail.total=calculaTotal(response.data);
 				checkoutService.checkout.total=calculaTotal(response.data);

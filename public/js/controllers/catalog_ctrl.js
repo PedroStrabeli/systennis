@@ -14,13 +14,13 @@ angular.module('systennis')
 			//console.log("Os tipos que encontrei foram: " + $scope.types);
 	    });
 
-	    console.log("KW = " + $state.params.keywordFilter);
-	    console.log("BF = " + $state.params.brandFilter);
-	    console.log("TF = " + $state.params.typeFilter);
+	    // console.log("KW = " + $state.params.keywordFilter);
+	    // console.log("BF = " + $state.params.brandFilter);
+	    // console.log("TF = " + $state.params.typeFilter);
 
 		if(!($state.params.keywordFilter || $state.params.brandFilter || $state.params.typeFilter))
 		{
-			console.log("Primeiro Caso!")
+			//console.log("Primeiro Caso!")
 			if(!$scope.result)
 			{
 				$http.get('/catalog').success(function(response){

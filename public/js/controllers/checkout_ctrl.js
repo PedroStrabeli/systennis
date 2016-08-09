@@ -3,7 +3,7 @@ angular.module('systennis')
 	.controller('checkout_address_ctrl',function($scope, $state, $http, checkoutService){
 		//var user={id_cliente: 1};
 		//$scope.address;
-
+		if(!checkoutService.checkout.user) $state.go('login')
 		$http.get('/checkout/getAddress/cli'+checkoutService.checkout.user.id_cliente)
 						.then(function(response){
 							$scope.addresses=response.data
@@ -82,6 +82,7 @@ angular.module('systennis')
 					alert("Insira o nome do portador do cartão")
 				else{
 						geraPedido();
+						$state.go('orders');
 						//geraPedido();
 						//MANDAR EMAIL
 
@@ -97,7 +98,7 @@ angular.module('systennis')
 							checkout:checkoutService.checkout
 									},//checkoutService.checkout.cart.total]},
 					url: '/checkout/payment'}).then(function(response){
-						$state.go('pedidos');
+						// $state.go('pedidos');
 					}).catch(function(err){
 						console.log(JSON.stringify(err));
 					});

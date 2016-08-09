@@ -11,12 +11,12 @@ angular.module('systennis')
 	{
 		$http.get('/users/get_session').success(function(response)
 		{
-			console.log(response);
+			//console.log(response);
 			if (response.user)
 			{
 				$scope.isAuthenticated = true;
 				checkoutService.checkout.user=response.user;
-				console.log(checkoutService.checkout.user)
+				//console.log(checkoutService.checkout.user)
 				// checkoutService.putSession();
 				$scope.user = response.user
 			}

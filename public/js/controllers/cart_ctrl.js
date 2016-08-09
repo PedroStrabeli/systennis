@@ -16,14 +16,24 @@ angular.module('systennis')
 		}
 
 		$scope.changeItem=function(item){
-			$http({method: 'POST', 
-						data: {id_cliente: user.id_cliente, id_prod: item.id_prod, qte_prod:item.qte_prod},
-						url: '/cart/changeItem'})
-						.then(function(response){							
-						}).catch(function(err){
-							alert("Ocorreu um erro! \n"+err);
-						});
-			getCart(user.id_cliente);
+			if (item.qte_prod<1){}
+			else{
+				if(checkoutService.checkout.user){
+					$http({method: 'POST', 
+								data: {id_cliente: user.id_cliente, id_prod: item.id_prod, qte_prod:item.qte_prod},
+								url: '/cart/changeItem'})
+								.then(function(response){							
+								}).catch(function(err){
+									alert("Ocorreu um erro! \n"+err);
+								});
+					getCart(user.id_cliente);
+				}
+				else{
+					for (i=0;i<checkoutService.checkout.cart;i++)
+						if(checkoutService.checkout.cart[i]===item) 
+							checkoutService.checkout.cart[i].qte_prod=item.qte_prod
+				}
+			}
 		}
 
 		var calculaTotal=function(item){
@@ -52,8 +62,9 @@ angular.module('systennis')
 
 
 		$scope.reloadState = function() {
+			getCart();
 		   // $state.go($state.current, {}, {reload: true});
-		   $state.transitionTo('cart', $stateParams, { reload: true, inherit: false, notify: true });
+		   // $state.transitionTo('cart', $stateParams, { reload: true, inherit: false, notify: true });
 		}
 		
 		//FAZER IR PARA O COOKIE
@@ -65,7 +76,8 @@ angular.module('systennis')
 						url: '/cart/removeCart'})
 						.then(function(response){
 							alert("Removido com sucesso.");
-							$state.transitionTo('cart', $stateParams, { reload: true, inherit: false, notify: true });
+							getCart()
+							//$state.transitionTo('cart', { reload: true, inherit: false, notify: true });
 						}).catch(function(err){
 							alert("Ocorreu um erro! \n"+err);
 						});
@@ -77,21 +89,27 @@ angular.module('systennis')
 
 		function Checker(){
 			var lista=cartService.getProducts();
+			
 			while(lista[0]!=null){
-				item=lista.pop();
-				itemCart={
-					id_prod: item.id_prod,
-					id_cliente: user.id_cliente,
-					qte_prod: 1,
-					tamanho_prod: item.tamanho_prod
-				};
+				for (i=0;i<lista.length;i++){
+					lista[i].id_cliente=user.id_cliente
+					//lista[i].qte_prod=1
+				}
+				var item = lista.pop()
+				putProdCart(item)
 				
-				$http({method: 'POST', data: itemCart, url: '/cart/CheckProd'})
+				
+			}
+		};
+
+		function putProdCart(item){
+
+			$http({method: 'POST', data: item, url: '/cart/CheckProd'})
 					.then(function(response){
-						console.log(response.data[0]);
+						//console.log(response.data[0]);
 						if(response.data[0].count === 0){
 							console.log("vou entrar\n\n");
-							$http({method: 'POST', data: itemCart, url: '/cart/addCartProduct'})
+							$http({method: 'POST', data: item, url: '/cart/addCartProduct'})
 								.then(function(){
 									console.log("Produto adicionado ao carrinho: " + item.id_prod);
 									getCart(user.id_cliente);
@@ -102,6 +120,7 @@ angular.module('systennis')
 						}
 						
 					});	
-			}
-		};
+		}
+
+
 	});

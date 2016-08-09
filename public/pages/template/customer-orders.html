@@ -44,7 +44,7 @@ _________________________________________________________ -->
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr ng-repeat="pedido in pedidos">
+                                        <tr ng-repeat="pedido in pedidos | orderBy: '-data_pedido'">
                                             <th>{{pedido.id_pedido}}</th>
                                             <td>{{pedido.data_pedido}}</td>
                                             <td>{{pedido.valor_pedido}}</td>

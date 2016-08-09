@@ -40,7 +40,7 @@
                     <div class="container">
                         <div class="navbar-header" >
 
-                            <a class="navbar-brand home" ui-sref="new_index">
+                            <a class="navbar-brand home" ui-sref="catalog">
                                 <img src="https://dl.dropboxusercontent.com/s/j1l92u5t07kjsil/systennis_logo_alt_bo.png" alt="Systennis logo" class="hidden-xs hidden-sm" width="150">
                                 <img src="https://dl.dropboxusercontent.com/s/j1l92u5t07kjsil/systennis_logo_alt_bo.png" alt="Systennis logo" class="visible-xs visible-sm" width="150"><span class="sr-only">Systennis</span>
                             </a>
@@ -57,11 +57,12 @@
 
                             <ul class="nav navbar-nav navbar-right">
                                 <li class="dropdown">
-                                    <a class="dropdown-toggle" data-toggle="modal" data-target="#myModal">Busca <b class="caret"></b></a>
-                                </li>
-                                <li class="dropdown">
                                     <a ui-sref="catalog({keywordFilter: null, brandFilter: null, typeFilter: null})" class="dropdown-toggle">Home <b class="caret"></b></a>
                                 </li>
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="modal" data-target="#myModal">Busca <b class="caret"></b></a>
+                                </li>
+                                
                                 <li class="dropdown" ng-controller="login_ctrl"><!-- use-yamm yamm-fw-->
                                     <span ng-init="session_check()"></span>
                                     <a href="javascript: void(0)" class="dropdown-toggle" data-toggle="dropdown" ng-if="isAuthenticated">Perfil<b class="caret"></b></a>

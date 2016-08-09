@@ -4,14 +4,14 @@ angular.module('systennis')
 	.controller('prod_detail_ctrl',function($scope, $stateParams, $http, $window, productService, cartService){
 
 			$scope.detail = productService.getProducts();
-			console.log($scope.detail);
+			//console.log($scope.detail);
 
 			if (!$scope.detail)
 			{
 				$http.get('/prod_detail/prod='+$stateParams.id_prod)
 				.then(function(response){
 					$scope.detail = response.data[0];
-					console.log($scope.detail);
+					//console.log($scope.detail);
 				});
 			}
 
@@ -26,13 +26,17 @@ angular.module('systennis')
 			}
 
 			$scope.addProduct = function(currObj){
-    	    	cartService.addProduct(currObj);
+				if ($scope.detail.tamanho_prod){
+					currObj.qte_prod=1;
+    	    		cartService.addProduct(currObj);
+				}
+    	    	else alert("Escolha um tamanho de tênis.")
 	    	};
-	    	console.log($stateParams.id_prod);
+	    	//console.log($stateParams.id_prod);
 
 	    	$scope.show_color = function()
 	    	{
-	    		console.log($scope.product.color);
+	    		//console.log($scope.product.color);
 	    	}
 
 	    	$scope.change_colors = function(id_prod)
@@ -51,13 +55,13 @@ angular.module('systennis')
 			//$stateParams
 				.then(function(response){
 					$scope.sizes=response.data;
-					console.log($scope.sizes);
+					//console.log($scope.sizes);
 
 				})
 
 			$http.get('/prod_detail/prod='+$stateParams.id_prod+'/getcolors')
 				.then(function(response){
 					$scope.colors = response.data;
-					console.log($scope.colors);
+					//console.log($scope.colors);
 				});
 			});
