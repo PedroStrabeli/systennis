@@ -1,5 +1,5 @@
 angular.module('systennis')
-	.controller('cadastro_prod_ctrl',function($scope, $http, $state){
+	.controller('cadastro_prod_ctrl',function($scope, $http, $state, $timeout){
 		$scope.title = "Cadastro de Produtos";
 
 		//SELECT TIPO
@@ -35,12 +35,14 @@ angular.module('systennis')
 						tamanho_prod : tamanhos[i].tamanho_prod,
 						id_prod : response.data.id
 					};
-					$http.post('/crud_prod/create_tamanho', input);
+					$http.post('/crud_prod/create_tamanho', input).success(function(response){
+					});
 				}
 			}, function(error){});
+			$timeout(function() {
+						$state.go('consulta_prod', {}, {reload: true});}, 1000);
 			delete $scope.tamanhos;
 			delete $scope.produto;
-			$state.go('consulta_prod');
 		};
 
 		//CADASTRO DE TAMANHOS
