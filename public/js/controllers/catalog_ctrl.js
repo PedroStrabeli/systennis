@@ -1,9 +1,9 @@
 angular.module('systennis')
-	
+
 	.controller('catalog_ctrl', function($scope, $http, $state, productService, cartService){
 		// $scope.title = 'Systennis'
-		$scope.maxSize = 30;
-		$scope.currentPage = 1;	
+		$scope.maxSize = 12;
+		$scope.currentPage = 1;
 
 		$http.get('/catalog/brands').success(function(response){
 			$scope.brands = response;
