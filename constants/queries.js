@@ -39,7 +39,7 @@ queries.check_cart=  function (id_cliente, id_prod, tamanho_prod){return 'SELECT
 
 queries.get_cart= function (id_cliente){return   'SELECT id_prod, nome_prod, desc_prod,cor_prod, tamanho_prod, preco_prod, url_imagem, qte_prod FROM item_carrinho LEFT JOIN tb_produto using(id_prod) LEFT JOIN tb_cliente using(id_cliente) WHERE id_cliente = '+id_cliente;};
 
-queries.remove_cart=function(id_cliente,id_prod){return 'DELETE FROM item_carrinho WHERE id_cliente = '+id_cliente+' AND id_prod = '+id_prod;}
+queries.remove_cart=function(id_cliente,id_prod, tamanho_prod){return 'DELETE FROM item_carrinho WHERE id_cliente = '+id_cliente+' AND id_prod = '+id_prod+' AND tamanho_prod = '+tamanho_prod;}
 
 queries.change_item=function(id_cliente,id_prod, qte_prod){return 'UPDATE item_carrinho SET qte_prod='+qte_prod+' WHERE id_cliente='+id_cliente+' AND id_prod='+id_prod};
 //CHECKOUT

@@ -23,4 +23,22 @@ angular.module('app.directives.contentEditable', [])
            };
        }
     };
-});
+})
+.directive('pageTitle', function ($rootScope, $timeout) {
+    return {
+        link: function(scope, element) {
+            var listener = function(event, toState, toParams, fromState, fromParams) {
+                // Default title
+                var pageTitle = 'AlbumIt';
+                // Title pattern
+                if (toState.data && toState.data.pageTitle) title = 'Albumit | ' + toState.data.pageTitle;
+                $timeout(function() {
+                    element.text(title);
+                });
+            };
+            $rootScope.$on('$stateChangeSuccess', listener);
+        }
+    }
+})
+  
+

@@ -16,6 +16,7 @@ angular.module('systennis')
   };
 
   return {
+    cart: productList,
     addProduct: addProduct,
     getProducts: getProducts
   };

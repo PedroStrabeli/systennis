@@ -61,7 +61,7 @@ _________________________________________________________ -->
                                                 <td>{{item.preco_prod.toFixed(2)}}</td>
                                                 <!--<td>$0.00</td>-->
                                                 <td>{{(item.preco_prod*item.qte_prod).toFixed(2)}}</td>
-                                                <td><div class="btn btn-default" ng-click="removeCart(item.id_prod)"><i class="fa fa-trash-o"></i></div>
+                                                <td><div class="btn btn-default" ng-click="removeCart(item.id_prod, item.tamanho_prod)"><i class="fa fa-trash-o"></i></div>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -81,7 +81,7 @@ _________________________________________________________ -->
                                         <a ui-sref="catalog" class="btn btn-default"><i class="fa fa-chevron-left"></i> Continuar Comprando</a>
                                     </div>
                                     <div class="pull-right">
-                                        <button ng-click="reloadState()" class="btn btn-default"><i class="fa fa-refresh"></i> Update cart</button>
+                                        <a ng-click="reloadState()" class="btn btn-default"><i class="fa fa-refresh"></i> Atualizar Carrinho</a>
                                         <a ui-sref="checkout1"><button class="btn btn-template-main">Realizar Pedido<i class="fa fa-chevron-right"></i>
                                         </button></a>
                                     </div>

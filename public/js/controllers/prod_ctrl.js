@@ -1,7 +1,7 @@
 
 
 angular.module('systennis')
-	.controller('prod_detail_ctrl',function($scope, $stateParams, $http, $window, productService, cartService){
+	.controller('prod_detail_ctrl',function($scope, $state, $stateParams, $http, $window, productService, cartService){
 
 			$scope.detail = productService.getProducts();
 			//console.log($scope.detail);
@@ -29,6 +29,7 @@ angular.module('systennis')
 				if ($scope.detail.tamanho_prod){
 					currObj.qte_prod=1;
     	    		cartService.addProduct(currObj);
+    	    		$state.go('cart');
 				}
     	    	else alert("Escolha um tamanho de tênis.")
 	    	};
