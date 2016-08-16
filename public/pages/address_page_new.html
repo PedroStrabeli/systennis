@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html ng-app="systennis">
+	<head>
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+		<link rel="stylesheet" href="/stylesheets/jumbotron.css">
+	    <meta charset="utf-8">
+	    <title>{{title}}</title>
+	</head>
+	<title>Systennis - Página de Cadastro</title>
+	<body>
+		<div class="container" ng-app="systennis" ng-controller="register_ctrl" ng-init="session_check()">
+		<h3 class="text-muted">Systennis</h3>
+ 		<br><br>
+		<div class="alert alert-warning" ng-if="!isAuthenticated">
+		  <strong>Atenção!</strong> Você não está autorizado a entrar nesta página!
+		</div>
+	      <div class="header clearfix" ng-if="isAuthenticated">
+		 		<div class="register-view">
+				    	 <div class="alert alert-danger" ng-repeat="item in errors_2">{{item.msg}}</div>
+				    	 	<h2 class="page-header">Adicione um Endereço - {{user.nome_cliente + " " + user.sobrenome_cliente}}</h2>
+				    	 	<h4>Os campos marcados com (*) são de preenchimento obrigatório</h4><br>
+							<form method="post">
+							  <div class="form-group">
+							  <label>CEP(*)</label>
+							    <input type="text" class="form-control address" ng-model="address.zipcode" ui-mask="99999-999" name="zipcode" ng-change="fetch_zipcode_details(address.zipcode)">
+							  </div>
+							  <div>
+						  		<label>Estado(*)</label>
+							  	<select class="select address" id="state" style="margin-right: 30px; width: 213px"  ng-model="address.state" name="state" ng-options="estados for estados in estados" placeholder="Selecione" ng-change="fetch_cities(address.state)">
+								</select>
+								<label>Cidade(*)</label>
+							  	<select class="select address" id="city" style="width: 213px"  ng-model="address.city" ng-options="cities for cities in cities" placeholder="Selecione um Estado">
+								</select>
+							</div><br>
+							  <div content-editable class="form-group">
+							    <label>Bairro(*)</label>
+							    <input type="text" class="form-control address" ng-model="address.bairro" name="bairro" id="bairro">
+							  </div>
+							  <div class="form-group">
+							    <label>Rua(*)</label>
+							    <input type="text" class="form-control address" ng-model="address.street" name="street" id="rua">
+							  </div>
+							   <div class="form-group">
+							    <label>Número</label>
+							    <input type="text" class="form-control address" ng-model="address.number" name="number" ui-mask="9?9?9?9?9">
+							  </div>
+							  <div class="form-group">
+							    <label>Complemento (Apartamento, Bloco, etc.)</label>
+							    <input type="text" class="form-control address" ng-model="address.complement" placeholder="Complemento" name="complement">
+							  </div>
+							  <br>
+							  <button type="submit" class="btn btn-default" ng-click="cadastrar_end_logged_user(address, user.id_cliente)">Próximo</button>
+							</form>
+							<br>
+					</div>
+	    </div>
+	    <div class="row">
+	      <footer class="footer">
+	        <p>&copy; 2016 Systennis, Inc.</p>
+	      </footer>
+		</div>
+	    </div>
+		<!--<script source="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>-->
+		<script src="js/Angular/angular.js"></script>
+		<script src="js/ui-router/angular-ui-router.js"></script>
+		<script src="js/bootstrap/ui-bootstrap-tpls-0.12.0.min.js"></script>
+		<script src="js/Angular/angular-resource.min.js"></script>
+		<script src="js/config.js"></script>
+		<script src="jquery/dist/jquery.tel_rg_cpf_format.js"></script>
+		<!--<script src="js/ng-app.js"></script>		-->
+		<!--<script src="js/index.controller.js"></script>-->
+	</body>
+</html>

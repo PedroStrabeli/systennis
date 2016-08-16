@@ -340,6 +340,128 @@ passport.use(new LocalStrategy({
   }
 ));
 
+// Store user and address data into DB
+router.post('/register_3_justaddress', function(req, res) {
+
+	console.log(req.body);
+
+	var newAddress = req.body.addressData;
+	var myId = req.body.userId;
+	var userId = myId;
+
+	req.getConnection(function(err,connection){
+	    if(err) return res.status(400).json(err);
+
+	    // connection.query(queries.queries.register + userQuery
+	    // 	 ,[],function(err,result){
+	       //  	 if(err) throw err;
+
+	       //  	 console.log("USER INSERT FULLFILED!");
+	    // });
+
+	    connection.query(queries.queries.insert_new_address(newAddress.pais_end,
+	    	newAddress.estado_end, newAddress.cidade_end, newAddress.bairro_end,
+	    	newAddress.cep_end, newAddress.rua_end, newAddress.numero_end,
+	    	newAddress.complemento_end)
+	    	,[],function(err, result){
+	    		if(err) throw err;
+
+	    		console.log("ADDRESS INSERT FULLFILED!")
+	    	});
+
+	    connection.query(queries.queries.fetch_address_id(newAddress.pais_end,
+	    	newAddress.estado_end, newAddress.cidade_end, newAddress.bairro_end,
+	    	newAddress.cep_end, newAddress.rua_end, newAddress.numero_end,
+	    	newAddress.complemento_end)
+	    	,[],function(err, result){
+	    		if(err) throw err;
+
+	    		addressId = result[0].id_endereco;
+
+	    		console.log("ADDRESS_ID SUCCESSFULLY FETCHED: " + addressId);
+
+	    		connection.query(queries.queries.insert_user_address(userId, addressId),
+	        	[],function(err, result){
+	        		if(err) throw err;
+
+	        		console.log("USER AND ADDRESS SUCCESSFULLY LINKED!");
+	        	});
+	    	});
+	});
+	// // Asynchronous method to hashify password
+	// bcrypt.genSalt(10, function(err, salt) {
+
+	// 	var userId;
+	// 	var addressId;
+
+	// 	// DB Inserts
+	//     bcrypt.hash(newUser.hash_senha, salt, function(err, hash) {
+	//         newUser.hash_senha = hash;
+
+	//         var userQuery = "("  +"'"+ newUser.nome_cliente 	 + "'"  +", "
+	// 	        		 +"'"+ newUser.sobrenome_cliente + "'"  +", "
+	// 	        		 +"'"+ newUser.email_cliente 	 + "'"  +", "
+	// 	        		 +"'"+ newUser.hash_senha  		 + "'"  +", "
+	// 	        		 +"'"+ newUser.cpf_cliente 		 + "'"  +", "
+	// 	        			 + 'NULL' 					        +", "
+	// 	        		 +"'"+ newUser.member_since 	 + "'"  +", "
+	// 	        		 +"'"+ newUser.tel_fixo 		 + "'"  +", "
+	// 	        		 +"'"+ newUser.tel_cel 			 + "'"  +", "
+	// 	        		 +"'"+ newUser.data_nasc 		 + "'"  +", "
+	// 	        		     + "'M'" + ")"
+	//     });
+	// });
+
+	res.status(200).json({status: "success"});
+
+});
+
+passport.serializeUser(function(user, done) {
+  done(null, user.id_cliente);
+});
+
+passport.deserializeUser(function(id, done) {
+  User.getUserById(id, function(err, user) {
+    done(err, user);
+  });
+});
+
+passport.use(new LocalStrategy({
+	usernameField: 'email',
+	passwordField: 'password',
+  },
+  function(email, password, done) {
+
+  	console.log("Estou no GETUSERBYEMAIL");
+  	User.getUserByEmail(email, function(err, user){
+  		if(err) throw(err);
+
+  		if(!user)
+		{
+			return done(null, false, {message: "Usuário não cadastrado"})
+		};
+
+  		console.log("Segundo printe");
+
+  		User.checkPassword(password, user.hash_senha, function(err2, isMatch){
+
+  			console.log("Entrei no check password");
+  			if(err2) throw(err2);
+
+  			if(isMatch)
+  			{
+  				console.log(user);
+  				return done(null, user);
+  			}
+  			else
+  			{
+  				return done(null, false, {message: "Senha incorreta"})
+  			}
+  		});
+  	});
+  }
+));
+
 router.post('/login', function(req, res, next) {
   passport.authenticate('local', function(err, user, info) {
     if (err) { return next(err); }

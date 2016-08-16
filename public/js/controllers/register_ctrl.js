@@ -67,6 +67,28 @@ angular.module('systennis')
             $scope.whereAmI = page;
         };
 
+        $scope.session_check = function ()
+        {
+            $http.get('/users/get_session').success(function(response)
+            {
+                //console.log(response);
+                if (response.user)
+                {
+                    $scope.isAuthenticated = true;
+                    // checkoutService.checkout.user=response.user;
+                    //console.log(checkoutService.checkout.user)
+                    // checkoutService.putSession();
+                    $scope.user = response.user
+                    console.log($scope.user);
+                }
+                if (response.func)
+                {
+                    $scope.isAuthenticatedAsAdmin = true;
+                    $scope.func = response.func
+                }
+            })
+        };
+
 		$scope.cadastrar = function (cadastro) {
 			$http.post('/users/register', cadastro)
 			.success(function(response){
@@ -108,6 +130,26 @@ angular.module('systennis')
 			});
 		};
 
+        $scope.cadastrar_end_logged_user = function (cadastro, loggedUserId) {
+            $http.post('/users/register_2', cadastro)
+            .success(function(response){
+
+                if (!('cep_end' in response))
+                {
+                    $scope.errors_2 = response;
+                }
+                else
+                {
+                    $scope.errors_2 = [];
+
+                    var userId = $scope.user.id_cliente;
+                    var addressData = response;
+
+                    $state.go('register_3_justaddress', {userId: userId, addressData: addressData});
+                }
+            });
+        };
+
         $scope.confirmar_userdata = function () {
             var regParams = $scope.registrationParams;
 
@@ -118,6 +160,22 @@ angular.module('systennis')
                 if (response.status == "success")
                 {
                     $state.go('register_4', {registrationStatus: response.status});
+                };
+            });
+        };
+
+        $scope.confirmar_userdata_new = function () {
+            var regParams = $scope.registrationParams;
+
+            console.log(regParams);
+
+            $http.post('/users/register_3_justaddress', regParams)
+            .success(function(response){
+
+                // console.log("Estou indo pra a página do THANK YOU: " + response);
+                if (response.status == "success")
+                {
+                    $state.go('checkout1');
                 };
             });
         };
@@ -135,6 +193,28 @@ angular.module('systennis')
             "(4) Telefone": ($scope.userData.tel_fixo),
             "(5) Celular": ($scope.userData.tel_cel),
             "(6) Data de Nascimento": ($scope.userData.data_nasc)};
+
+            $scope.tbfAddressData =
+            {"(1) Estado": ($scope.addressData.estado_end),
+            "(2) Cidade": ($scope.addressData.cidade_end),
+            "(3) CEP": ($scope.addressData.cep_end),
+            "(4) Rua": ($scope.addressData.rua_end),
+            "(5) Número": ($scope.addressData.numero_end),
+            "(6) Bairro": ($scope.addressData.bairro_end)};
+
+            console.log("Estou prestes a cuspir os dados no console");
+
+            // console.log($scope.tbfUserData);
+            // console.log($scope.tbfAddressData);
+        };
+
+        $scope.formatAndShowUserAddress = function (){
+
+            $state.params.userId = $scope.user.id_cliente;
+
+            $scope.addressData = $state.params.addressData;
+            $scope.userId = $state.params.userId;
+            $scope.registrationParams = $state.params;
 
             $scope.tbfAddressData =
             {"(1) Estado": ($scope.addressData.estado_end),

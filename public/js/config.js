@@ -31,8 +31,8 @@ var config = ['$urlRouterProvider', '$stateProvider', '$locationProvider', funct
           })
         .state('checkout1-new', {
               url: "/endereco_entrega/novo",
-              templateUrl: "pages/template/shop-checkout1-new-address.html",
-              controller: 'checkout_address_ctrl',
+              templateUrl: "pages/address_page_new.html",
+              controller: 'register_ctrl',
               data: { pageTitle: 'Novo Endereço de Entrega' }
           })
         .state('checkout2', {
@@ -96,7 +96,6 @@ var config = ['$urlRouterProvider', '$stateProvider', '$locationProvider', funct
               controller: '',
               data: { title: 'Lista de Desejos' },
           })
-
         .state('test', {
               url: "/test",
               templateUrl: "pages/teste.html",
@@ -135,6 +134,16 @@ var config = ['$urlRouterProvider', '$stateProvider', '$locationProvider', funct
                 addressData: null
               },
               templateUrl: "pages/reg_confirmation_page.html",
+              controller: 'register_ctrl',
+              data: { title: 'Página de Cadastro - Confirmação de Cadastro' },
+          })
+        .state('register_3_justaddress', {
+              url: "/users/register_3_justaddress",
+              params: {
+                userId: null,
+                addressData: null
+              },
+              templateUrl: "pages/reg_confirmation_page_new.html",
               controller: 'register_ctrl',
               data: { title: 'Página de Cadastro - Confirmação de Cadastro' },
           })
