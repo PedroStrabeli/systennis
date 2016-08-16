@@ -13,6 +13,7 @@ angular.module('systennis')
 		$scope.supervisor = [];
 		$scope.equipe = [];
 		$scope.itens_pedido = [];
+		$scope.itens_selecao = [];
 		$scope.entregas = [];
 		$scope.entregaSelecionada = [];
 
@@ -42,12 +43,6 @@ angular.module('systennis')
 	 		};
 		});
 
-
-		// Recupera Endereco
-		$http.get('/gestao_entregas/endereco' + sessionStorage.id_endereco).success(function(response){
-		 	$scope.endereco = response[0];
-		});
-
 		// Recupera Itens Pedido
 		$http.get('/gestao_entregas/itens_pedido' + sessionStorage.id_pedido).success(function(response){
 		 	$scope.itens_pedido = response;
@@ -56,6 +51,11 @@ angular.module('systennis')
 		 			$scope.itens_selecao.push(response[i]);
 		 		}
 		 	}
+		});
+
+		// Recupera Endereco
+		$http.get('/gestao_entregas/endereco' + sessionStorage.id_endereco).success(function(response){
+		 	$scope.endereco = response[0];
 		});
 
 		// Recupera Entregas
@@ -97,16 +97,16 @@ angular.module('systennis')
 	        		$scope.entregas[i].status_entrega = "Entregue";
 	        	}
 	        }
-	        // Atualiza Estoques dos pedidos
 	        $http.post('/gestao_entregas/finalizar_entrega' + sessionStorage.id_entrega, input);
-	        for (i=0;i<$scope.entregaSelecionada.itens_entrega.length;i++) {
-        		var atualizarEstoque = $scope.entregaSelecionada.itens_entrega[i].estoque_prod - $scope.entregaSelecionada.itens_entrega[i].qte_prod;
-        		$scope.entregaSelecionada.itens_entrega[i].estoque_prod = atualizarEstoque;
-        		var input = {
-        			estoque_prod : atualizarEstoque
-        		};
-        		$http.post('/gestao_entregas/atualizar_estoque' + $scope.entregaSelecionada.itens_entrega[i].id_prod, input);
-       		}
+	        // Atualiza Estoques dos pedidos
+	        // for (i=0;i<$scope.entregaSelecionada.itens_entrega.length;i++) {
+        	// 	var atualizarEstoque = $scope.entregaSelecionada.itens_entrega[i].estoque_prod - $scope.entregaSelecionada.itens_entrega[i].qte_prod;
+        	// 	$scope.entregaSelecionada.itens_entrega[i].estoque_prod = atualizarEstoque;
+        	// 	var input = {
+        	// 		estoque_prod : atualizarEstoque
+        	// 	};
+        	// 	$http.post('/gestao_entregas/atualizar_estoque' + $scope.entregaSelecionada.itens_entrega[i].id_prod, input);
+       		// }
        		// Atualiza Status do Pedido
        		for (i=0;i<$scope.entregas.length;i++){
        			if($scope.entregas[i].status_entrega == "Entregue") {
@@ -116,12 +116,16 @@ angular.module('systennis')
        		console.log($scope.entregas.length);
        		console.log(atualizarPedido);
        		if ($scope.entregas.length == atualizarPedido) {
-       			console.log("Fechar Pedido!")
-       			$scope.pedido.status_pedido = "Entregue";
-       			$http.post('/gestao_entregas/selecionar_pedidos', $scope.pedido);
+			 	if ($scope.itens_selecao.length == 0){
+			 		console.log("Fechar Pedido!");
+	       			$scope.pedido.status_pedido = "Entregue";
+	       			$http.post('/gestao_entregas/selecionar_pedidos', $scope.pedido);
+			 	}
+       		} else {
+       			console.log("Não Fechar Pedido!");
        		}
        		$timeout(function() {
-						$state.go($state.current, {}, {reload: true});}, 500);
+						$state.go($state.current, {}, {reload: true});}, 1000);
 
     	};
 
