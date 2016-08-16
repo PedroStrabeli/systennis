@@ -25,6 +25,11 @@ angular.module('systennis')
 			})
 		};
 
+		$scope.logout = function ()
+		{
+			$http.get('/users_ad/logout_ad');
+		}
+
 		// Query de Pedidos
 		$scope.pedidos = [];
 

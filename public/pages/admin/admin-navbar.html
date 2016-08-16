@@ -116,6 +116,9 @@
             <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav" ng-init="session_check()">
+                    <li ng-if="isAuthenticatedAsAdmin">
+                        <a href="/#/" ng-click="logout()"><i class="fa fa-fw fa-unlock-alt"></i> Logout</a>
+                    </li>
                     <li ng-if="!isAuthenticatedAsAdmin">
                         <a href="/#/users_ad/login_admin"><i class="fa fa-fw fa-lock"></i> Login</a>
                     </li>
