@@ -64,50 +64,50 @@ var config = ['$urlRouterProvider', '$stateProvider', '$locationProvider', funct
               url: "/cadastro_prod",
               templateUrl: "pages/cadastro_prod.html",
               controller: 'cadastro_prod_ctrl',
-              data: { title: 'Cadastro de Produtos' },
+              data: { pageTitle: 'Cadastro de Produtos' },
           })
         .state('cadastro_cliente', {
               url: "/cadastro",
               templateUrl: "pages/template/customer-register.html",
               controller: '',
-              data: { title: 'Cadastro de Cliente' },
+              data: { pageTitle: 'Cadastro de Cliente' },
           })
         .state('perfil', {
               url: "/perfil",
               templateUrl: "pages/template/customer-account.html",
               controller: '',
-              data: { title: 'Perfil' },
+              data: { pageTitle: 'Perfil' },
           })
         .state('order_detail', {
               url: "/detalhes_pedido",
               templateUrl: "pages/template/customer-order.html",
               controller: 'order_detail_ctrl',
-              data: { title: 'Detalhes de Pedido' },
+              data: { pageTitle: 'Detalhes de Pedido' },
           })
         .state('orders', {
               url: "/pedidos",
               templateUrl: "pages/template/customer-orders.html",
               controller: 'orders_ctrl',
-              data: { title: 'Pedidos' },
+              data: { pageTitle: 'Pedidos' },
           })
         .state('wishlist', {
               url: "/wishlist",
               templateUrl: "pages/template/customer-wishlist.html",
               controller: '',
-              data: { title: 'Lista de Desejos' },
+              data: { pageTitle: 'Lista de Desejos' },
           })
         .state('test', {
               url: "/test",
               templateUrl: "pages/teste.html",
               controller: 'test',
-              data: { title: 'testes' },
+              data: { pageTitle: 'testes' },
           })
         //
         .state('consulta_prod', {
               url: "/consulta_prod",
               templateUrl: "pages/template/startbootstrap-sb-admin-1.0.4/index.html",
               // controller: 'cadastro_prod_ctrl',
-              data: { title: 'Consulta de Produtos' },
+              data: { pageTitle: 'Consulta de Produtos' },
           })
         .state('register', {
               url: "/users/register",
@@ -116,7 +116,7 @@ var config = ['$urlRouterProvider', '$stateProvider', '$locationProvider', funct
               },
               templateUrl: "pages/register_page.html",
               controller: 'register_ctrl',
-              data: { title: 'Página de Cadastro - Passo 1' },
+              data: { pageTitle: 'Página de Cadastro - Passo 1' },
           })
         .state('register_2', {
               url: "/users/register_2",
@@ -125,7 +125,7 @@ var config = ['$urlRouterProvider', '$stateProvider', '$locationProvider', funct
               },
               templateUrl: "pages/address_page.html",
               controller: 'register_ctrl',
-              data: { title: 'Página de Cadastro - Passo 2' },
+              data: { pageTitle: 'Página de Cadastro - Passo 2' },
           })
         .state('register_3', {
               url: "/users/register_3",
@@ -135,7 +135,7 @@ var config = ['$urlRouterProvider', '$stateProvider', '$locationProvider', funct
               },
               templateUrl: "pages/reg_confirmation_page.html",
               controller: 'register_ctrl',
-              data: { title: 'Página de Cadastro - Confirmação de Cadastro' },
+              data: { pageTitle: 'Página de Cadastro - Confirmação de Cadastro' },
           })
         .state('register_3_justaddress', {
               url: "/users/register_3_justaddress",
@@ -154,7 +154,7 @@ var config = ['$urlRouterProvider', '$stateProvider', '$locationProvider', funct
               },
               templateUrl: "pages/thank_you_page.html",
               controller: 'register_ctrl',
-              data: { title: 'Página de Cadastro - Obrigado pelo cadastro!' },
+              data: { pageTitle: 'Página de Cadastro - Obrigado pelo cadastro!' },
           })
         .state('register_admin', {
               url: "/users_ad/register_admin",
@@ -163,7 +163,7 @@ var config = ['$urlRouterProvider', '$stateProvider', '$locationProvider', funct
               },
               templateUrl: "pages/register_admin_page.html",
               controller: 'register_admin_ctrl',
-              data: { title: 'Página de Cadastro [ADMIN] - Passo 1' },
+              data: { pageTitle: 'Página de Cadastro [ADMIN] - Passo 1' },
           })
         .state('register_admin_2', {
               url: "/users_ad/register_admin_2",
@@ -172,7 +172,7 @@ var config = ['$urlRouterProvider', '$stateProvider', '$locationProvider', funct
               },
               templateUrl: "pages/reg_admin_confirmation_page.html",
               controller: 'register_admin_ctrl',
-              data: { title: 'Página de Cadastro [ADMIN] - Passo 2' },
+              data: { pageTitle: 'Página de Cadastro [ADMIN] - Passo 2' },
           })
         .state('register_admin_3', {
               url: "/users_ad/register_admin_3",
@@ -181,19 +181,19 @@ var config = ['$urlRouterProvider', '$stateProvider', '$locationProvider', funct
               },
               templateUrl: "pages/thank_you_page_admin.html",
               controller: 'register_admin_ctrl',
-              data: { title: 'Página de Cadastro [ADMIN]'},
+              data: { pageTitle: 'Página de Cadastro [ADMIN]'},
           })
         .state('login', {
               url: "/users/login",
               templateUrl: "pages/login_page.html",
               controller: 'login_ctrl',
-              data: { title: 'Página de Login' },
+              data: { pageTitle: 'Página de Login' },
           })
         .state('login_admin', {
               url: "/users_ad/login_admin",
               templateUrl: "pages/login_page_admin.html",
               controller: 'login_admin_ctrl',
-              data: { title: 'Página de Login [ADMIN]' },
+              data: { pageTitle: 'Página de Login [ADMIN]' },
           })
         // .state('outlook', {
         //     url: "/outlook",
@@ -206,6 +206,7 @@ var config = ['$urlRouterProvider', '$stateProvider', '$locationProvider', funct
 angular
     .module('systennis',['ui.router', 'ui.mask', 'ui.bootstrap'])
     .config(config)
+
     // .run(function($rootScope, $state) {
     //     $rootScope.$state = $state;
     // })

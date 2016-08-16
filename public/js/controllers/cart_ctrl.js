@@ -2,8 +2,25 @@
 angular.module('systennis')
 	.controller('cart_ctrl',function($scope, $state, $http, cartService, checkoutService){
 		
-		$scope.pagename='Carrinho';
+		// $scope.pagename='Carrinho';
 		var user=checkoutService.checkout.user;
+
+
+		if(user){
+			console.log('Usuario logado')
+			//checa se existe algo no carrinho local.
+			if (cartService.getProducts()[0]!= null){
+				//console.log(cartService.getProducts()!==[])
+				Checker();
+			}
+			else {
+				getCart(user.id_cliente);
+			}
+		}
+		else{
+			$scope.cart = cartService.getProducts();
+			console.log(cartService.getProducts())
+		}
 
 		var getCart=function(id_cliente){
 			$http.get('/cart/'+id_cliente).then(function(response){
@@ -22,7 +39,7 @@ angular.module('systennis')
 					$http({method: 'POST', 
 								data: {id_cliente: user.id_cliente, id_prod: item.id_prod, qte_prod:item.qte_prod},
 								url: '/cart/changeItem'})
-								.then(function(response){							
+								.then(function(response){
 								}).catch(function(err){
 									alert("Ocorreu um erro! \n"+err);
 								});
@@ -30,8 +47,10 @@ angular.module('systennis')
 				}
 				else{
 					for (i=0;i<checkoutService.checkout.cart;i++)
-						if(checkoutService.checkout.cart[i]===item) 
-							checkoutService.checkout.cart[i].qte_prod=item.qte_prod
+						if(checkoutService.checkout.cart[i]===item)
+							console.log(checkoutService.checkout.cart[i])
+							//checkoutService.checkout.cart[i].qte_prod=item.qte_prod
+							cartService.cart[i].qte_prod=item.qte_prod
 				}
 			}
 		}
@@ -45,38 +64,29 @@ angular.module('systennis')
 			return total.toFixed(2);
 		}
 		//var user={id_cliente:1, nome_cliente:"Pedro Strabeli", email_cliente:'pedrostrabeli@gmail.com'};
-		if(user){
-			console.log('Usuario logado')
-			//checa se existe algo no carrinho local.
-			if (cartService.getProducts()[0]!= null){
-				//console.log(cartService.getProducts()!==[])
-				Checker();
-			}
-			else {
-				getCart(user.id_cliente);
-			}
-		}
-		else{
-			$scope.cart = cartService.getProducts();
-		}
+		
 
 
 		$scope.reloadState = function() {
-			getCart();
+			if(user)
+				getCart(user.id_cliente);
+			else
+				$scope.cart=cartService.getProducts()
 		   // $state.go($state.current, {}, {reload: true});
 		   // $state.transitionTo('cart', $stateParams, { reload: true, inherit: false, notify: true });
 		}
 		
 		//FAZER IR PARA O COOKIE
-		$scope.removeCart=function(id_prod){
+		$scope.removeCart=function(id_prod, tamanho_prod){
 			console.log ('apagando')
 			if(user){
-				$http({method: 'POST', 
-						data: {id_cliente: user.id_cliente, id_prod: id_prod},
+				console.log(user.id_cliente+'  '+id_prod)
+				$http({method: 'POST',
+						data: {id_cliente: user.id_cliente, id_prod: id_prod, tamanho_prod: tamanho_prod},
 						url: '/cart/removeCart'})
 						.then(function(response){
 							alert("Removido com sucesso.");
-							getCart()
+							getCart(user.id_cliente);
 							//$state.transitionTo('cart', { reload: true, inherit: false, notify: true });
 						}).catch(function(err){
 							alert("Ocorreu um erro! \n"+err);
@@ -84,6 +94,18 @@ angular.module('systennis')
 					}
 			else {
 				//Tirar do array.
+				console.log(checkoutService.checkout.user)
+				var lista = cartService.getProducts()
+				
+				for (i=0;i<lista.length;i++){
+					if (lista[i].id_prod==id_prod && lista[i].tamanho_prod==tamanho_prod){
+						//console.log('vou pegar')
+						//delete array[i];
+						console.log(cartService.cart)
+						cartService.cart.splice(i, 1);
+						$scope.cart = cartService.getProducts();
+					}
+				}
 			}
 		}
 
@@ -95,6 +117,7 @@ angular.module('systennis')
 					lista[i].id_cliente=user.id_cliente
 					//lista[i].qte_prod=1
 				}
+				cartService.cart.pop()
 				var item = lista.pop()
 				putProdCart(item)
 				
@@ -113,13 +136,11 @@ angular.module('systennis')
 								.then(function(){
 									console.log("Produto adicionado ao carrinho: " + item.id_prod);
 									getCart(user.id_cliente);
-								});	
-							
+								});
 						} else{
 							getCart(user.id_cliente);
 						}
-						
-					});	
+					});
 		}
 
 
