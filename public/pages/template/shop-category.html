@@ -23,11 +23,10 @@ _________________________________________________________ -->
 
                     <!-- *** LEFT COLUMN ***
 			_________________________________________________________ -->
-
                     <div class="col-sm-9">
                         <div class="row products">
 
-                            <div class="col-md-4 col-sm-6" ng-repeat="item in result | startFrom: (currentPage - 1)*maxSize | limitTo: maxSize" "><!--| offset: currentPage*itemsPerPage | limitTo: itemsPerPage-->
+                            <div class="col-md-3 col-sm-5" ng-repeat="item in result | startFrom: (currentPage - 1)*maxSize | limitTo: maxSize" ><!--| offset: currentPage*itemsPerPage | limitTo: itemsPerPage-->
                                 <div class="product">
                                     <div class="image">
                                         <a ui-sref="prod_detail({id_prod: item.id_prod})" ng-click="sendDetail(item)">
@@ -84,7 +83,7 @@ _________________________________________________________ -->
                             </p>-->
 
 
-                            <ul uib-pagination total-items="result.length" ng-model="currentPage" max-size="10" class="pagination-lg" boundary-links="true"  force-ellipses="true"></ul>
+                            <ul uib-pagination total-items="result.length" items-per-page="maxSize" ng-model="currentPage" max-size="5" class="pagination-lg" boundary-links="true"  force-ellipses="true"></ul>
                             <!--<ul class="pagination">
                                 <li><a href="#">&laquo;</a>
                                 </li>
