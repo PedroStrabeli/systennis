@@ -2,11 +2,31 @@ angular.module('systennis')
 	.controller('selecao_pedidos_ctrl',function($scope, $http, $timeout, $state){
 		$scope.title = "Seleção de Pedidos";
 
+		$scope.isAuthenticated = false;
+		$scope.isAuthenticatedAsAdmin = false;
+
+		$scope.session_check = function ()
+		{
+			$http.get('/users/get_session').success(function(response)
+			{
+				console.log(response);
+				console.log("Estou checando a sessao!");
+				if (response.user)
+				{
+					$scope.isAuthenticated = true;
+					$scope.user = response.user;
+				}
+				if (response.func)
+				{
+					$scope.isAuthenticatedAsAdmin = true;
+					$scope.func = response.func;
+					console.log("Estou autenticado como funcionario.")
+				}
+			})
+		};
+
 		// Query de Pedidos
 		$scope.pedidos = [];
-
-		// Id supervisor dummy
-		sessionStorage.loggedID = 1;
 
 		$http.get('/gestao_entregas/pedidos_aprovados').success(function(response){
 		 	$scope.pedidos = response;
@@ -33,7 +53,7 @@ angular.module('systennis')
 			for (i=0;i<pedidos.length;i++) {
 				if (pedidos[i].selecionado){
 					pedidos[i].status_pedido = 'Preparando Entrega';
-					pedidos[i].id_supervisor = sessionStorage.loggedID;
+					pedidos[i].id_supervisor = $scope.func.id_func;
 					$http.post('/gestao_entregas/selecionar_pedidos', pedidos[i]);
 				}
 			}
